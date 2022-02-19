@@ -1,17 +1,24 @@
+import { useReducer } from "react"
+
 const INITIAL_STATE = {
     users: []
 }
 
-const actionTypes = Object.freeze({
-    getUsers: 0,
+const usersActionTypes = Object.freeze({
+    setUsers: 0,
 })
 
 export function usersReducer(state = INITIAL_STATE, action) {
-    switch(action.type) {
-        case(actionTypes.getUsers): return {
+    const states = {
+        [usersActionTypes.setUsers]: {
             ...state,
             users: action.payload
         }
-        default: return state
-    }
+    };
+    return states[action.type] ?? state;
+}
+
+export function UsersReducer() {
+    const [userState, dispatchUserState] = useReducer(usersReducer, INITIAL_STATE)
+    return {userState, dispatchUserState, usersActionTypes}
 }
