@@ -1,24 +1,32 @@
-import { useReducer } from "react"
+// import { useReducer } from "react"
 
 const INITIAL_STATE = {
-    users: []
+    users: [],
+    loading: true,
+    error: false,
 }
 
 export const usersActionTypes = Object.freeze({
-    setUsers: 0,
+    getState: 0,
+    setUsers: 1,
 })
 
 export function usersReducer(state = INITIAL_STATE, action) {
     const states = {
+        [usersActionTypes.getState]: {
+            ...state,
+        },
         [usersActionTypes.setUsers]: {
             ...state,
-            users: action.payload
+            users: action.payload,
+            loading: false,
+            error: false,
         }
     };
     return states[action.type] ?? state;
 }
 
-export function UsersReducer() {
-    const [userState, dispatchUserState] = useReducer(usersReducer, INITIAL_STATE)
-    return {userState, dispatchUserState, usersActionTypes}
-}
+// export function UsersReducer() {
+//     const [userState, dispatchUserState] = useReducer(usersReducer, INITIAL_STATE)
+//     return {userState, dispatchUserState, usersActionTypes}
+// }

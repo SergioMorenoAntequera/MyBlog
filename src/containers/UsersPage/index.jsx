@@ -1,20 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-
+import * as usersActions from 'actions/usersActions'
 
 function UsersPage(props) {
   
+  useEffect(() => {
+    props.getAllUsers()
+  }, [])
+  
   const {
     users,
-    // setData: setUsers,
     loading,
-    // error
   } = props
   
+  console.log(props)
   return (<>
-    {loading && <p> loading we </p>}
+    {loading && !users && <p> loading data we </p>}
     
-    {!loading && 
+    {!loading && users &&
       users.map(user => 
         <div key={user.id}> { user.name } </div>
       )
@@ -25,4 +28,4 @@ function UsersPage(props) {
 const mapStateToProps = (reducers) => {
   return reducers.usersReducer
 } 
-export default connect(mapStateToProps, {/* Actions */})(UsersPage)
+export default connect(mapStateToProps, usersActions)(UsersPage)

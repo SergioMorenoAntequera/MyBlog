@@ -1,11 +1,12 @@
 {
-    "compilerOptions": {
-      "baseUrl": "./src",
-      "paths": {
-        "containers/*": ["./containers*"],
-        "components/*": ["./components*"],
-        "hooks/*": ["./hooks*"],
-        "reducers/*": ["./reducers*"]
-      }
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "containers/*": ["./containers*"],
+      "components/*": ["./components*"],
+      "hooks/*": ["./hooks*"],
+      "reducers/*": ["./reducers*"],
+      "actions/*": ["./actions*"]
     }
+  }
 }
