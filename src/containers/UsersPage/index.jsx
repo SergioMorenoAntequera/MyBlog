@@ -6,9 +6,9 @@ export default function UsersPage() {
 
   const {
     data : users,
-    setData: setUsers,
+    // setData: setUsers,
     loading,
-    error
+    // error
   } = useFetchData("https://jsonplaceholder.typicode.com/users")
   
 
@@ -17,7 +17,7 @@ export default function UsersPage() {
     
     {!loading && 
       users.map(user => 
-        user.name
+        <div key={user.id}> { user.name } </div>
       )
     }
   </>)
