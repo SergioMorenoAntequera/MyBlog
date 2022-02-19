@@ -1,7 +1,7 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import Header from "../Header";
-import TasksPage from "../TasksPage";
-import UsersPage from "../UsersPage";
+import Header from "containers/Header";
+import TasksPage from "containers/TasksPage";
+import UsersPage from "containers/UsersPage";
 
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
         <Route path="/tasks" element={<TasksPage />} />
       </Routes>
     </div>
-    
+
   </BrowserRouter>);
 }
 

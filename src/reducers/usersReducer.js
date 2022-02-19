@@ -4,7 +4,7 @@ const INITIAL_STATE = {
     users: []
 }
 
-const usersActionTypes = Object.freeze({
+export const usersActionTypes = Object.freeze({
     setUsers: 0,
 })
 

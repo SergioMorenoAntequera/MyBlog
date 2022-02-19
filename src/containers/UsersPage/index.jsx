@@ -1,17 +1,16 @@
 import React from 'react'
-import useFetchData from '../../Hooks/useFetchData'
+import { connect } from 'react-redux'
 
 
-export default function UsersPage() {
-
+function UsersPage(props) {
+  
   const {
-    data : users,
+    users,
     // setData: setUsers,
     loading,
     // error
-  } = useFetchData("https://jsonplaceholder.typicode.com/users")
+  } = props
   
-
   return (<>
     {loading && <p> loading we </p>}
     
@@ -22,3 +21,8 @@ export default function UsersPage() {
     }
   </>)
 }
+
+const mapStateToProps = (reducers) => {
+  return reducers.usersReducer
+} 
+export default connect(mapStateToProps, {/* Actions */})(UsersPage)
