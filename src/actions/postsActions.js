@@ -1,11 +1,12 @@
 import {SET_ALL, ON_LOADING, ON_ERROR} from "types/postsActionTypes";
 import axios from "axios"
 
-export const getAllPosts = () => async (dispatch) => {
+export const getAllPosts = (userId) => async (dispatch) => {
+    userId = userId ?? ""
     dispatch({type: ON_LOADING})
-    
+
     try {
-        var response = await axios("https://jsonplaceholder.typicode.com/posts")
+        var response = await axios("https://jsonplaceholder.typicode.com/posts/" + userId )
         dispatch({
             type: SET_ALL,
             payload: response.data

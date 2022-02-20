@@ -10,17 +10,14 @@ function PostsPage(props) {
   const { id } = useParams()
   const { usersReducer, postsReducer, getAllUsers, getAllPosts } = props
   
-  useEffect(() => {
-    if(!usersReducer.users.length) getAllUsers()
-    if(!postsReducer.posts.length) getAllPosts()
-  }, [])
-  
-    
-  console.log(props)
-  
   const user = usersReducer.users.find(u => u.id.toString() === id)
-  const posts = postsReducer.posts.filter(p => p.userId === user?.id)
-  
+  const posts = postsReducer.posts
+
+  useEffect(() => {
+    if(!user?.length) getAllUsers()
+    if(!posts?.length) getAllPosts(user?.id)
+  }, [])
+
   
   if(!user) return <Spinner/>
   return (<>
