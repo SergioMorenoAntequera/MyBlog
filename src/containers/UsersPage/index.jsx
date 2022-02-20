@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import * as usersActions from 'actions/usersActions'
+import Spinner from 'components/Spinner'
+import Fatal from 'components//Fatal'
 
 function UsersPage(props) {
   
@@ -11,15 +13,21 @@ function UsersPage(props) {
   const {
     users,
     loading,
+    error,
   } = props
   
   console.log(props)
+  if(loading) return <Spinner/>
+  if(error) return <Fatal message={error}/>
   return (<>
-    {loading && !users && <p> loading data we </p>}
-    
-    {!loading && users &&
-      users.map(user => 
-        <div key={user.id}> { user.name } </div>
+    {
+      users.map((user, index) => 
+        <div key={user.id}> 
+          <span> { user.name } </span>
+          <span> { user.email } </span>
+          <span> { user.website } </span>
+          <span> { index } </span>
+        </div>
       )
     }
   </>)
