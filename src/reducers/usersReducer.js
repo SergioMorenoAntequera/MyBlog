@@ -1,7 +1,8 @@
-import {SET_ALL, ON_LOADING, ON_ERROR} from "types/usersActionTypes";
+import {SET_ALL, ON_LOADING, ON_ERROR, SET_ONE} from "types/usersActionTypes";
 
 const INITIAL_STATE = {
     users: [],
+    user: undefined,
     loading: false,
     error: "",
 }
@@ -11,6 +12,12 @@ export function usersReducer(state = INITIAL_STATE, action) {
         [SET_ALL]: {
             ...state,
             users: action.payload,
+            loading: false,
+            error: "",
+        },
+        [SET_ONE]: {
+            ...state,
+            user: action.payload,
             loading: false,
             error: "",
         },
