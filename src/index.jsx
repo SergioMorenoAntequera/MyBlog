@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from 'containers/App';
+import App from 'pages/App';
 
 import { createStore, applyMiddleware } from "redux";
 import reduxThunk from "redux-thunk"

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import * as usersActions from 'actions/usersActions'
 import Spinner from 'components/Spinner'
 import Fatal from 'components//Fatal'
+import { Link } from 'react-router-dom'
 
 function UsersPage(props) {
   
@@ -26,7 +27,9 @@ function UsersPage(props) {
           <span> { user.name } </span>
           <span> { user.email } </span>
           <span> { user.website } </span>
-          <span> { index } </span>
+          <Link to={`users/${user.id}/posts`}>
+            <button> See Posts </button>
+          </Link>
         </div>
       )
     }

@@ -4,6 +4,7 @@
     "paths": {
       "containers/*": ["./containers*"],
       "components/*": ["./components*"],
+      "pages/*": ["./pages*"],
       "hooks/*": ["./hooks*"],
       "reducers/*": ["./reducers*"],
       "actions/*": ["./actions*"],
