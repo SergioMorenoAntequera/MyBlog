@@ -7,7 +7,7 @@ export const getAllPosts = (userId) => async (dispatch) => {
     dispatch({type: ON_LOADING})
 
     try {
-        var response = await axios(`https://jsonplaceholder.typicode.com/users/${userId}/posts`)
+        var response = await axios(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
         dispatch({
             type: SET_ALL,
             payload: response.data

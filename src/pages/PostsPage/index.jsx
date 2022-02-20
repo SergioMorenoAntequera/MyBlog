@@ -12,14 +12,14 @@ function PostsPage(props) {
   
   const user = usersReducer.user
   const posts = postsReducer.posts
+  const doneChanging = user?.id.toString() === id
 
   useEffect(() => {
-    if(user?.id !== id) getOneUser(id)
-    console.log(user)
+    if(!doneChanging) getOneUser(id)
   }, [])
 
   
-  if(!usersReducer.user) return <Spinner/>
+  if(!doneChanging) return <Spinner/>
   return (<>
     <h2> Blog posts of {user.name} </h2>
     <div>
