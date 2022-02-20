@@ -6,7 +6,8 @@
       "components/*": ["./components*"],
       "hooks/*": ["./hooks*"],
       "reducers/*": ["./reducers*"],
-      "actions/*": ["./actions*"]
+      "actions/*": ["./actions*"],
+      "types/*": ["./types*"]
     }
   }
 }

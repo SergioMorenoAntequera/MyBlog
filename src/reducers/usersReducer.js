@@ -1,15 +1,10 @@
-// import { useReducer } from "react"
+import { usersActionTypes } from "types/usersActionTypes";
 
 const INITIAL_STATE = {
     users: [],
     loading: true,
     error: false,
 }
-
-export const usersActionTypes = Object.freeze({
-    getState: 0,
-    setUsers: 1,
-})
 
 export function usersReducer(state = INITIAL_STATE, action) {
     const states = {

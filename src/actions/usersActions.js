@@ -1,5 +1,5 @@
 import axios from "axios"
-import { usersActionTypes } from "reducers/usersReducer"
+import { usersActionTypes } from "types/usersActionTypes"
 
 export const getAllUsers = () => async (dispatch) => {
 
