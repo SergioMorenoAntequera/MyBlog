@@ -6,7 +6,6 @@ import Fatal from 'components//Fatal'
 import { Link } from 'react-router-dom'
 
 function UsersPage(props) {
-  
   useEffect(() => {
     props.getAllUsers()
   }, [])
@@ -17,7 +16,7 @@ function UsersPage(props) {
     error,
   } = props
   
-  console.log(props)
+
   if(loading) return <Spinner/>
   if(error) return <Fatal message={error}/>
   return (<>
@@ -36,7 +35,5 @@ function UsersPage(props) {
   </>)
 }
 
-const mapStateToProps = (reducers) => {
-  return reducers.usersReducer
-} 
+const mapStateToProps = (reducers) => reducers.usersReducer
 export default connect(mapStateToProps, usersActions)(UsersPage)
