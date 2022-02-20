@@ -1,16 +1,16 @@
-import {SET_ALL, ON_LOADING, ON_ERROR} from "types/usersActionTypes";
+import {SET_ALL, ON_LOADING, ON_ERROR} from "types/postsActionTypes";
 
 const INITIAL_STATE = {
-    users: [],
+    posts: [],
     loading: false,
     error: "",
 }
 
-export function usersReducer(state = INITIAL_STATE, action) {
+export function postsReducer(state = INITIAL_STATE, action) {
     const states = {
         [SET_ALL]: {
             ...state,
-            users: action.payload,
+            posts: action.payload,
             loading: false,
             error: "",
         },
@@ -26,8 +26,3 @@ export function usersReducer(state = INITIAL_STATE, action) {
     };
     return states[action.type] ?? state;
 }
-
-// export function UsersReducer() {
-//     const [userState, dispatchUserState] = useReducer(usersReducer, INITIAL_STATE)
-//     return {userState, dispatchUserState, usersActionTypes}
-// }

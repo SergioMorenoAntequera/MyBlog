@@ -1,5 +1,4 @@
-export const GET_STATE = 0;
-export const SET_USERS = 1;
+export const SET_ALL = "users_set_all";
 
-export const ON_LOADING = 2;
-export const ON_ERROR = 3;
+export const ON_LOADING = "users_on_loading";
+export const ON_ERROR = "users_on_error";
