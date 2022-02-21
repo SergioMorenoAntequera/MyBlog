@@ -28,8 +28,6 @@ export const getOneUser = (userId) => async (dispatch) => {
             type: SET_ONE,
             payload: response.data
         }) 
-        
-        dispatch(getAllPosts(response.data.id))
     } catch(error) {
         dispatch({
             type: ON_ERROR,

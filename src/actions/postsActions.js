@@ -1,7 +1,8 @@
 import {SET_ALL, ON_LOADING, ON_ERROR} from "types/postsActionTypes";
 import axios from "axios"
 
-export const getAllPosts = (userId) => async (dispatch) => {
+
+export const getPostsByUser = (userId) => async (dispatch) => {
     if(!userId) return;
     
     dispatch({type: ON_LOADING})

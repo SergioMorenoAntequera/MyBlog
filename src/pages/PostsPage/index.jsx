@@ -8,32 +8,36 @@ import Spinner from 'components/Spinner'
 
 function PostsPage(props) {
   const { id } = useParams()
-  const { usersReducer, postsReducer, getOneUser } = props
+  const { usersReducer, postsReducer, getOneUser, getPostsByUser } = props
+  
   
   const user = usersReducer.user
+  const userLoaded = user?.id.toString() === id
   const posts = postsReducer.posts
-  const doneChanging = user?.id.toString() === id
+  const postsLoaded = posts[0]?.userId.toString() === id
 
   useEffect(() => {
-    if(!doneChanging) getOneUser(id)
+    getOneUser(id)
+    getPostsByUser(id)
   }, [])
 
   
-  if(!doneChanging) return <Spinner/>
+  if(!userLoaded) return <Spinner/>
   return (<>
     <h2> Blog posts of {user.name} </h2>
     <div>
-      {!posts.length && <Spinner/>}
-      {posts.map((post, index) => {return <div key={post.id}>
-        
-        <h3 style={{marginBottom:0}}> 
-          {index} - {post.title} 
-        </h3>
-        <p style={{marginTop:0}}> 
-          {post.body}
-        </p>
-
-      </div>})}
+      {!postsLoaded && <Spinner/>}
+      {postsLoaded &&  
+        posts.map((post, index) => {return <div key={post.id}>
+          <h3 style={{marginBottom:0}}> 
+            {index} - {post.title} 
+          </h3>
+          <p style={{marginTop:0}}> 
+            {post.body}
+          </p>
+        </div>})
+      }
+      
     </div>
   </>)
 }
