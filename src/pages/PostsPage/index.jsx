@@ -11,12 +11,14 @@ function PostsPage(props) {
   const { usersReducer, postsReducer, getOneUser, getPostsByUser } = props
   
   
-  const user = usersReducer.user
+  let user = usersReducer.user
+  console.log(usersReducer.users)
   const userLoaded = user?.id.toString() === id
   const posts = postsReducer.posts
   const postsLoaded = posts[0]?.userId.toString() === id
 
   useEffect(() => {
+    if(userLoaded) return
     getOneUser(id)
     getPostsByUser(id)
   }, [])

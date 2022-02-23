@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 
 function UsersPage(props) {
   useEffect(() => {
+    if(users.length > 0) return
     props.getAllUsers()
   }, [])
   

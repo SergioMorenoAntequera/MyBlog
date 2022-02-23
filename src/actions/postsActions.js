@@ -5,6 +5,7 @@ import axios from "axios"
 export const getPostsByUser = (userId) => async (dispatch) => {
     if(!userId) return;
     
+    
     dispatch({type: ON_LOADING})
 
     try {
