@@ -1,4 +1,4 @@
-import {SET_ALL, ON_LOADING, ON_ERROR} from "types/postsActionTypes";
+import {SET_BY_USER, ON_LOADING, ON_ERROR} from "types/postsActionTypes";
 
 const INITIAL_STATE = {
     posts: [],
@@ -8,9 +8,9 @@ const INITIAL_STATE = {
 
 export function postsReducer(state = INITIAL_STATE, action) {
     const states = {
-        [SET_ALL]: {
+        [SET_BY_USER]: {
             ...state,
-            posts: action.payload,
+            posts: [...state.posts, action.payload],
             loading: false,
             error: "",
         },

@@ -11,16 +11,14 @@ function PostsPage(props) {
   const { usersReducer, postsReducer, getOneUser, getPostsByUser } = props
   
   
-  let user = usersReducer.user
-  console.log(usersReducer.users)
+  const user = usersReducer.user
   const userLoaded = user?.id.toString() === id
-  const posts = postsReducer.posts
-  const postsLoaded = posts[0]?.userId.toString() === id
+  console.log(postsReducer.posts)
+  const postsByUser = postsReducer.posts.find(p=>p.userId.toString() === id)
 
   useEffect(() => {
-    if(userLoaded) return
-    getOneUser(id)
-    getPostsByUser(id)
+    if(!userLoaded) getOneUser(id)
+    if(!postsByUser) getPostsByUser(id)
   }, [])
 
   
@@ -28,9 +26,9 @@ function PostsPage(props) {
   return (<>
     <h2> Blog posts of {user.name} </h2>
     <div>
-      {!postsLoaded && <Spinner/>}
-      {postsLoaded &&  
-        posts.map((post, index) => {return <div key={post.id}>
+      {!postsByUser && <Spinner/>}
+      {postsByUser &&  
+        postsByUser.posts.map((post, index) => {return <div key={post.id}>
           <h3 style={{marginBottom:0}}> 
             {index} - {post.title} 
           </h3>

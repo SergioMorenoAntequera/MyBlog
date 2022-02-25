@@ -1,4 +1,4 @@
-import {SET_ALL, ON_LOADING, ON_ERROR} from "types/postsActionTypes";
+import {SET_BY_USER, ON_LOADING, ON_ERROR} from "types/postsActionTypes";
 import axios from "axios"
 
 
@@ -11,8 +11,8 @@ export const getPostsByUser = (userId) => async (dispatch) => {
     try {
         var response = await axios(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
         dispatch({
-            type: SET_ALL,
-            payload: response.data
+            type: SET_BY_USER,
+            payload: {"userId": userId, posts: response.data}
         })                
     } catch(error) {
         dispatch({
