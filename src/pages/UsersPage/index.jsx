@@ -17,7 +17,6 @@ function UsersPage(props) {
     error,
   } = props
   
-
   if(loading) return <Spinner/>
   if(error) return <Fatal message={error}/>
   return (<>
