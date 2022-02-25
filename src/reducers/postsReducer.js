@@ -10,7 +10,7 @@ export function postsReducer(state = INITIAL_STATE, action) {
     const states = {
         [SET_BY_USER]: {
             ...state,
-            posts: [...state.posts, action.payload],
+            posts: action.payload,
             loading: false,
             error: "",
         },
