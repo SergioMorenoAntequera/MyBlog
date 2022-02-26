@@ -26,7 +26,7 @@ export const getOneUser = (userId) => async (dispatch) => {
     getOneUserAPI(userId).then(response => {
         dispatch({
             type: SET_ONE,
-            payload: response.data
+            payload: response.data[0]
         }) 
     }).catch(error => {
         dispatch({

@@ -1,13 +1,16 @@
 import {SET_BY_USER, ON_LOADING, ON_ERROR, UPDATE_POST} from "types/postsActionTypes";
-import axios from "axios"
+
+import { 
+    getPostByUser as getPostByUserAPI,
+    getCommentsByPost as getCommentsByPostAPI 
+} from "api/requests";
 
 
 export const getPostsByUser = (userId) => async (dispatch, getState) => {
     if(!userId) return;
     dispatch({type: ON_LOADING})
 
-    try {
-        var response = await axios(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
+    getPostByUserAPI(userId).then(response => {
         let newPosts = {
             "userId": userId, 
             posts: response.data.map(p=> ({...p, comments:[], commentsLoading: false, open:false}))
@@ -17,13 +20,14 @@ export const getPostsByUser = (userId) => async (dispatch, getState) => {
         dispatch({
             type: SET_BY_USER,
             payload: [...savedPosts, newPosts]
-        })                
-    } catch(error) {
+        }) 
+
+    }).catch(error => {
         dispatch({
             type: ON_ERROR,
             payload: error.message
         })
-    }
+    })
 }
 
 export const toggleOpenComments = (post) => async (dispatch, getState) => { 
@@ -45,14 +49,19 @@ export const getCommentByPost = (post) => async (dispatch) => {
         payload: post
     })
 
-    const commentsResponse = await axios(`https://jsonplaceholder.typicode.com/comments?postId=${post.id}`)
-    post.comments = commentsResponse.data
-    post.commentsLoading = false
-    dispatch({
-        type: UPDATE_POST,
-        payload: post
+    getCommentsByPostAPI(post.id).then(response => {
+        post.comments = response.data
+        post.commentsLoading = false
+        dispatch({
+            type: UPDATE_POST,
+            payload: post
+        })
+    }).catch(error => {
+        dispatch({
+            type: ON_ERROR,
+            payload: error.message
+        })
     })
-    
 }
 
 
