@@ -1,4 +1,4 @@
-import {SET_BY_USER, ON_LOADING, ON_ERROR} from "types/postsActionTypes";
+import {SET_BY_USER, ON_LOADING, ON_ERROR, UPDATE_POST} from "types/postsActionTypes";
 
 const INITIAL_STATE = {
     posts: [],
@@ -7,10 +7,25 @@ const INITIAL_STATE = {
 }
 
 export function postsReducer(state = INITIAL_STATE, action) {
+    
+    function updatePost(postToUpdate) {
+        var posts = [...state.posts].map(p=>p.id)
+        var index = posts.indexOf(postToUpdate?.id)
+        if(index === -1) return state.posts
+        posts[index] = postToUpdate
+        return posts
+    }
+
     const states = {
         [SET_BY_USER]: {
             ...state,
             posts: action.payload,
+            loading: false,
+            error: "",
+        },
+        [UPDATE_POST]: {
+            ...state,
+            posts: updatePost(action.payload),
             loading: false,
             error: "",
         },

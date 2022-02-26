@@ -8,7 +8,8 @@ import Spinner from 'components/Spinner'
 
 function PostsPage(props) {
   const { id } = useParams()
-  const { usersReducer, postsReducer, getOneUser, getPostsByUser } = props
+  const { usersReducer, postsReducer, getOneUser } = props
+  const { getPostsByUser, getCommentByPost, toggleOpenComments} = props
   
   
   const user = usersReducer.users.find(u=>id.toString() === id) ?? usersReducer.user
@@ -27,12 +28,14 @@ function PostsPage(props) {
       {!postsByUser && <Spinner/>}
       {postsByUser &&  
         postsByUser.posts.map((post, index) => {return <div key={post.id}>
-          <h3 style={{marginBottom:0}}> 
-            {index} - {post.title} 
-          </h3>
-          <p style={{marginTop:0}}> 
-            {post.body}
-          </p>
+          <div className='PostsPage_Post' onClick={()=>toggleOpenComments(post)}>
+            <h3 style={{marginBottom:0}}> 
+              {index} - {post.title} - {post.open ? "a": "b"}
+            </h3>
+            <p style={{marginTop:0}} > 
+              {post.body}
+            </p>
+          </div>
         </div>})
       }
       
