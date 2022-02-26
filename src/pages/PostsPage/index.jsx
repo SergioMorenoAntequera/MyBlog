@@ -3,13 +3,14 @@ import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import * as usersActions from 'actions/usersActions'
 import * as postsActions from 'actions/postsActions'
+import "./style.scss"
 
 import Spinner from 'components/Spinner'
 
 function PostsPage(props) {
   const { id } = useParams()
   const { usersReducer, postsReducer, getOneUser } = props
-  const { getPostsByUser, getCommentByPost, toggleOpenComments} = props
+  const { getPostsByUser, toggleOpenComments} = props
   
   
   const user = usersReducer.users.find(u=>id.toString() === id) ?? usersReducer.user
@@ -40,7 +41,7 @@ function PostsPage(props) {
             <div className='Comments' style={{display: post.open? "block" : "none"}}>
               {!post.comments.length && <Spinner/>}
               {post.comments.map(comment => <div className='Comment' key={comment.id}>
-                
+                AAAAAAAAA
               </div>)}
             </div>
 
