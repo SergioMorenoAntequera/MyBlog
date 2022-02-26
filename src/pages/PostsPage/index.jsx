@@ -13,9 +13,10 @@ function PostsPage(props) {
   const { getPostsByUser, toggleOpenComments} = props
   
   
-  const user = usersReducer.users.find(u=>id.toString() === id) ?? usersReducer.user
+  const user = usersReducer.users.find(u=>id.toString() === id) ?? undefined
   const postsByUser = postsReducer.posts.find(p=>p.userId.toString() === id)
 
+  console.log(usersReducer.users)
   useEffect(() => {
     if(!user) getOneUser(id)
     if(!postsByUser) getPostsByUser(id)

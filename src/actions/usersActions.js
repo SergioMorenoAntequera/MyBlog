@@ -1,37 +1,37 @@
 import {SET_ALL, SET_ONE, ON_LOADING, ON_ERROR} from "types/usersActionTypes";
-import { getAllPosts } from 'actions/postsActions'
-import axios from "axios"
+import { 
+    getAllUsers as getAllUsersAPI,
+    getOneUser as getOneUserAPI
+} from "api/requests";
 
 export const getAllUsers = () => async (dispatch) => {
     dispatch({type: ON_LOADING})
     
-    try {
-        var response = await axios("https://jsonplaceholder.typicode.com/users")
+    getAllUsersAPI().then(response => {
         dispatch({
             type: SET_ALL,
             payload: response.data
         })
-    } catch(error) {
+    }).catch(error => {
         dispatch({
             type: ON_ERROR,
             payload: error.message
         })
-    }
+    })
 }
 
 export const getOneUser = (userId) => async (dispatch) => {
     dispatch({type: ON_LOADING})
-    
-    try {
-        var response = await axios("https://jsonplaceholder.typicode.com/users/" + userId)
+
+    getOneUserAPI(userId).then(response => {
         dispatch({
             type: SET_ONE,
             payload: response.data
         }) 
-    } catch(error) {
+    }).catch(error => {
         dispatch({
             type: ON_ERROR,
             payload: error.message
         })
-    }
+    })
 }

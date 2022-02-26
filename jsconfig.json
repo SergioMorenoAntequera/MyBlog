@@ -8,7 +8,8 @@
       "hooks/*": ["./hooks*"],
       "reducers/*": ["./reducers*"],
       "actions/*": ["./actions*"],
-      "types/*": ["./types*"]
+      "types/*": ["./types*"],
+      "api/*": ["./api*"]
     }
   }
 }
