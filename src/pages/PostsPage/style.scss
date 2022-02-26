@@ -1,4 +1,7 @@
 .PostsPage_Post {
+    .PostsPage_Post_Title { margin-bottom: 0; }
+    .PostsPage_Post_Body { margin-top: 0; }
+
     .Comments {
         display: none;
         &.open { display: block; }
@@ -10,9 +13,9 @@
         .Comment {
             margin-bottom: 2em;
             * {margin: 0;}
-            .header { display: flex; }
-            .header h4 { margin-right: 10px; }
-            .header p { color: grey; }
+            .Header { display: flex; }
+            .Header h4 { margin-right: 10px; }
+            .Header p { color: grey; }
         }
         
 

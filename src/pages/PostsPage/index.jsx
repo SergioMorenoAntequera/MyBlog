@@ -26,26 +26,28 @@ function PostsPage(props) {
   return (<>
     <h2> Blog posts of {user.name} </h2>
     <div>
-      {!postsByUser && <Spinner/>}
-      {postsByUser &&  
-        postsByUser.posts.map((post, index) => {return <div key={post.id}>
-          <div className='PostsPage_Post' onClick={()=>toggleOpenComments(post)}>
-            <h3 style={{marginBottom:0}}> 
+      { !postsByUser && <Spinner/> }
+      { postsByUser &&  
+
+        postsByUser.posts.map((post, index) => 
+          <div className='PostsPage_Post' key={post.id} onClick={()=>toggleOpenComments(post)}>
+
+            <h3 className='PostsPage_Post_Title'> 
               {index} - {post.title}
             </h3>
 
-            <p style={{marginTop:0}} > 
+            <p className='PostsPage_Post_Body'> 
               {post.body}
             </p>
 
             <div className={`Comments ${post.open ? 'open':''}`}>
               {!post.comments.length && <Spinner/>}
               {post.comments.map(comment => <div className='Comment' key={comment.id}>
-                <div className='header'>
+                <div className='Header'>
                   <h4> {comment.name} </h4>
                   <p> {comment.email} </p>
                 </div>
-                <div className='body'>
+                <div className='Body'>
                   <p> {comment.body} </p>
                 </div>
                 
@@ -53,7 +55,7 @@ function PostsPage(props) {
             </div>
 
           </div>
-        </div>})
+        )
       }
     </div>
   </>)

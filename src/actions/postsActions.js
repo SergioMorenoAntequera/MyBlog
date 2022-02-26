@@ -33,7 +33,8 @@ export const toggleOpenComments = (post) => async (dispatch, getState) => {
         payload: post
     })
     
-    dispatch(getCommentByPost(post))
+    if(!post.comments.length)
+        dispatch(getCommentByPost(post))
 }
 
 export const getCommentByPost = (post) => async (dispatch) => { 
