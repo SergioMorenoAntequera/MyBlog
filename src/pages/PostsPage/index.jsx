@@ -38,10 +38,17 @@ function PostsPage(props) {
               {post.body}
             </p>
 
-            <div className='Comments' style={{display: post.open? "block" : "none"}}>
+            <div className={`Comments ${post.open ? 'open':''}`}>
               {!post.comments.length && <Spinner/>}
               {post.comments.map(comment => <div className='Comment' key={comment.id}>
-                AAAAAAAAA
+                <div className='header'>
+                  <h4> {comment.name} </h4>
+                  <p> {comment.email} </p>
+                </div>
+                <div className='body'>
+                  <p> {comment.body} </p>
+                </div>
+                
               </div>)}
             </div>
 
