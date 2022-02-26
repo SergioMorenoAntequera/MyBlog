@@ -30,15 +30,23 @@ function PostsPage(props) {
         postsByUser.posts.map((post, index) => {return <div key={post.id}>
           <div className='PostsPage_Post' onClick={()=>toggleOpenComments(post)}>
             <h3 style={{marginBottom:0}}> 
-              {index} - {post.title} - {post.open ? "a": "b"}
+              {index} - {post.title}
             </h3>
+
             <p style={{marginTop:0}} > 
               {post.body}
             </p>
+
+            <div className='Comments' style={{display: post.open? "block" : "none"}}>
+              {!post.comments.length && <Spinner/>}
+              {post.comments.map(comment => <div className='Comment' key={comment.id}>
+                
+              </div>)}
+            </div>
+
           </div>
         </div>})
       }
-      
     </div>
   </>)
 }

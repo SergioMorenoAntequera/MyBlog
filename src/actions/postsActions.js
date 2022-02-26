@@ -10,7 +10,7 @@ export const getPostsByUser = (userId) => async (dispatch, getState) => {
         var response = await axios(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
         let newPosts = {
             "userId": userId, 
-            posts: response.data.map(p=> ({...p, comments:[], open:false}))
+            posts: response.data.map(p=> ({...p, comments:[], commentsLoading: false, open:false}))
         }
         let savedPosts = getState().postsReducer.posts
 
@@ -26,14 +26,32 @@ export const getPostsByUser = (userId) => async (dispatch, getState) => {
     }
 }
 
-export const getCommentByPost = (post) => async (dispatch) => { 
-    
-}
-
 export const toggleOpenComments = (post) => async (dispatch, getState) => { 
     post.open = !post.open
     dispatch({
         type: UPDATE_POST,
         payload: post
     })
+    
+    dispatch(getCommentByPost(post))
 }
+
+export const getCommentByPost = (post) => async (dispatch) => { 
+    
+    post.commentsLoading = true
+    dispatch({
+        type: UPDATE_POST,
+        payload: post
+    })
+
+    const commentsResponse = await axios(`https://jsonplaceholder.typicode.com/comments?postId=${post.id}`)
+    post.comments = commentsResponse.data
+    post.commentsLoading = false
+    dispatch({
+        type: UPDATE_POST,
+        payload: post
+    })
+    
+}
+
+
