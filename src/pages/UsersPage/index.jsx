@@ -1,18 +1,21 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import * as usersActions from 'actions/usersActions'
 import Spinner from 'components/Spinner'
 import Fatal from 'components//Fatal'
 import { Link } from 'react-router-dom'
+import { getAllUsers } from 'actions/usersActions'
 
 function UsersPage(props) {
+  const dispatch = useDispatch();
+  const users = useSelector(state => state.usersReducer.users)
+
   useEffect(() => {
     if(users.length > 0) return
-    props.getAllUsers()
+    dispatch(getAllUsers())
   }, [])
   
   const {
-    users,
     loading,
     error,
   } = props
@@ -35,5 +38,4 @@ function UsersPage(props) {
   </>)
 }
 
-const mapStateToProps = (reducers) => reducers.usersReducer
-export default connect(mapStateToProps, usersActions)(UsersPage)
+export default UsersPage
