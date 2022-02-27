@@ -1,24 +1,24 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import * as usersActions from 'actions/usersActions'
-import * as postsActions from 'actions/postsActions'
 import "./style.scss"
 
 import Spinner from 'components/Spinner'
 
-function PostsPage(props) {
+import { getOneUser } from 'actions/usersActions'
+import { getPostsByUser, toggleOpenComments } from 'actions/postsActions'
+
+function PostsPage() {
+  const dispatch = useDispatch()
+  const {usersReducer, postsReducer} = useSelector(state => state)
   const { id } = useParams()
-  const { usersReducer, postsReducer, getOneUser } = props
-  const { getPostsByUser, toggleOpenComments} = props
-  
   
   const user = usersReducer.users.find(u=>u.id.toString() === id) ?? usersReducer.user
   const postsByUser = postsReducer.posts.find(p=>p.userId.toString() === id)
 
   useEffect(() => {
-    if(user?.id !== id) getOneUser(id)
-    if(!postsByUser) getPostsByUser(id)
+    if(user?.id !== id) dispatch(getOneUser(id))
+    if(!postsByUser) dispatch(getPostsByUser(id))
   }, [])
 
   
@@ -30,7 +30,7 @@ function PostsPage(props) {
       { postsByUser &&  
 
         postsByUser.posts.map((post, index) => 
-          <div className='PostsPage_Post' key={post.id} onClick={()=>toggleOpenComments(post)}>
+          <div className='PostsPage_Post' key={post.id} onClick={()=>dispatch(toggleOpenComments(post))}>
 
             <h3 className='PostsPage_Post_Title'> 
               {index} - {post.title}
@@ -61,6 +61,5 @@ function PostsPage(props) {
   </>)
 }
 
-const mapStateToProps = ({usersReducer, postsReducer}) => ({usersReducer, postsReducer})
-const mapDispatchToProps = {...usersActions, ...postsActions}
-export default connect(mapStateToProps, mapDispatchToProps)(PostsPage)
+
+export default PostsPage

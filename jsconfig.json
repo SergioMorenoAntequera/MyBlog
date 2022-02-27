@@ -2,14 +2,14 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "containers/*": ["./containers*"],
-      "components/*": ["./components*"],
-      "pages/*": ["./pages*"],
-      "hooks/*": ["./hooks*"],
-      "reducers/*": ["./reducers*"],
-      "actions/*": ["./actions*"],
-      "types/*": ["./types*"],
-      "api/*": ["./api*"]
+      "containers*": ["./containers*"],
+      "components*": ["./components*"],
+      "pages*": ["./pages*"],
+      "hooks*": ["./hooks*"],
+      "reducers*": ["./reducers*"],
+      "actions*": ["./actions*"],
+      "types*": ["./types*"],
+      "api*": ["./api*"]
     }
   }
 }

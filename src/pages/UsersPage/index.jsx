@@ -1,24 +1,19 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import * as usersActions from 'actions/usersActions'
+import { getAllUsers } from 'actions/usersActions'
+import { Link } from 'react-router-dom'
 import Spinner from 'components/Spinner'
 import Fatal from 'components//Fatal'
-import { Link } from 'react-router-dom'
-import { getAllUsers } from 'actions/usersActions'
+
 
 function UsersPage(props) {
   const dispatch = useDispatch();
-  const users = useSelector(state => state.usersReducer.users)
+  const {users, loading, error} = useSelector(state => state.usersReducer)
 
   useEffect(() => {
     if(users.length > 0) return
     dispatch(getAllUsers())
   }, [])
-  
-  const {
-    loading,
-    error,
-  } = props
   
   if(loading) return <Spinner/>
   if(error) return <Fatal message={error}/>
