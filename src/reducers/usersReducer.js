@@ -1,4 +1,4 @@
-import {SET_ALL, ON_LOADING, ON_ERROR, SET_ONE} from "types/usersActionTypes";
+import {SET_ALL, ON_LOADING, ON_ERROR, SET_ONE} from "actions/usersActionTypes";
 
 const INITIAL_STATE = {
     users: [],

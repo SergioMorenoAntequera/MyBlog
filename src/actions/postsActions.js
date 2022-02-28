@@ -1,4 +1,4 @@
-import {SET_BY_USER, ON_LOADING, ON_ERROR, UPDATE_POST} from "types/postsActionTypes";
+import {SET_BY_USER, ON_LOADING, ON_ERROR, UPDATE_POST} from "actions/postsActionTypes";
 
 import { 
     getPostByUser as getPostByUserAPI,

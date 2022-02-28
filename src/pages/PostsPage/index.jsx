@@ -7,6 +7,7 @@ import Spinner from 'components/Spinner'
 
 import { getOneUser } from 'actions/usersActions'
 import { getPostsByUser, toggleOpenComments } from 'actions/postsActions'
+import H1 from 'components/H1'
 
 function PostsPage() {
   const dispatch = useDispatch()
@@ -24,7 +25,7 @@ function PostsPage() {
   
   if(!user) return <Spinner/>
   return (<>
-    <h2> Blog posts of {user.name} </h2>
+    <H1> Blog posts of {user.name} </H1>
     <div>
       { !postsByUser && <Spinner/> }
       { postsByUser &&  

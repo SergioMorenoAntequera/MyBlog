@@ -1,4 +1,4 @@
-import {SET_ALL, SET_ONE, ON_LOADING, ON_ERROR} from "types/usersActionTypes";
+import {SET_ALL, SET_ONE, ON_LOADING, ON_ERROR} from "actions/usersActionTypes";
 import { 
     getAllUsers as getAllUsersAPI,
     getOneUser as getOneUserAPI
