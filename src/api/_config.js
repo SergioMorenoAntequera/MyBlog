@@ -1,13 +1,10 @@
 import axios from "axios";
 
-// Firebase SDK
-import firebase from 'firebase/compat/app';
+import { initializeApp } from "firebase/app"
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
 
-import { useCollectionData } from 'react-firebase-hooks/firestore';
-
-firebase.initializeApp({
+const firebase = initializeApp({
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
     authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
     projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
@@ -18,7 +15,6 @@ firebase.initializeApp({
 })
 
 
-const firestore = firebase.firestore()
 
 
 const BASE_URL = process.env.BASE_URL || "https://jsonplaceholder.typicode.com"
