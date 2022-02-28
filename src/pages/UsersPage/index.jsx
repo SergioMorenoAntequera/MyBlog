@@ -5,11 +5,15 @@ import { Link } from 'react-router-dom'
 import Spinner from 'components/Spinner'
 import Fatal from 'components//Fatal'
 import H1 from 'components/H1'
+import { SignIn, SignOut, SignToggle, useUser } from 'api/auth'
 
 
 function UsersPage(props) {
   const dispatch = useDispatch();
   const {users, loading, error} = useSelector(state => state.usersReducer)
+
+  const user = useUser()
+  console.log(user?.displayName)
 
   useEffect(() => {
     if(users.length > 0) return
@@ -19,6 +23,9 @@ function UsersPage(props) {
   if(loading) return <Spinner/>
   if(error) return <Fatal message={error}/>
   return (<>
+
+    <SignToggle/>
+    
     <H1> Users List </H1>
     {
       users.map((user, index) => 

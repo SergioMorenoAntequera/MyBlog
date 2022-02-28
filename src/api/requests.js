@@ -1,4 +1,4 @@
-import axiosInstance from "api/config";
+import { axiosInstance } from "api/_config";
 
 export const getAllUsers = () => axiosInstance.get("/users")
 export const getOneUser = (userId) => axiosInstance.get(`/users?id=${userId}`)
