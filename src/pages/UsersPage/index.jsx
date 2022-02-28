@@ -4,6 +4,7 @@ import { getAllUsers } from 'actions/usersActions'
 import { Link } from 'react-router-dom'
 import Spinner from 'components/Spinner'
 import Fatal from 'components//Fatal'
+import H1 from 'components/H1'
 
 
 function UsersPage(props) {
@@ -18,6 +19,7 @@ function UsersPage(props) {
   if(loading) return <Spinner/>
   if(error) return <Fatal message={error}/>
   return (<>
+    <H1> Users List </H1>
     {
       users.map((user, index) => 
         <div key={user.id}> 
