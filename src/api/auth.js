@@ -5,7 +5,10 @@ const auth = getAuth()
 
 
 const useUser = () => {
-    return [useAuthState(auth)[0], SignToggle]
+    return {
+        user: useAuthState(auth)[0], 
+        SignToggle: SignToggle
+    }
 }
 
 const SignIn = () => {

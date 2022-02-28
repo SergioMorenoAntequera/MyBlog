@@ -4,6 +4,7 @@ import UsersPage from "pages/UsersPage";
 import PostsPage from "pages/PostsPage";
 import Layout from 'containers/Layout';
 import HomePage from "pages/Home";
+import UserPage from "pages/UserPage";
 
 function App() {
   return (<BrowserRouter>
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<HomePage/>} />
           <Route exact path="/users" element={<UsersPage />} />
+          <Route exact path="/user" element={<UserPage />} />
           <Route exact path="/users/:id/posts" element={<PostsPage/>} />
           <Route exact path="/tasks" element={<TasksPage />} />
         </Routes>

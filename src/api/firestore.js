@@ -1,4 +1,4 @@
-import { getFirestore, collection, where, query, getDocs, orderBy, limit } from 'firebase/firestore';
+import { getFirestore, collection, where, query, getDocs, orderBy, limit, addDoc, Timestamp } from 'firebase/firestore';
 
 const db = getFirestore();
 const postsCol = collection(db, "posts")
@@ -13,14 +13,26 @@ const getRecentPosts = async () => {
     return data
 }
 
-const usePostsByUser = async () => {
-    // const user = useUser()
+const getPostsByUser = async (userId) => {
     const q = query(collection(db, "posts"), where("user", "==", "user1"));
-    const result = await getDocs(q);
-    return result.map(r => r.data())
+    const querySnapshot = await getDocs(q);
+    const data = []; // Cant do a map
+    querySnapshot.forEach((doc) => {
+        data.push(doc.data());
+    });
+    return data
+}
+
+const createNewPost = async (userId, body) => {
+    await addDoc(collection(db, "posts"), {
+        userId: userId,
+        body: body,
+        createdAt: Timestamp.now()
+    });
 }
 
 export {
     getRecentPosts,
-    usePostsByUser
+    getPostsByUser,
+    createNewPost
 }   
