@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import H1 from 'components/H1'
-import { createNewPost, getPostsByUser } from 'api/firestore'
+import { createNewPost, getPostsByUser } from 'api/posts'
 import { useUser } from 'api/auth'
 
 
@@ -8,14 +8,15 @@ function UserPage(props) {
   const { user } = useUser()
   const [posts, setPosts] = useState([])
   const [newPostBody, setNewPostBody] = useState("")
-  console.log(newPostBody)
+  
 
   useEffect(() => {
-    getPostsByUser(user?.id).then(res => {
-      setPosts(res) 
+    if(!user) return
+    getPostsByUser(user.uid).then(res => {
+      setPosts(res)
+      console.log(res)
     })
-
-  }, [])
+  }, [user])
   
   function crateNewPost(event) {
     event.preventDefault()

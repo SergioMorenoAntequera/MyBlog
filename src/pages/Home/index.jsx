@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import Spinner from 'components/Spinner'
 import Fatal from 'components//Fatal'
 import H1 from 'components/H1'
-import { getRecentPosts } from 'api/firestore'
+import { getRecentPosts } from 'api/posts'
 
 
 function HomePage(props) {

@@ -5,22 +5,12 @@ const postsCol = collection(db, "posts")
 
 const getRecentPosts = async () => {
     const q = query(postsCol, orderBy("createdAt", "desc"), limit(25));
-    const querySnapshot = await getDocs(q);
-    const data = []; // Cant do a map
-    querySnapshot.forEach((doc) => {
-        data.push(doc.data());
-    });
-    return data
+    return getData(q)
 }
 
 const getPostsByUser = async (userId) => {
-    const q = query(collection(db, "posts"), where("user", "==", "user1"));
-    const querySnapshot = await getDocs(q);
-    const data = []; // Cant do a map
-    querySnapshot.forEach((doc) => {
-        data.push(doc.data());
-    });
-    return data
+    const q = query(collection(db, "posts"), where("userId", "==", userId));
+    return getData(q)
 }
 
 const createNewPost = async (userId, body) => {
@@ -30,6 +20,15 @@ const createNewPost = async (userId, body) => {
         createdAt: Timestamp.now()
     });
 }
+
+const getData = async (query) => {
+    const querySnapshot = await getDocs(query);
+    const data = []; // Cant do a map
+    querySnapshot.forEach((doc) => {
+        data.push( {id:doc.id, ...doc.data()} );
+    });
+    return data
+} 
 
 export {
     getRecentPosts,
