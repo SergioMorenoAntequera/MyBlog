@@ -1,20 +1,30 @@
 import {SET_BY_USER, ON_LOADING, ON_ERROR, UPDATE_POST} from "actions/postsActionTypes";
 
 const INITIAL_STATE = {
-    posts: [],
+    posts: {
+        byId: {
+            "0": {
+                id: "0",
+                body: "",
+                // author: "",
+                // comments: [""]
+            }
+        },
+        allIds: ["0"]
+    },
     loading: false,
     error: "",
 }
 
 export function postsReducer(state = INITIAL_STATE, action) {
     
-    function updatePost(postToUpdate) {
-        var posts = [...state.posts].map(p=>p.id)
-        var index = posts.indexOf(postToUpdate?.id)
-        if(index === -1) return state.posts
-        posts[index] = postToUpdate
-        return posts
-    }
+    // function updatePost(postToUpdate) {
+    //     var posts = [...state.posts].map(p=>p.id)
+    //     var index = posts.indexOf(postToUpdate?.id)
+    //     if(index === -1) return state.posts
+    //     posts[index] = postToUpdate
+    //     return posts
+    // }
 
     const states = {
         [SET_BY_USER]: {
@@ -23,12 +33,12 @@ export function postsReducer(state = INITIAL_STATE, action) {
             loading: false,
             error: "",
         },
-        [UPDATE_POST]: {
-            ...state,
-            posts: updatePost(action.payload),
-            loading: false,
-            error: "",
-        },
+        // [UPDATE_POST]: {
+        //     ...state,
+        //     posts: updatePost(action.payload),
+        //     loading: false,
+        //     error: "",
+        // },
         [ON_LOADING]: {
             ...state,
             loading: true,
