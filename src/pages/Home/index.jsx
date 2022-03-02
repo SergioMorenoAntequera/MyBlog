@@ -5,26 +5,25 @@ import { Link } from 'react-router-dom'
 import Spinner from 'components/Spinner'
 import Fatal from 'components//Fatal'
 import H1 from 'components/H1'
-import { getRecentPosts } from 'api/posts'
+import * as PostsAPI from 'api/posts'
 
 
 function HomePage(props) {
-  
-  const [recentPosts, setRecentPosts] = useState([])
+  const posts = useSelector(state => state.posts)
+  console.log(posts)
 
   useEffect(() => {
-    getRecentPosts().then(res => {
-      setRecentPosts(res) 
+    PostsAPI.getRecent().then(res => {
+      //setRecentPosts(res) 
     })
 
   }, [])
   
-  console.log(recentPosts)
   return (<>
 
     <H1> Home, most recent posts </H1>
     
-    { recentPosts?.map(post => <p key={post.id}> {post.body} </p>) }
+    {/* { recentPosts?.map(post => <p key={post.id}> {post.body} </p>) } */}
     
   </>)
 }

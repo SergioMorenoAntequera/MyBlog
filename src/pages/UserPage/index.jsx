@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import H1 from 'components/H1'
-import { createNewPost, getPostsByUser } from 'api/posts'
+import { createNew, getByUser } from 'api/posts'
 import { useUser } from 'api/auth'
 
 
@@ -12,7 +12,7 @@ function UserPage(props) {
 
   useEffect(() => {
     if(!user) return
-    getPostsByUser(user.uid).then(res => {
+    getByUser(user.uid).then(res => {
       setPosts(res)
       console.log(res)
     })
@@ -20,7 +20,7 @@ function UserPage(props) {
   
   function crateNewPost(event) {
     event.preventDefault()
-    createNewPost(user.uid, newPostBody)
+    createNew(user.uid, newPostBody)
   }
 
   return (<>

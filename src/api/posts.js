@@ -3,17 +3,17 @@ import { getFirestore, collection, where, query, getDocs, orderBy, limit, addDoc
 const db = getFirestore();
 const postsCol = collection(db, "posts")
 
-const getRecentPosts = async () => {
-    const q = query(postsCol, orderBy("createdAt", "desc"), limit(25));
+const getRecent = async (limitAmt = 25) => {
+    const q = query(postsCol, orderBy("createdAt", "desc"), limit(limitAmt));
     return getData(q)
 }
 
-const getPostsByUser = async (userId) => {
+const getByUser = async (userId) => {
     const q = query(collection(db, "posts"), where("userId", "==", userId));
     return getData(q)
 }
 
-const createNewPost = async (userId, body) => {
+const createNew = async (userId, body) => {
     await addDoc(collection(db, "posts"), {
         userId: userId,
         body: body,
@@ -31,7 +31,7 @@ const getData = async (query) => {
 } 
 
 export {
-    getRecentPosts,
-    getPostsByUser,
-    createNewPost
+    getRecent,
+    getByUser,
+    createNew
 }   
