@@ -6,24 +6,24 @@ import Spinner from 'components/Spinner'
 import Fatal from 'components//Fatal'
 import H1 from 'components/H1'
 import * as PostsAPI from 'api/posts'
+import { getMainFeed } from 'actions/postsActions'
 
 
-function HomePage(props) {
-  const posts = useSelector(state => state.posts)
-  console.log(posts)
+function HomePage() {
+  const dispatch = useDispatch();
+  const posts = useSelector(state => state.posts.posts)
+  const recentPosts = posts.allIds?.map(id => posts.byId[id])
 
   useEffect(() => {
-    PostsAPI.getRecent().then(res => {
-      //setRecentPosts(res) 
-    })
-
+    if(recentPosts.length === 0)
+      dispatch(getMainFeed())
   }, [])
   
   return (<>
 
     <H1> Home, most recent posts </H1>
     
-    {/* { recentPosts?.map(post => <p key={post.id}> {post.body} </p>) } */}
+    { recentPosts?.map(post => <p key={post.id}> {post.body} </p>) }
     
   </>)
 }

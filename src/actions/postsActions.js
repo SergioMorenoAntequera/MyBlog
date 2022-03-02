@@ -1,10 +1,25 @@
-import {SET_BY_USER, ON_LOADING, ON_ERROR, UPDATE_POST} from "actions/postsActionTypes";
+import {SET_BY_USER, ON_LOADING, ON_ERROR, UPDATE_POST, ADD_POST} from "actions/postsActionTypes";
 
 import { 
     getPostByUser as getPostByUserAPI,
     getCommentsByPost as getCommentsByPostAPI 
 } from "api/requests";
 
+import * as PostsAPI from 'api/posts'
+
+export const getMainFeed = () => async (dispatch) => {
+    var recentPosts = await PostsAPI.getRecent()
+    recentPosts.forEach(post => {
+        dispatch({
+            type: ADD_POST,
+            payload: post
+        })
+    })
+}
+
+export const getUserFeed = (userId) => async (dispatch) => {
+
+}
 
 export const getPostsByUser = (userId) => async (dispatch, getState) => {
     if(!userId) return;

@@ -6,11 +6,11 @@ import { createStore, applyMiddleware } from "redux";
 import reduxThunk from "redux-thunk"
 import { Provider } from "react-redux";
 import combineReducers from "reducers/index";
-import { logAction } from 'middlewares';
+// import { logAction } from 'middlewares';
 
 const store = createStore(
   combineReducers,
-  applyMiddleware(reduxThunk, logAction)
+  applyMiddleware(reduxThunk)
 )
 
 ReactDOM.render(
