@@ -1,4 +1,4 @@
-import {SET_BY_USER, ON_LOADING, ON_ERROR, UPDATE_POST, ADD_POST} from "actions/postsActionTypes";
+import {SET_BY_USER, ON_LOADING, ON_ERROR, UPDATE_POST, ADD_POST, ADD_POST_MAIN_FEED, SORT_POST_MAIN_FEED} from "actions/postsActionTypes";
 
 import { 
     getPostByUser as getPostByUserAPI,
@@ -14,12 +14,20 @@ export const getMainFeed = () => async (dispatch) => {
             type: ADD_POST,
             payload: post
         })
+        dispatch({
+            type: ADD_POST_MAIN_FEED,
+            payload: post.id
+        })
     })
 }
 
 export const getUserFeed = (userId) => async (dispatch) => {
 
 }
+
+
+
+
 
 export const getPostsByUser = (userId) => async (dispatch, getState) => {
     if(!userId) return;

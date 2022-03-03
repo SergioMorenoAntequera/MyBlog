@@ -1,4 +1,4 @@
-import {SET_BY_USER, ON_LOADING, ON_ERROR, ADD_POST} from "actions/postsActionTypes";
+import {SET_BY_USER, ON_LOADING, ON_ERROR, ADD_POST, ADD_POST_MAIN_FEED, SORT_POST_MAIN_FEED} from "actions/postsActionTypes";
 
 const INITIAL_STATE = {
     posts: {
@@ -11,7 +11,9 @@ const INITIAL_STATE = {
                 // comments: [""]
             // }
         },
-        allIds: []
+        allIds: [],
+        mainFeed: [],
+        userFeed: []
     },
     loading: false,
     error: "",
@@ -39,6 +41,20 @@ export function postsReducer(state = INITIAL_STATE, action) {
                     allIds: [
                         ...state.posts.allIds,
                         payload.id
+                    ]
+                }
+            }
+        }
+        case ADD_POST_MAIN_FEED : {
+            if(state.posts.mainFeed.includes(payload)) return state
+            
+            return {
+                ...state,
+                posts: {
+                    ...state.posts,
+                    mainFeed: [
+                        ...state.posts.mainFeed,
+                        action.payload
                     ]
                 }
             }

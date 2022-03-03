@@ -12,7 +12,8 @@ import { getMainFeed } from 'actions/postsActions'
 function HomePage() {
   const dispatch = useDispatch();
   const posts = useSelector(state => state.posts.posts)
-  const recentPosts = posts.allIds?.map(id => posts.byId[id])
+  const recentPosts = posts.mainFeed?.map(id => posts.byId[id])
+  console.log(recentPosts)
 
   useEffect(() => {
     if(recentPosts.length === 0)
