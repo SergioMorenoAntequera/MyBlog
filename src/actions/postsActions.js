@@ -24,6 +24,7 @@ export const getMainFeed = () => async (dispatch) => {
 export const getUserFeed = (userId) => async (dispatch) => {
     var recentPosts = await PostsAPI.getByUser(userId)
 
+    console.log(recentPosts)
     recentPosts.forEach(post => {
         dispatch({
             type: ADD_POST,

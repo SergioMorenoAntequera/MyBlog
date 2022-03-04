@@ -12,19 +12,19 @@ import { getMainFeed } from 'actions/postsActions'
 function HomePage() {
   const dispatch = useDispatch();
   const posts = useSelector(state => state.posts.posts)
-  const recentPosts = posts.mainFeed?.map(id => posts.byId[id])
-  console.log(recentPosts)
+  const mainFeedPosts = posts.mainFeed?.map(id => posts.byId[id])
 
   useEffect(() => {
-    if(recentPosts.length === 0)
+    if(mainFeedPosts.length === 0)
       dispatch(getMainFeed())
   }, [])
   
+  console.log(posts)
   return (<>
 
     <H1> Home, most recent posts </H1>
     
-    { recentPosts?.map(post => <p key={post.id}> {post.body} </p>) }
+    { mainFeedPosts?.map(post => <p key={post.id}> {post.body} </p>) }
     
   </>)
 }

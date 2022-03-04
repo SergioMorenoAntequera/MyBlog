@@ -1,26 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import H1 from 'components/H1'
-import { createNew, getByUser } from 'api/posts'
+import * as postsAPI from 'api/posts'
 import { useUser } from 'api/auth'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUserFeed } from 'actions/postsActions'
 
 
 function UserPage(props) {
-  const { user } = useUser()
-  const [posts, setPosts] = useState([])
-  const [newPostBody, setNewPostBody] = useState("")
+  const postsEntity = useSelector(state => state.posts)
+  const posts = postsEntity.posts.userFeed.map(p => postsEntity.posts.byId[p])
   
+  const dispatch = useDispatch()
+  const { user } = useUser()
 
+
+  const [newPostBody, setNewPostBody] = useState("")
+
+  
+ 
   useEffect(() => {
     if(!user) return
-    getByUser(user.uid).then(res => {
-      setPosts(res)
-      console.log(res)
-    })
+    console.log(user)
+    
+    dispatch(getUserFeed(user.uid))
   }, [user])
-  
+
   function crateNewPost(event) {
     event.preventDefault()
-    createNew(user.uid, newPostBody)
+    postsAPI.createNew(user.uid, newPostBody)
   }
 
   return (<>
