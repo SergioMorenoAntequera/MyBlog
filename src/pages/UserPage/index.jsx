@@ -3,31 +3,27 @@ import H1 from 'components/H1'
 import * as postsAPI from 'api/posts'
 import { useUser } from 'api/auth'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUserFeed } from 'actions/postsActions'
+import { createPost, getUserFeed } from 'actions/postsActions'
 
 
 function UserPage(props) {
-  const postsEntity = useSelector(state => state.posts)
-  const posts = postsEntity.posts.userFeed.map(p => postsEntity.posts.byId[p])
-  
+  const postsEntity = useSelector(state => state.postsEntity)
   const dispatch = useDispatch()
+  const posts = postsEntity.posts.userFeed.map(p => postsEntity.posts.byId[p])
+
   const { user } = useUser()
 
 
   const [newPostBody, setNewPostBody] = useState("")
-
-  
  
   useEffect(() => {
-    if(!user) return
-    console.log(user)
-    
-    dispatch(getUserFeed(user.uid))
+    dispatch(getUserFeed(user?.uid))
   }, [user])
 
   function crateNewPost(event) {
     event.preventDefault()
-    postsAPI.createNew(user.uid, newPostBody)
+    
+    dispatch(createPost(user?.uid, newPostBody))
   }
 
   return (<>

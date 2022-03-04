@@ -3,6 +3,6 @@ import { usersReducer } from "reducers/usersReducer";
 import { postsReducer } from "reducers/postsReducer";
 
 export default combineReducers({
-    users : usersReducer,
-    posts : postsReducer
+    usersEntity : usersReducer,
+    postsEntity : postsReducer
 })

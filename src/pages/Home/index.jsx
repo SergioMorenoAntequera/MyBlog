@@ -11,7 +11,7 @@ import { getMainFeed } from 'actions/postsActions'
 
 function HomePage() {
   const dispatch = useDispatch();
-  const posts = useSelector(state => state.posts.posts)
+  const posts = useSelector(state => state.postsEntity.posts)
   const mainFeedPosts = posts.mainFeed?.map(id => posts.byId[id])
 
   useEffect(() => {

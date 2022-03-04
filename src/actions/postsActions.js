@@ -9,6 +9,7 @@ import * as PostsAPI from 'api/posts'
 
 export const getMainFeed = () => async (dispatch) => {
     var recentPosts = await PostsAPI.getRecent()
+
     recentPosts.forEach(post => {
         dispatch({
             type: ADD_POST,
@@ -20,11 +21,10 @@ export const getMainFeed = () => async (dispatch) => {
         })
     })
 }
-
 export const getUserFeed = (userId) => async (dispatch) => {
+    if(!userId) return
     var recentPosts = await PostsAPI.getByUser(userId)
-
-    console.log(recentPosts)
+    
     recentPosts.forEach(post => {
         dispatch({
             type: ADD_POST,
@@ -36,7 +36,19 @@ export const getUserFeed = (userId) => async (dispatch) => {
         })
     })
 }
+export const createPost = (userId, newPost) => async (dispatch) => {
+    if(!userId) return
+    var newPostCreated = await PostsAPI.createNew(userId, newPost)
 
+    dispatch({
+        type: ADD_POST,
+        payload: newPostCreated
+    })
+    dispatch({
+        type: ADD_POST_USER_FEED,
+        payload: newPostCreated.id
+    })
+}
 
 
 
