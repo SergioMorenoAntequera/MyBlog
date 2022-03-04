@@ -1,4 +1,4 @@
-import {SET_BY_USER, ON_LOADING, ON_ERROR, UPDATE_POST, ADD_POST, ADD_POST_MAIN_FEED, SORT_POST_MAIN_FEED, ADD_POST_USER_FEED} from "actions/postsActionTypes";
+import {SET_BY_USER, ON_LOADING, ON_ERROR, UPDATE_POST, ADD_POST, ADD_POST_MAIN_FEED, ADD_POST_USER_FEED} from "actions/postsActionTypes";
 
 import { 
     getPostByUser as getPostByUserAPI,

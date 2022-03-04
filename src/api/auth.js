@@ -3,38 +3,24 @@ import { useAuthState } from "react-firebase-hooks/auth"
 
 const auth = getAuth()
 
-
 const useUser = () => {
     return {
-        user: useAuthState(auth)[0], 
-        SignToggle: SignToggle
+        user: useAuthState(auth)[0],
+        auth: auth
     }
 }
 
-const SignIn = () => {
-    const signInWithGoogle = () => {
-        const provider = new GoogleAuthProvider();
-        signInWithPopup(auth, provider)
-    }
-
-    return <button onClick={signInWithGoogle}> Sign in with Google </button>  
-}
-const SignOut = () => {
-    return auth.currentUser && (
-        <button onClick={()=>{auth.signOut()}}> Sign Out </button>  
-    )
-}
-const SignToggle = () => {
-    if(auth.currentUser)
-        return <SignOut/>
-    else
-        return <SignIn/>
+const signInWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
 }
 
+const signOut = () => {
+    auth.signOut()
+}
 
 export {
     useUser,
-    SignIn,
-    SignOut,
-    SignToggle
+    signInWithGoogle,
+    signOut
 }

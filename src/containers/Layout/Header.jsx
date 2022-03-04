@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom'
-import { useUser } from 'api/auth'
-import "./Header.scss"
 import React from 'react'
+import "./Header.scss"
+
+import { SignToggle } from 'components/SignButton'
+import { useUser } from 'api/auth'
 
 export default function Header() {
-  const { user, SignToggle } = useUser()
+  const { user } = useUser()
+
   
   return (<div className='Header'>
       <div>

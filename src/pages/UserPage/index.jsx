@@ -22,7 +22,6 @@ function UserPage(props) {
 
   function crateNewPost(event) {
     event.preventDefault()
-    
     dispatch(createPost(user?.uid, newPostBody))
   }
 
