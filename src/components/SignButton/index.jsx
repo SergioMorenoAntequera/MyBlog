@@ -1,8 +1,21 @@
+import { createUser } from "actions/usersActions"
 import * as authAPI from "api/auth"
 import Button from "components/Button"
+import { useDispatch } from "react-redux"
 
 const SignIn = () => {
-    return <Button onClick={authAPI.signInWithGoogle}> Sign in with Google </Button>  
+
+    const dispatch = useDispatch()
+    const { auth } = authAPI.useUser()
+
+    const signIn = async () => {
+        await authAPI.signInWithGoogle()
+        dispatch(createUser(auth.currentUser))
+    }
+
+    return <>
+        <Button onClick={signIn}> Sign in with Google </Button>  
+    </>
 }
 
 const SignOut = () => {

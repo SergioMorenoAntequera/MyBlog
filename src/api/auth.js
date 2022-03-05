@@ -10,9 +10,9 @@ const useUser = () => {
     }
 }
 
-const signInWithGoogle = () => {
+const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
+    await signInWithPopup(auth, provider)
 }
 
 const signOut = () => {

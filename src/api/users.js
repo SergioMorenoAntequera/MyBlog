@@ -5,12 +5,15 @@ import { getData } from '../utils/api';
 const collectionName = "users"
 const usersCol = collection(db, collectionName)
 
-const getById = async (userId) => {
-    const q = query(usersCol, where("userId", "==", userId));
+const getByUid = async (userUid) => {
+    const q = query(usersCol, where("uid", "==", userUid));
     return getData(await getDocs(q));
 }
 
 const createNew = async ({uid, displayName, photoURL}) => {
+    const foundPlayer = await getByUid(uid);
+    if(foundPlayer.length) return foundPlayer[0]
+
     const newUser= {
         uid: uid,
         displayName: displayName,
@@ -22,6 +25,6 @@ const createNew = async ({uid, displayName, photoURL}) => {
 }
 
 export {
-    getById,
+    getByUid,
     createNew
 }   
