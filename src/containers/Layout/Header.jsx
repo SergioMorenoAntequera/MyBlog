@@ -13,7 +13,6 @@ export default function Header() {
       <div>
         <Link to={"/"} > Home </Link>
         <Link to={"/users"} > Users </Link>
-        <Link to={"/tasks"} > Tasks </Link>
       </div>
       
       <div>
