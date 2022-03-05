@@ -16,6 +16,10 @@ export const createUser = (newUser) => async (dispatch) => {
     })
 }
 
+
+
+
+
 export const getAllUsers = () => async (dispatch) => {
     dispatch({type: ON_LOADING})
     
