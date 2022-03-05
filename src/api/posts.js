@@ -15,9 +15,10 @@ const getByUser = async (userId) => {
     return getData(q)
 }
 
-const createNew = async (userId, body) => {
+const createNew = async (userId, {body, title}) => {
     const newPost = {
         userId: userId,
+        title: title,
         body: body,
         createdAt: Timestamp.now()
     }
