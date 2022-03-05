@@ -1,6 +1,6 @@
 import { collection, where, query, getDocs, orderBy, limit, addDoc, Timestamp } from 'firebase/firestore';
 import { db } from './_config';
-import { getData } from './_utils';
+import { getData } from '../utils/api';
 
 
 const collectionName = "posts"

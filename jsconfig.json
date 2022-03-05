@@ -9,7 +9,8 @@
       "reducers*": ["./reducers*"],
       "actions*": ["./actions*"],
       "types*": ["./types*"],
-      "api*": ["./api*"]
+      "api*": ["./api*"],
+      "utils*": ["./utils*"]
     }
   }
 }

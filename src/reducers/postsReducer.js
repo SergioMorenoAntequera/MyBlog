@@ -1,4 +1,5 @@
 import {SET_BY_USER, ON_LOADING, ON_ERROR, ADD_POST, ADD_POST_MAIN_FEED, ADD_POST_USER_FEED} from "actions/postsActionTypes";
+import { addMainRecord, addUnique } from "utils/reducers";
 
 const INITIAL_STATE = {
     posts: {
@@ -58,25 +59,5 @@ export function postsReducer(state = INITIAL_STATE, action) {
         }
 
         default : return state
-    }
-
-
-    function addMainRecord(object) {
-        let result = {};
-        result[object.id] = {}
-        Object.keys(object).forEach(k => {
-            result[object.id] = {
-                ...result[object.id],
-                [k]: object[k]
-            }
-        })
-        return result
-    }
-    function addUnique(array, el) {
-        if(array.includes(el)) {
-            return array
-        } else {
-            return [...array, el]
-        }
     }
 }

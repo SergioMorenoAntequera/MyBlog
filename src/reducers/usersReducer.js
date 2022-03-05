@@ -1,4 +1,5 @@
-import {SET_ALL, ON_LOADING, ON_ERROR, SET_ONE, ADD_USER} from "actions/usersActionTypes";
+import { ADD_USER } from "actions/usersActionTypes";
+import { addMainRecord, addUnique } from "utils/reducers";
 
 const INITIAL_STATE = {
     users: {
@@ -26,14 +27,14 @@ export function usersReducer(state = INITIAL_STATE, action) {
             
             return {
                 ...state,
-                    users: {
-                        ...state.users,
-                        byId: {
-                            ...state.users.byId,
-                            ...addMainRecord(action.payload)
-                        },
-                        allIds: addUnique(state.users.allIds, action.payload.id)
-                    }
+                users: {
+                    ...state.users,
+                    byId: {
+                        ...state.users.byId,
+                        ...addMainRecord(action.payload)
+                    },
+                    allIds: addUnique(state.users.allIds, action.payload.id)
+                }
             }
         }
 
@@ -41,22 +42,4 @@ export function usersReducer(state = INITIAL_STATE, action) {
     }
 }
 
-function addMainRecord(object) {
-    let result = {};
-    result[object.id] = {}
-    Object.keys(object).forEach(k => {
-        result[object.id] = {
-            ...result[object.id],
-            [k]: object[k]
-        }
-    })
-    return result
-}
 
-function addUnique(array, el) {
-    if(array.includes(el)) {
-        return array
-    } else {
-        return [...array, el]
-    }
-}
