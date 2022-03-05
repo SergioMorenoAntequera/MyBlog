@@ -4,6 +4,7 @@ import * as postsAPI from 'api/posts'
 import { useUser } from 'api/auth'
 import { useDispatch, useSelector } from 'react-redux'
 import { createPost, getUserFeed } from 'actions/postsActions'
+import Post from 'containers/Post'
 
 
 function UserPage(props) {
@@ -14,26 +15,29 @@ function UserPage(props) {
   const { user } = useUser()
 
 
-  const [newPostBody, setNewPostBody] = useState("")
+  const [newPost, setNewPost] = useState({title:"",body:""})
  
   useEffect(() => {
     dispatch(getUserFeed(user?.uid))
-  }, [])
+  }, [user])
 
   function crateNewPost(event) {
     event.preventDefault()
-    dispatch(createPost(user?.uid, newPostBody))
+    dispatch(createPost(user?.uid, newPost))
   }
-
-  
 
   return (<>
     <H1> USER {user?.displayName} profile </H1>
     
-    { posts?.map(post => <p key={post.id}> {post.body} </p>) }
+    { posts?.map(post => <Post key={post.id} post={post}/> )}
 
     <form action="GET">
-      <input type="text" value={newPostBody} onChange={e => setNewPostBody(e.target.value)} />
+      <label htmlFor=""> title </label>
+      <input type="text" value={newPost.title} onChange={e => setNewPost({...newPost, title:e.target.value})} />
+      <br />
+      <label htmlFor=""> body </label>
+      <input type="text" value={newPost.body} onChange={e => setNewPost({...newPost, body:e.target.value})} />
+      <br />
       <input type="submit" onClick={crateNewPost}/>
     </form>
     
