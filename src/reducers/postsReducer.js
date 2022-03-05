@@ -57,7 +57,7 @@ export function postsReducer(state = INITIAL_STATE, action) {
             }
         }
         case ADD_POST_USER_FEED : {
-            if(state.posts.mainFeed.includes(payload)) return state
+            if(state.posts.userFeed.includes(payload)) return state
             
             return {
                 ...state,

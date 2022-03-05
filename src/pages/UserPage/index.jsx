@@ -18,12 +18,14 @@ function UserPage(props) {
  
   useEffect(() => {
     dispatch(getUserFeed(user?.uid))
-  }, [user])
+  }, [])
 
   function crateNewPost(event) {
     event.preventDefault()
     dispatch(createPost(user?.uid, newPostBody))
   }
+
+  
 
   return (<>
     <H1> USER {user?.displayName} profile </H1>
