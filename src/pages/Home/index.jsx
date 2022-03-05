@@ -7,6 +7,7 @@ import Fatal from 'components//Fatal'
 import H1 from 'components/H1'
 import * as PostsAPI from 'api/posts'
 import { getMainFeed } from 'actions/postsActions'
+import Post from 'containers/Post'
 
 
 function HomePage() {
@@ -19,12 +20,11 @@ function HomePage() {
       dispatch(getMainFeed())
   }, [])
   
-  console.log(posts)
   return (<>
 
     <H1> Home, most recent posts </H1>
     
-    { mainFeedPosts?.map(post => <p key={post.id}> {post.body} </p>) }
+    { mainFeedPosts?.map(post => <Post key={post.id} post={post} />) }
     
   </>)
 }

@@ -1,8 +1,20 @@
-import {SET_ALL, SET_ONE, ON_LOADING, ON_ERROR} from "actions/usersActionTypes";
+import {SET_ALL, SET_ONE, ON_LOADING, ON_ERROR, ADD_USER} from "actions/usersActionTypes";
+import * as UsersAPI from 'api/users'
 import { 
     getAllUsers as getAllUsersAPI,
     getOneUser as getOneUserAPI
 } from "api/requests";
+
+
+export const createUser = (newUser) => async (dispatch) => {
+    if(!newUser) return
+    var newUserCreated = await UsersAPI.createNew(newUser)
+    
+    dispatch({
+        type: ADD_USER,
+        payload: newUserCreated
+    })
+}
 
 export const getAllUsers = () => async (dispatch) => {
     dispatch({type: ON_LOADING})

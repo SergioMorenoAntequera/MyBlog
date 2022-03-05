@@ -34,16 +34,11 @@ export function postsReducer(state = INITIAL_STATE, action) {
                         ...state.posts.byId,
                         ...addMainRecord(payload)
                     },
-                    allIds: [
-                        ...state.posts.allIds,
-                        payload.id
-                    ]
+                    allIds: addUnique(state.posts.allIds, action.payload.id)
                 }
             }
         }
         case ADD_POST_MAIN_FEED : {
-            if(state.posts.mainFeed.includes(payload)) return state
-            
             return {
                 ...state,
                 posts: {
@@ -53,8 +48,6 @@ export function postsReducer(state = INITIAL_STATE, action) {
             }
         }
         case ADD_POST_USER_FEED : {
-            if(state.posts.userFeed.includes(payload)) return state
-            
             return {
                 ...state,
                 posts: {

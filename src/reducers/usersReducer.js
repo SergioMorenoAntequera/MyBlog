@@ -1,40 +1,62 @@
-import {SET_ALL, ON_LOADING, ON_ERROR, SET_ONE} from "actions/usersActionTypes";
+import {SET_ALL, ON_LOADING, ON_ERROR, SET_ONE, ADD_USER} from "actions/usersActionTypes";
 
 const INITIAL_STATE = {
-    users: [],
-    user: undefined,
+    users: {
+        byId: {
+            // "0": {
+            //     id: "0",
+            //     title: "",
+            //     body: "",
+            //     createdAt: "",
+                // author: "",
+                // comments: [""]
+            // }
+        },
+        allIds: [],
+    },
     loading: false,
     error: "",
 }
 
 export function usersReducer(state = INITIAL_STATE, action) {
-    const states = {
-        [SET_ALL]: {
-            ...state,
-            users: action.payload,
-            loading: false,
-            error: "",
-        },
-        [SET_ONE]: {
-            ...state,
-            user: action.payload,
-            loading: false,
-            error: "",
-        },
-        [ON_LOADING]: {
-            ...state,
-            loading: true,
-        },
-        [ON_ERROR]: {
-            ...state,
-            loading: false,
-            error: action.payload,
+    const payload = action.payload;
+    switch (action.type) {
+        case ADD_USER : {
+            if(state.users.allIds.includes(payload.id)) return state
+            
+            return {
+                ...state,
+                    users: {
+                        ...state.users,
+                        byId: {
+                            ...state.users.byId,
+                            ...addMainRecord(action.payload)
+                        },
+                        allIds: addUnique(state.users.allIds, action.payload.id)
+                    }
+            }
         }
-    };
-    return states[action.type] ?? state;
+
+        default : return state
+    }
 }
 
-// export function UsersReducer() {
-//     const [userState, dispatchUserState] = useReducer(usersReducer, INITIAL_STATE)
-//     return {userState, dispatchUserState, usersActionTypes}
-// }
+function addMainRecord(object) {
+    let result = {};
+    result[object.id] = {}
+    Object.keys(object).forEach(k => {
+        result[object.id] = {
+            ...result[object.id],
+            [k]: object[k]
+        }
+    })
+    return result
+}
+
+function addUnique(array, el) {
+    if(array.includes(el)) {
+        return array
+    } else {
+        return [...array, el]
+    }
+}

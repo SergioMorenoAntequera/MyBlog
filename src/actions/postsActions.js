@@ -76,7 +76,6 @@ export const getPostsByUser = (userId) => async (dispatch, getState) => {
         })
     })
 }
-
 export const toggleOpenComments = (post) => async (dispatch, getState) => { 
     post.open = !post.open
     dispatch({
@@ -87,7 +86,6 @@ export const toggleOpenComments = (post) => async (dispatch, getState) => {
     if(!post.comments.length)
         dispatch(getCommentByPost(post))
 }
-
 export const getCommentByPost = (post) => async (dispatch) => { 
     
     post.commentsLoading = true
