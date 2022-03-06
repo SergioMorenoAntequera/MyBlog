@@ -9,16 +9,24 @@ import "./style.scss"
 
 export default function Post({post: {id, body, title, userId, createdAt}}) {
   let author = useSelector(state => state.usersEntity.users.byId[userId])
+  let comments = useSelector(state => {
+    let auxComments = state.commentsEntity.comments
+    if(auxComments.byAttachedTo[id]) {
+      return auxComments.byAttachedTo[id].map(commentId => auxComments.byId[commentId])
+    }
+      return []
+  })
+
   const dispatch = useDispatch()
   const {user:login} = useUser()
-
-  // dispatch(getCommentByPost(id))
-
+  console.log(comments)
+ 
   useEffect(() => {
     if(!author) {
       dispatch(getUserByUid(userId))
     }
-  }, [userId])
+    dispatch(getCommentByPost(id))
+  }, [author])
 
   const [newCommentBody, setNewCommentBody] = useState("")
   function addComment() {
@@ -53,11 +61,9 @@ export default function Post({post: {id, body, title, userId, createdAt}}) {
         COMMENTS  
         <input type="text" value={newCommentBody} onChange={(e)=>{setNewCommentBody(e.target.value)}}/>
         <button onClick={addComment}> Comment </button>
+        { comments.map(comment => <p key={comment.id}> {comment.body} </p> )}
       </p> 
 
-      
-
-    </div>
-    
+    </div>    
   </div>)
 }

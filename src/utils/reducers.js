@@ -16,6 +16,7 @@ const Positions = Object.freeze({
     "end": 1,
 })
 function addUnique(array, el, position = 1) {
+    array = array ?? [];
     if(array.includes(el)) {
         return array
     } else {

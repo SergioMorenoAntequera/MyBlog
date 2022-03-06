@@ -31,7 +31,14 @@ export function commentsReducer(state = INITIAL_STATE, action) {
                         ...state.comments.byId,
                         ...addMainRecord(payload)
                     },
-                    allIds: addUnique(state.comments.allIds, payload.id)
+                    allIds: addUnique(state.comments.allIds, payload.id),
+                    byAttachedTo: {
+                        ...state.comments.byAttachedTo,
+                        [payload.attachedTo]: addUnique(
+                            state.comments.byAttachedTo[payload.attachedTo], 
+                            payload.id
+                        ),
+                    }
                 }
             }
         }
