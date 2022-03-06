@@ -6,7 +6,7 @@ export default function UserImage({user}) {
 
     if(!user) return <></>
     return (<>
-        <Link to={"/user"} > 
+        <Link to={`/user/${user.uid}`} > 
           <StyledUserImage src={user.photoURL} alt={user.displayName} /> 
         </Link>
     </>)
