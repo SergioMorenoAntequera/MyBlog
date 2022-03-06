@@ -4,10 +4,10 @@ import "./Header.scss"
 
 import { SignToggle } from 'components/SignButton'
 import { useUser } from 'api/auth'
+import UserImage from 'components/UserImage'
 
 export default function Header() {
-  const { user } = useUser()
-
+  
   
   return (<div className='Header'>
       <div>
@@ -16,7 +16,7 @@ export default function Header() {
       </div>
       
       <div>
-        {user && <Link to={"/user"} > Profile </Link> }
+        <UserImage/>
         <SignToggle/>
       </div>
       
