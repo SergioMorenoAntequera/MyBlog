@@ -16,8 +16,7 @@ function HomePage() {
   const mainFeedPosts = posts.mainFeed?.map(id => posts.byId[id])
 
   useEffect(() => {
-    if(mainFeedPosts.length === 0)
-      dispatch(getMainFeed())
+    dispatch(getMainFeed())
   }, [])
   
   return (<>

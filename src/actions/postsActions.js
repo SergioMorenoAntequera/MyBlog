@@ -1,4 +1,4 @@
-import {SET_BY_USER, ON_LOADING, ON_ERROR, UPDATE_POST, ADD_POST, ADD_POST_MAIN_FEED, ADD_POST_USER_FEED} from "actions/postsActionTypes";
+import {SET_BY_USER, ON_LOADING, ON_ERROR, UPDATE_POST, ADD_POST, ADD_POST_MAIN_FEED, ADD_POST_USER_FEED, CLEAR_POST_USER_FEED} from "actions/postsActionTypes";
 
 import { 
     getPostByUser as getPostByUserAPI,
@@ -34,6 +34,11 @@ export const getUserFeed = (userId) => async (dispatch) => {
             type: ADD_POST_USER_FEED,
             payload: post.id
         })
+    })
+}
+export const clearUserFeed = () => async (dispatch) => {
+    dispatch({
+        type: CLEAR_POST_USER_FEED
     })
 }
 export const createPost = (userId, newPost) => async (dispatch) => {

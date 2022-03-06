@@ -11,15 +11,23 @@ function addMainRecord(object) {
     return result
 }
 
-function addUnique(array, el) {
+const Positions = Object.freeze({
+    "beggining": 0,
+    "end": 1,
+})
+function addUnique(array, el, position = 1) {
     if(array.includes(el)) {
         return array
     } else {
-        return [...array, el]
+        if(position === Positions.beggining)
+            return [el, ...array]
+        if(position === Positions.end)
+            return [...array, el]
     }
 }
 
 export {
     addMainRecord,
-    addUnique
+    addUnique,
+    Positions
 }

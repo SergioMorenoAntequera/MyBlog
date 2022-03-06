@@ -12,7 +12,7 @@ const getRecent = async (limitAmt = 25) => {
 }
 
 const getByUser = async (userId) => {
-    const q = query(postsCol, where("userId", "==", userId));
+    const q = query(postsCol, where("userId", "==", userId), orderBy("createdAt", "desc"));
     return getData(await getDocs(q))
 }
 

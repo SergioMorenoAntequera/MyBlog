@@ -1,8 +1,10 @@
+import { clearUserFeed } from "actions/postsActions"
 import { createUser } from "actions/usersActions"
 import * as authAPI from "api/auth"
 import Button from "components/Button"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
+import { Link } from 'react-router-dom'
 
 const SignIn = () => {
     return <Button onClick={authAPI.signInWithGoogle}> 
@@ -11,9 +13,16 @@ const SignIn = () => {
 }
 
 const SignOut = () => {
-    return <Button onClick={authAPI.signOut}> 
-        Sign Out 
-    </Button>  
+    const dispatch = useDispatch()
+
+    return <>
+        <Button onClick={()=>{
+            authAPI.signOut()   
+            dispatch(clearUserFeed())
+        }}> 
+            Sign Out 
+        </Button>
+    </>
 }
 
 const SignToggle = () => {

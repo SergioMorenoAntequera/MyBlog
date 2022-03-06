@@ -1,5 +1,5 @@
-import {SET_BY_USER, ON_LOADING, ON_ERROR, ADD_POST, ADD_POST_MAIN_FEED, ADD_POST_USER_FEED} from "actions/postsActionTypes";
-import { addMainRecord, addUnique } from "utils/reducers";
+import {SET_BY_USER, ON_LOADING, ON_ERROR, ADD_POST, ADD_POST_MAIN_FEED, ADD_POST_USER_FEED, CLEAR_POST_USER_FEED} from "actions/postsActionTypes";
+import { addMainRecord, addUnique, Positions } from "utils/reducers";
 
 const INITIAL_STATE = {
     posts: {
@@ -44,7 +44,7 @@ export function postsReducer(state = INITIAL_STATE, action) {
                 ...state,
                 posts: {
                     ...state.posts,
-                    mainFeed: addUnique(state.posts.mainFeed, action.payload)
+                    mainFeed: addUnique(state.posts.mainFeed, action.payload, Positions.beggining)
                 }
             }
         }
@@ -53,7 +53,16 @@ export function postsReducer(state = INITIAL_STATE, action) {
                 ...state,
                 posts: {
                     ...state.posts,
-                    userFeed: addUnique(state.posts.userFeed, action.payload)
+                    userFeed: addUnique(state.posts.userFeed, action.payload, Positions.beggining)
+                }
+            }
+        }
+        case CLEAR_POST_USER_FEED : {
+            return {
+                ...state,
+                posts: {
+                    ...state.posts,
+                    userFeed: [],
                 }
             }
         }
