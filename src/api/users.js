@@ -17,7 +17,7 @@ const createNew = async ({uid, displayName, photoURL}) => {
     const newUser= {
         uid: uid,
         displayName: displayName,
-        photoUrl: photoURL,
+        photoURL: photoURL,
         createdAt: Timestamp.now()
     }
     const docRef = await addDoc(usersCol, newUser);

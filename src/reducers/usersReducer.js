@@ -31,9 +31,9 @@ export function usersReducer(state = INITIAL_STATE, action) {
                     ...state.users,
                     byId: {
                         ...state.users.byId,
-                        ...addMainRecord(action.payload)
+                        [action.payload.uid]: addMainRecord(action.payload)[action.payload.id]
                     },
-                    allIds: addUnique(state.users.allIds, action.payload.id)
+                    allIds: addUnique(state.users.allIds, action.payload.uid)
                 }
             }
         }

@@ -1,11 +1,8 @@
-import { useUser } from 'api/auth'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import StyledUserImage from './styledUserImage'
 
-export default function UserImage() {
-
-    const { user } = useUser()
+export default function UserImage({user}) {
 
     if(!user) return <></>
     return (<>

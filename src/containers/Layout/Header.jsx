@@ -8,17 +8,17 @@ import UserImage from 'components/UserImage'
 
 export default function Header() {
   
-  
+  const { user } = useUser()
+
   return (<div className='Header'>
-      <div>
-        <Link to={"/"} > Home </Link>
-        <Link to={"/users"} > Users </Link>
-      </div>
-      
-      <div>
-        <UserImage/>
-        <SignToggle/>
-      </div>
-      
+    <div>
+      <Link to={"/"} > Home </Link>
+      <Link to={"/users"} > Users </Link>
+    </div>
+    
+    <div>
+      <UserImage user={user}/>
+      <SignToggle/>
+    </div>
   </div>)
 }
