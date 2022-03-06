@@ -20,7 +20,6 @@ function UserPage(props) {
   useEffect(() => {
     dispatch(getUserFeed(user?.uid))
   }, [user])
-  console.log(user)
 
   function crateNewPost(event) {
     event.preventDefault()

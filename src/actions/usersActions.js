@@ -16,6 +16,15 @@ export const createUser = (newUser) => async (dispatch) => {
     })
 }
 
+export const getUserByUid = (useUid) => async (dispatch) => {
+    if(!useUid) return
+    var fetchedUser = await UsersAPI.getByUid(useUid)
+
+    dispatch({
+        type: ADD_USER,
+        payload: fetchedUser[0]
+    })
+}
 
 
 
