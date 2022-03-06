@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import H1 from 'components/H1'
-import * as postsAPI from 'api/posts'
 import { useUser } from 'api/auth'
 import { useDispatch, useSelector } from 'react-redux'
-import { createPost, getUserFeed } from 'actions/postsActions'
+import { clearUserFeed, createPost, getUserFeed } from 'actions/postsActions'
 import Post from 'containers/Post'
+import { useParams } from 'react-router-dom'
 
 
 function UserPage(props) {
   const postsEntity = useSelector(state => state.postsEntity)
+  const usersEntity = useSelector(state => state.usersEntity)
   const dispatch = useDispatch()
+  
+  const { user:login } = useUser()
+  const { id } = useParams()
   const posts = postsEntity.posts.userFeed.map(p => postsEntity.posts.byId[p])
-
-  const { user } = useUser()
-
+  const user = usersEntity.users.byId[id]
 
   const [newPost, setNewPost] = useState({title:"",body:""})
  
   useEffect(() => {
+    dispatch(clearUserFeed())
     dispatch(getUserFeed(user?.uid))
   }, [user])
 
@@ -32,15 +35,18 @@ function UserPage(props) {
     
     { posts?.map(post => <Post key={post.id} post={post}/> )}
 
-    <form action="GET">
-      <label htmlFor=""> title </label>
-      <input type="text" value={newPost.title} onChange={e => setNewPost({...newPost, title:e.target.value})} />
-      <br />
-      <label htmlFor=""> body </label>
-      <input type="text" value={newPost.body} onChange={e => setNewPost({...newPost, body:e.target.value})} />
-      <br />
-      <input type="submit" onClick={crateNewPost}/>
-    </form>
+    { login?.uid === id &&
+      <form action="GET">
+        <label htmlFor=""> title </label>
+        <input type="text" value={newPost.title} onChange={e => setNewPost({...newPost, title:e.target.value})} />
+        <br />
+        <label htmlFor=""> body </label>
+        <input type="text" value={newPost.body} onChange={e => setNewPost({...newPost, body:e.target.value})} />
+        <br />
+        <input type="submit" onClick={crateNewPost}/>
+      </form>
+    }
+    
     
   </>)
 }
