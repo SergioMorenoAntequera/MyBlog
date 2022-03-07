@@ -3,6 +3,7 @@ import { getUserByUid } from 'actions/usersActions'
 import { useUser } from 'api/auth'
 import Spinner from 'components/Spinner'
 import UserImage from 'components/UserImage'
+import Comment from 'containers/Comment'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import "./style.scss"
@@ -19,7 +20,6 @@ export default function Post({post: {id, body, title, userId, createdAt}}) {
 
   const dispatch = useDispatch()
   const {user:login} = useUser()
-  console.log(comments)
  
   useEffect(() => {
     if(!author) {
@@ -57,13 +57,12 @@ export default function Post({post: {id, body, title, userId, createdAt}}) {
     </div>
 
     <div className='Comments'>
-      <p> 
-        COMMENTS  
-        <input type="text" value={newCommentBody} onChange={(e)=>{setNewCommentBody(e.target.value)}}/>
-        <button onClick={addComment}> Comment </button>
-        { comments.map(comment => <p key={comment.id}> {comment.body} </p> )}
-      </p> 
-
+      COMMENTS  
+      <input type="text" value={newCommentBody} onChange={(e)=>{setNewCommentBody(e.target.value)}}/>
+      <button onClick={addComment}> Comment </button>
+      { comments.map(comment => 
+        <Comment key={comment.id} comment={comment}/>
+      )}
     </div>    
   </div>)
 }
