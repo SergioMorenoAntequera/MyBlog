@@ -1,3 +1,4 @@
+import { getCommentByPost } from "actions/commentsActions"
 import AddComment from "containers/AddComment"
 import Comment from "containers/Comment"
 import { useDispatch, useSelector } from "react-redux"
@@ -13,7 +14,7 @@ export default function useComments(attachedToId) {
           return auxComments.byAttachedTo[attachedToId].map(commentId => auxComments.byId[commentId])
         }
 
-        // dispatch()
+        dispatch(getCommentByPost(attachedToId))
         return []
     })
 

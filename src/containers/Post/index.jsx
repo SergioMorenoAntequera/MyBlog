@@ -17,7 +17,7 @@ export default function Post({post: {id, body, title, userId, createdAt}}) {
     if(!author) {
       dispatch(getUserByUid(userId))
     }
-    dispatch(getCommentByPost(id))
+    // dispatch()
   }, [])
 
   
