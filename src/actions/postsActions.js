@@ -54,7 +54,16 @@ export const createPost = (userId, newPost) => async (dispatch) => {
         payload: newPostCreated.id
     })
 }
-
+export const getById = (postId) => async (dispatch) => {
+    if(!postId) return
+    var fetchedPost = await PostsAPI.getById(postId)
+    if(fetchedPost.length === 0) return
+    
+    dispatch({
+        type: ADD_POST,
+        payload: fetchedPost[0]
+    }) 
+}
 
 
 

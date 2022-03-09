@@ -1,4 +1,4 @@
-import { collection, where, query, getDocs, orderBy, limit, addDoc, Timestamp } from 'firebase/firestore';
+import { collection, where, query, getDocs, orderBy, limit, addDoc, Timestamp, documentId } from 'firebase/firestore';
 import { db } from './_config';
 import { getData } from '../utils/api';
 
@@ -13,6 +13,11 @@ const getRecent = async (limitAmt = 25) => {
 
 const getByUser = async (userId) => {
     const q = query(postsCol, where("userId", "==", userId), orderBy("createdAt", "desc"));
+    return getData(await getDocs(q))
+}
+
+const getById = async (postId) => {
+    const q = query(postsCol, where(documentId(), '==', postId));
     return getData(await getDocs(q))
 }
 
@@ -31,5 +36,6 @@ const createNew = async (userId, {body, title}) => {
 export {
     getRecent,
     getByUser,
+    getById,
     createNew
 }   
