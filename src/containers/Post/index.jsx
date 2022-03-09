@@ -5,11 +5,13 @@ import UserImage from 'components/UserImage'
 import useComments from 'hooks/useComments'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { FaComment } from "react-icons/fa";
 import "./style.scss"
+import { Link } from 'react-router-dom'
 
 export default function Post({post: {id, body, title, userId, createdAt}}) {
   let author = useSelector(state => state.usersEntity.users.byId[userId])
-  let {  comments, AddComment } = useComments(id)
+  let {  comments, commentsData, AddComment } = useComments(id)
 
   const dispatch = useDispatch()
 
@@ -40,10 +42,8 @@ export default function Post({post: {id, body, title, userId, createdAt}}) {
         <p> { body } </p>    
     </div>
 
-    <div className='Comments'>
-      COMMENTS  
-      <AddComment to={id}/>
-      { comments }
-    </div>    
+    <Link to={`/posts/${id}`}>
+      <FaComment/> {commentsData.length}   
+    </Link>
   </div>)
 }
