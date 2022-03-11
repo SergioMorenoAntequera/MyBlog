@@ -3,7 +3,7 @@ import H1 from 'components/H1'
 import { useUser } from 'api/auth'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearUserFeed, createPost, getUserFeed } from 'actions/postsActions'
-import Post from 'containers/Post'
+import Post from 'containers/PostCard'
 import { useParams } from 'react-router-dom'
 
 
