@@ -1,4 +1,4 @@
-import {SET_BY_USER, ON_LOADING, ON_ERROR, ADD_POST, ADD_POST_MAIN_FEED, ADD_POST_USER_FEED, CLEAR_POST_USER_FEED} from "actions/postsActionTypes";
+import {ADD_POST, ADD_POST_MAIN_FEED, ADD_POST_USER_FEED, CLEAR_POST_USER_FEED} from "actions/postsActionTypes";
 import { addMainRecord, addUnique, Positions } from "utils/reducers";
 
 const INITIAL_STATE = {
