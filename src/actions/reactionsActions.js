@@ -1,5 +1,5 @@
-import { ADD_REACTION } from "actions/ReactionsActionTypes";
-import * as ReactionsAPI from 'api/Reactions'
+import { ADD_REACTION } from "actions/reactionsActionTypes";
+import * as ReactionsAPI from 'api/reactions'
 
 export const createReaction = (newReaction) => async (dispatch) => {
     if(!newReaction) return
