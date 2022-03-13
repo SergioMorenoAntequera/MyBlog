@@ -1,4 +1,4 @@
-import { ADD_COMMENT } from "actions/reactionsActionTypes";
+import { ADD_REACTION } from "actions/reactionsActionTypes";
 import { addMainRecord, addUnique } from "utils/reducers";
 
 
@@ -23,7 +23,7 @@ export function reactionsReducer(state = INITIAL_STATE, action) {
     const payload = action.payload;
 
     switch (action.type) {
-        case ADD_COMMENT : {
+        case ADD_REACTION : {
             if(state.reactions.allIds.includes(payload.id)) return state
             
             return {
