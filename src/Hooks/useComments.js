@@ -1,25 +1,25 @@
 import { getCommentByPost } from "actions/commentsActions"
 import AddComment from "containers/AddComment"
 import Comment from "containers/Comment"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
+import useCallbackSelector from "./useCallbackSelector"
 
 
 export default function useComments(attachedToId) {
 
-    const dispatch = useDispatch()
-
+    let commentsId = useCallbackSelector(
+        state => state.commentsEntity.comments.byAttachedTo[attachedToId],
+        getCommentByPost(attachedToId)
+    )
+    commentsId = commentsId ?? []
     let commentsData = useSelector(state => {
-        let auxComments = state.commentsEntity.comments
-        if(auxComments.byAttachedTo[attachedToId]) {
-          return auxComments.byAttachedTo[attachedToId].map(commentId => auxComments.byId[commentId])
-        }
-
-        dispatch(getCommentByPost(attachedToId))
-        return []
+        return commentsId.map(commentId => 
+            state.commentsEntity.comments.byId[commentId]
+        );
     })
-
+    
     let comments = <CommentsCont comments={commentsData}/>
-
+    
     return  {
         commentsData,
         comments,
@@ -28,6 +28,8 @@ export default function useComments(attachedToId) {
 }
 
 function CommentsCont({comments}) {
+    if(!comments.length) return <></>
+    console.log(comments)
     return (<div>
         {comments?.map(comment => 
             <Comment key={comment.id} comment={comment}/>

@@ -4,9 +4,9 @@ import { useUser } from 'api/auth'
 import H1 from 'components/H1'
 import Spinner from 'components/Spinner'
 import useComments from 'hooks/useComments'
-import useReduxState from 'hooks/useReduxState'
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import useCallbackSelector from 'hooks/useCallbackSelector'
+import React from 'react'
+import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import * as ReactionTypes from 'types/reactions'
 
@@ -16,7 +16,7 @@ export default function PostPage() {
     const { id } = useParams()
     const { comments, AddComment } = useComments(id)
     const dispatch = useDispatch()
-    const post = useReduxState (
+    const post = useCallbackSelector (
         state => state.postsEntity.posts.byId[id],
         getById(id)
     )
