@@ -59,3 +59,6 @@ export const getById = (postId) => async (dispatch) => {
     }) 
 }
 
+const usersActions = {getMainFeed, getUserFeed, clearUserFeed, createPost, getById}
+export default usersActions
+

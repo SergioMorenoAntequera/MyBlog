@@ -21,4 +21,7 @@ export const getUserByUid = (useUid) => async (dispatch) => {
     })
 }
 
+const usersActions = {createUser, getUserByUid}
+export default usersActions
+
 
