@@ -29,7 +29,6 @@ export default function useComments(attachedToId) {
 
 function CommentsCont({comments}) {
     if(!comments.length) return <></>
-    console.log(comments)
     return (<div>
         {comments?.map(comment => 
             <Comment key={comment.id} comment={comment}/>

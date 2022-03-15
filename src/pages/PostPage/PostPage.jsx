@@ -7,11 +7,12 @@ import useCallbackSelector from 'hooks/useCallbackSelector'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import * as ReactionTypes from 'types/reactions'
+import ReactionTypes from 'types/reactions'
 import "./style.scss"
 import UserImage from 'components/UserImage'
 import postActions from 'actions/postsActions'
 import usersActions from 'actions/usersActions'
+import useReactions from 'hooks/useReactions'
 
 
 export default function PostPage() {
@@ -19,6 +20,7 @@ export default function PostPage() {
     const { user } = useUser()
     const { id } = useParams()
     const { comments, AddComment } = useComments(id)
+    const { reactionsData, alreadyReacted } = useReactions(id, user)
     const dispatch = useDispatch()
     const post = useCallbackSelector(
         state => state.postsEntity.posts.byId[id],
@@ -29,6 +31,7 @@ export default function PostPage() {
         usersActions.getUserByUid(post?.userId)
     )
     
+    console.log(reactionsData)
     
     if(!post) return <Spinner/>
     
@@ -41,18 +44,23 @@ export default function PostPage() {
             </div>
         </div>
 
-        <button onClick={()=> {
-            dispatch(
-                createReaction({
-                    userUid: user.uid, 
-                    type: ReactionTypes.TYPES.like, 
-                    attachedTo: post.id, 
-                    attachedToType: ReactionTypes.ATTACHED_TO_TYPES.comment
-                })
-            )
-            
-        }}>react</button>
+        ❤ {reactionsData.filter(it=> it.type === ReactionTypes.TYPES.like)?.length}
+        {!alreadyReacted &&
+            <button onClick={()=> {
+                dispatch(
+                    createReaction({
+                        userUid: user.uid, 
+                        type: ReactionTypes.TYPES.like, 
+                        attachedTo: post.id, 
+                        attachedToType: ReactionTypes.ATTACHED_TO_TYPES.comment
+                    })
+                )
+            }}>like</button>
+        }
+        
+        
 
+        
         <AddComment/>
         { comments }
     </div>)

@@ -9,4 +9,5 @@ const ATTACHED_TO_TYPES = Object.freeze({
     "comment": "ReactionAttachedToType.COMMENT"
 })
 
-export {TYPES, ATTACHED_TO_TYPES}
+const ReactionsTypes = {TYPES, ATTACHED_TO_TYPES}
+export default ReactionsTypes
