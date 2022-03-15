@@ -8,7 +8,9 @@ const reactionsCol = collection(db, collectionName)
 const createNew = async ({userUid, type, attachedTo, attachedToType}) => {
     const newReaction = {
         userUid: userUid,
+        type: type,
         attachedTo: attachedTo,
+        attachedToType: attachedToType,
         createdAt: Timestamp.now()
     }
     const docRef = await addDoc(reactionsCol, newReaction);
