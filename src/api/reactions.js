@@ -1,4 +1,4 @@
-import { collection, where, query, getDocs, addDoc, Timestamp } from 'firebase/firestore';
+import { collection, where, query, getDocs, addDoc, Timestamp, deleteDoc, doc } from 'firebase/firestore';
 import { db } from './_config';
 import { getData } from '../utils/api';
 
@@ -17,6 +17,10 @@ const createNew = async ({userUid, type, attachedTo, attachedToType}) => {
     return {...newReaction, id:docRef.id}
 }
 
+const remove = async (id) => {
+    await deleteDoc(doc(db, collectionName, id));
+}
+
 const getByPost = async (postId) => {
     const q = query(reactionsCol, where("attachedTo", "==", postId));
     return getData(await getDocs(q));
@@ -24,5 +28,6 @@ const getByPost = async (postId) => {
 
 export {
     getByPost,
+    remove,
     createNew
 }   

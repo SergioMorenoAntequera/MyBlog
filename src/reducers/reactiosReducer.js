@@ -1,5 +1,5 @@
-import { ADD_REACTION } from "actions/reactionsActionTypes";
-import { addMainRecord, addUnique } from "utils/reducers";
+import { ADD_REACTION, REMOVE_REACTION } from "actions/reactionsActionTypes";
+import { addMainRecord, addUnique, removeKey } from "utils/reducers";
 
 
 const INITIAL_STATE = {
@@ -41,6 +41,21 @@ export function reactionsReducer(state = INITIAL_STATE, action) {
                             state.reactions.byAttachedTo[payload.attachedTo], 
                             payload.id
                         ),
+                    }
+                }
+            }
+        }
+        case REMOVE_REACTION : {
+            return {
+                ...state,
+                reactions: {
+                    ...state.reactions,
+                    byId: {
+                        ...removeKey(state.reactions.byId, payload.id),
+                    },
+                    allIds: state.reactions.allIds.filter(it=>it!==payload.id),
+                    byAttachedTo: {
+                        ...removeKey(state.reactions.byAttachedTo, payload.attachedTo),
                     }
                 }
             }

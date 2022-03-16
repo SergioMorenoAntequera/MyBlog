@@ -1,4 +1,4 @@
-import { createReaction } from 'actions/reactionsActions'
+import { createReaction, removeReaction } from 'actions/reactionsActions'
 import { useUser } from 'api/auth'
 import H1 from 'components/H1'
 import Spinner from 'components/Spinner'
@@ -20,7 +20,7 @@ export default function PostPage() {
     const { user } = useUser()
     const { id } = useParams()
     const { comments, AddComment } = useComments(id)
-    const { reactionsData, alreadyReacted } = useReactions(id, user)
+    const { reactionsData, userReaction } = useReactions(id, user)
     const dispatch = useDispatch()
     const post = useCallbackSelector(
         state => state.postsEntity.posts.byId[id],
@@ -30,8 +30,6 @@ export default function PostPage() {
         state => state.usersEntity.users.byId[post?.userId],
         usersActions.getUserByUid(post?.userId)
     )
-    
-    console.log(reactionsData)
     
     if(!post) return <Spinner/>
     
@@ -45,7 +43,7 @@ export default function PostPage() {
         </div>
 
         ❤ {reactionsData.filter(it=> it.type === ReactionTypes.TYPES.like)?.length}
-        {!alreadyReacted &&
+        {!userReaction &&
             <button onClick={()=> {
                 dispatch(
                     createReaction({
@@ -56,6 +54,16 @@ export default function PostPage() {
                     })
                 )
             }}>like</button>
+        }
+        {userReaction && 
+            <button onClick={()=> {
+                dispatch(
+                    removeReaction({
+                        id: userReaction.id,
+                        attachedTo: userReaction.attachedTo,
+                    })
+                )
+            }}>cancel</button>
         }
         
         

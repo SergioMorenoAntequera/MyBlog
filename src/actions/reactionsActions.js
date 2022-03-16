@@ -1,4 +1,4 @@
-import { ADD_REACTION } from "actions/reactionsActionTypes";
+import { ADD_REACTION, REMOVE_REACTION } from "actions/reactionsActionTypes";
 import * as ReactionsAPI from 'api/reactions'
 
 export const createReaction = (newReaction) => async (dispatch) => {
@@ -8,6 +8,16 @@ export const createReaction = (newReaction) => async (dispatch) => {
     dispatch({
         type: ADD_REACTION,
         payload: newReactionCreated
+    })
+}
+
+export const removeReaction = ({id, attachedTo}) => async (dispatch) => {
+    if(!id) return
+    await ReactionsAPI.remove(id)
+    
+    dispatch({
+        type: REMOVE_REACTION,
+        payload: {id:id, attachedTo:attachedTo}
     })
 }
 

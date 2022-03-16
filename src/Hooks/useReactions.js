@@ -18,11 +18,11 @@ export default function useReactions(attachedToId, user) {
     
     let reactions = <ReactionsCont reactions={reactionsData}/>
     
-    const alreadyReacted = !!reactionsData.find(it=>it.userUid === user?.uid)
+    const userReaction = reactionsData.find(it=>it.userUid === user?.uid)
     return  {
         reactionsData,
         reactions,
-        alreadyReacted
+        userReaction
     }
 }
 
