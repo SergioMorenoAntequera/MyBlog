@@ -1,4 +1,5 @@
 import { createReaction, removeReaction } from 'actions/reactionsActions'
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useUser } from 'api/auth'
 import H1 from 'components/H1'
 import Spinner from 'components/Spinner'
@@ -31,6 +32,26 @@ export default function PostPage() {
         usersActions.getUserByUid(post?.userId)
     )
     
+    function toggleLike() {
+        if(!userReaction){
+            dispatch(
+                createReaction({
+                    userUid: user.uid, 
+                    type: ReactionTypes.TYPES.like, 
+                    attachedTo: post.id, 
+                    attachedToType: ReactionTypes.ATTACHED_TO_TYPES.comment
+                })
+            )
+        } else {
+            dispatch(
+                removeReaction({
+                    id: userReaction.id,
+                    attachedTo: userReaction.attachedTo,
+                })
+            )
+        }
+    }
+
     if(!post) return <Spinner/>
     
     return (<div className='PostPage'>
@@ -42,29 +63,16 @@ export default function PostPage() {
             </div>
         </div>
 
-        ❤ {reactionsData.filter(it=> it.type === ReactionTypes.TYPES.like)?.length}
-        {!userReaction &&
-            <button onClick={()=> {
-                dispatch(
-                    createReaction({
-                        userUid: user.uid, 
-                        type: ReactionTypes.TYPES.like, 
-                        attachedTo: post.id, 
-                        attachedToType: ReactionTypes.ATTACHED_TO_TYPES.comment
-                    })
-                )
-            }}>like</button>
-        }
-        {userReaction && 
-            <button onClick={()=> {
-                dispatch(
-                    removeReaction({
-                        id: userReaction.id,
-                        attachedTo: userReaction.attachedTo,
-                    })
-                )
-            }}>cancel</button>
-        }
+        
+        
+
+        <div onClick={toggleLike} style={{cursor:"pointer"}}>
+            {!userReaction && <AiOutlineHeart />}
+            {userReaction && <AiFillHeart />}
+            {reactionsData.filter(it=> it.type === ReactionTypes.TYPES.like)?.length}
+        </div>
+        
+        
         
         
 
