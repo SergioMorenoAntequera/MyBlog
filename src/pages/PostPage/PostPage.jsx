@@ -18,11 +18,10 @@ import useReactions from 'hooks/useReactions'
 
 export default function PostPage() {
 
-    const { user } = useUser()
+    
     const { id } = useParams()
     const { comments, AddComment } = useComments(id)
-    const { reactionsData, userReaction } = useReactions(id, user)
-    const dispatch = useDispatch()
+    const { reactionsData, userReaction, toggleReaction } = useReactions(id)
     const post = useCallbackSelector(
         state => state.postsEntity.posts.byId[id],
         postActions.getById(id)
@@ -32,27 +31,8 @@ export default function PostPage() {
         usersActions.getUserByUid(post?.userId)
     )
     
-    function toggleLike() {
-        if(!userReaction){
-            dispatch(
-                createReaction({
-                    userUid: user.uid, 
-                    type: ReactionTypes.TYPES.like, 
-                    attachedTo: post.id, 
-                    attachedToType: ReactionTypes.ATTACHED_TO_TYPES.comment
-                })
-            )
-        } else {
-            dispatch(
-                removeReaction({
-                    id: userReaction.id,
-                    attachedTo: userReaction.attachedTo,
-                })
-            )
-        }
-    }
-
     if(!post) return <Spinner/>
+    console.log(userReaction)
     
     return (<div className='PostPage'>
         <div className='PostPage_Post'>
@@ -63,10 +43,7 @@ export default function PostPage() {
             </div>
         </div>
 
-        
-        
-
-        <div onClick={toggleLike} style={{cursor:"pointer"}}>
+        <div onClick={()=>{toggleReaction(ReactionTypes.TYPES.like)}} style={{cursor:"pointer"}}>
             {!userReaction && <AiOutlineHeart />}
             {userReaction && <AiFillHeart />}
             {reactionsData.filter(it=> it.type === ReactionTypes.TYPES.like)?.length}
