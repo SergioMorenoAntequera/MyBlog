@@ -1,5 +1,6 @@
 import { createReaction, getReactionByPost, removeReaction } from "actions/reactionsActions"
 import { useUser } from "api/auth"
+import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import ReactionsTypes from "types/reactions"
 import useCallbackSelector from "./useCallbackSelector"
@@ -21,10 +22,15 @@ export default function useReactions(attachedToId) {
     let reactions = <ReactionsCont reactions={reactionsData}/>
     const { user } = useUser()
     const userReaction = reactionsData.find(it=>it.userUid === user?.uid)
+    const [userReacted, setUserReacted] = useState(!!userReaction)
+    let [reactionNumbers, setReactionNumbers] = useState(reactionsData.length)
+    
     const dispatch = useDispatch()
 
     function toggleReaction(reactionType) {
-        if(!userReaction){
+        if(!userReacted){
+            setUserReacted(true)
+            setReactionNumbers(++reactionNumbers)
             dispatch(
                 createReaction({
                     userUid: user.uid, 
@@ -34,6 +40,8 @@ export default function useReactions(attachedToId) {
                 })
             )
         } else {
+            setUserReacted(false)
+            setReactionNumbers(--reactionNumbers)
             dispatch(
                 removeReaction({
                     id: userReaction.id,
@@ -45,8 +53,9 @@ export default function useReactions(attachedToId) {
 
     return  {
         reactionsData,
+        reactionNumbers,
         reactions,
-        userReaction,
+        userReacted,
         toggleReaction
     }
 }

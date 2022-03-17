@@ -21,7 +21,7 @@ export default function PostPage() {
     
     const { id } = useParams()
     const { comments, AddComment } = useComments(id)
-    const { reactionsData, userReaction, toggleReaction } = useReactions(id)
+    const { reactionNumbers, userReacted, toggleReaction } = useReactions(id)
     const post = useCallbackSelector(
         state => state.postsEntity.posts.byId[id],
         postActions.getById(id)
@@ -32,7 +32,7 @@ export default function PostPage() {
     )
     
     if(!post) return <Spinner/>
-    console.log(userReaction)
+    console.log(reactionNumbers)
     
     return (<div className='PostPage'>
         <div className='PostPage_Post'>
@@ -44,9 +44,9 @@ export default function PostPage() {
         </div>
 
         <div onClick={()=>{toggleReaction(ReactionTypes.TYPES.like)}} style={{cursor:"pointer"}}>
-            {!userReaction && <AiOutlineHeart />}
-            {userReaction && <AiFillHeart />}
-            {reactionsData.filter(it=> it.type === ReactionTypes.TYPES.like)?.length}
+            {!userReacted && <AiOutlineHeart />}
+            {userReacted && <AiFillHeart />}
+            {reactionNumbers}
         </div>
         
         
