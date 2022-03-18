@@ -1,6 +1,7 @@
-import { collection, where, query, getDocs, addDoc, Timestamp, deleteDoc, doc } from 'firebase/firestore';
+import { collection, where, query, getDocs, Timestamp, deleteDoc, doc, setDoc } from 'firebase/firestore';
 import { db } from './_config';
 import { getData } from '../utils/api';
+import { v4 as uuid } from 'uuid';
 
 const collectionName = "reactions"
 const reactionsCol = collection(db, collectionName)
@@ -13,8 +14,9 @@ const createNew = async ({userUid, type, attachedTo, attachedToType}) => {
         attachedToType: attachedToType,
         createdAt: Timestamp.now()
     }
-    const docRef = await addDoc(reactionsCol, newReaction);
-    return {...newReaction, id:docRef.id}
+    const newReactionId = uuid()
+    setDoc(doc(db, collectionName, newReactionId), newReaction);
+    return {...newReaction, id:newReactionId}
 }
 
 const remove = async (id) => {

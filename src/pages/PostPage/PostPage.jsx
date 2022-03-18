@@ -1,27 +1,23 @@
-import { createReaction, removeReaction } from 'actions/reactionsActions'
+import React from 'react'
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { useUser } from 'api/auth'
 import H1 from 'components/H1'
 import Spinner from 'components/Spinner'
 import useComments from 'hooks/useComments'
 import useCallbackSelector from 'hooks/useCallbackSelector'
-import React from 'react'
-import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import ReactionTypes from 'types/reactions'
-import "./style.scss"
 import UserImage from 'components/UserImage'
 import postActions from 'actions/postsActions'
 import usersActions from 'actions/usersActions'
 import useReactions from 'hooks/useReactions'
-
+import "./style.scss"
 
 export default function PostPage() {
 
     
     const { id } = useParams()
     const { comments, AddComment } = useComments(id)
-    const { reactionNumbers, userReacted, toggleReaction } = useReactions(id)
+    const { reactionsData, userReaction, toggleReaction } = useReactions(id)
     const post = useCallbackSelector(
         state => state.postsEntity.posts.byId[id],
         postActions.getById(id)
@@ -32,7 +28,6 @@ export default function PostPage() {
     )
     
     if(!post) return <Spinner/>
-    console.log(reactionNumbers)
     
     return (<div className='PostPage'>
         <div className='PostPage_Post'>
@@ -44,14 +39,10 @@ export default function PostPage() {
         </div>
 
         <div onClick={()=>{toggleReaction(ReactionTypes.TYPES.like)}} style={{cursor:"pointer"}}>
-            {!userReacted && <AiOutlineHeart />}
-            {userReacted && <AiFillHeart />}
-            {reactionNumbers}
+            {!userReaction && <AiOutlineHeart />}
+            {userReaction && <AiFillHeart />}
+            {reactionsData.length}
         </div>
-        
-        
-        
-        
 
         
         <AddComment/>

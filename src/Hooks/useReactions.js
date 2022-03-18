@@ -22,15 +22,11 @@ export default function useReactions(attachedToId) {
     let reactions = <ReactionsCont reactions={reactionsData}/>
     const { user } = useUser()
     const userReaction = reactionsData.find(it=>it.userUid === user?.uid)
-    const [userReacted, setUserReacted] = useState(!!userReaction)
-    let [reactionNumbers, setReactionNumbers] = useState(reactionsData.length)
     
     const dispatch = useDispatch()
 
     function toggleReaction(reactionType) {
-        if(!userReacted){
-            setUserReacted(true)
-            setReactionNumbers(++reactionNumbers)
+        if(!userReaction){
             dispatch(
                 createReaction({
                     userUid: user.uid, 
@@ -40,8 +36,6 @@ export default function useReactions(attachedToId) {
                 })
             )
         } else {
-            setUserReacted(false)
-            setReactionNumbers(--reactionNumbers)
             dispatch(
                 removeReaction({
                     id: userReaction.id,
@@ -53,9 +47,8 @@ export default function useReactions(attachedToId) {
 
     return  {
         reactionsData,
-        reactionNumbers,
         reactions,
-        userReacted,
+        userReaction,
         toggleReaction
     }
 }
