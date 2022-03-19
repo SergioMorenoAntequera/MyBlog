@@ -5,7 +5,7 @@ import ReactionsTypes from "types/reactions"
 import useCallbackSelector from "./useCallbackSelector"
 
 
-export default function useReactions(attachedToId) {
+export default function useReactions(attachedToId, reactionType) {
 
     let reactionsId = useCallbackSelector(
         state => state.reactionsEntity.reactions.byAttachedTo[attachedToId],
@@ -20,11 +20,13 @@ export default function useReactions(attachedToId) {
     
     let reactions = <ReactionsCont reactions={reactionsData}/>
     const { user } = useUser()
-    const userReaction = reactionsData.find(it=>it.userUid === user?.uid)
-    
+    const userReactionsByType = {}
+    reactionsData.filter(it => it.userUid === user?.uid).forEach(it =>  userReactionsByType[it.type] = it )
+
     const dispatch = useDispatch()
 
-    function toggleReaction(reactionType) {
+    function toggleReaction() {
+        const userReaction = userReactionsByType[reactionType]
         if(!userReaction){
             dispatch(
                 createReaction({
@@ -47,7 +49,7 @@ export default function useReactions(attachedToId) {
     return  {
         reactionsData,
         reactions,
-        userReaction,
+        userReactionsByType,
         toggleReaction
     }
 }

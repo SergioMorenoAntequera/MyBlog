@@ -1,23 +1,22 @@
 import React from 'react'
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import H1 from 'components/H1'
 import Spinner from 'components/Spinner'
 import useComments from 'hooks/useComments'
 import useCallbackSelector from 'hooks/useCallbackSelector'
 import { useParams } from 'react-router-dom'
-import ReactionTypes from 'types/reactions'
 import UserImage from 'components/UserImage'
 import postActions from 'actions/postsActions'
 import usersActions from 'actions/usersActions'
-import useReactions from 'hooks/useReactions'
 import "./style.scss"
+import Reaction from 'components/Reaction'
+import ReactionsTypes from 'types/reactions'
 
 export default function PostPage() {
 
     
     const { id } = useParams()
     const { comments, AddComment } = useComments(id)
-    const { reactionsData, userReaction, toggleReaction } = useReactions(id)
+    
     const post = useCallbackSelector(
         state => state.postsEntity.posts.byId[id],
         postActions.getById(id)
@@ -38,12 +37,8 @@ export default function PostPage() {
             </div>
         </div>
 
-        <div onClick={()=>{toggleReaction(ReactionTypes.TYPES.like)}} style={{cursor:"pointer"}}>
-            {!userReaction && <AiOutlineHeart />}
-            {userReaction && <AiFillHeart />}
-            {reactionsData.length}
-        </div>
-
+        <Reaction attachedToId={id} reactionType={ReactionsTypes.TYPES.like}/>
+        <Reaction attachedToId={id} reactionType={ReactionsTypes.TYPES.disLike}/>
         
         <AddComment/>
         { comments }

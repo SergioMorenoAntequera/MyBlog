@@ -29,9 +29,9 @@ function addUnique(array, el, position = 1) {
 
 function removeKey(object, key) {
     if(object[key] === undefined) return object
-    let clone = {...object[key]}
-    console.log(clone)
-    return object
+    let clone = {...object}
+    delete clone[key]
+    return clone
 }
 
 export {
