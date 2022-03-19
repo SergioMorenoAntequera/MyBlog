@@ -18,7 +18,7 @@ export default function useReactions(attachedToId, reactionType) {
         );
     })
     
-    let reactions = <ReactionsCont reactions={reactionsData}/>
+    const dispatch = useDispatch()
     const { user } = useUser()
     const userReactions = reactionsData.filter(it => it.userUid === user?.uid)
 
@@ -36,52 +36,34 @@ export default function useReactions(attachedToId, reactionType) {
         userReactionsByGroup[reactionGroup] = {...reaction}
     })
 
-    const dispatch = useDispatch()
 
     function toggleReaction() {
         const userReaction = userReactionsByGroup[reactionType.group]
+        const newReaction = {
+            userUid: user.uid, 
+            type: reactionType.type, 
+            attachedTo: attachedToId, 
+            attachedToType: ReactionsTypes.ATTACHED_TO_TYPES.comment
+        }
         
         if(!userReaction){
-            dispatch(createReaction({
-                userUid: user.uid, 
-                type: reactionType.type, 
-                attachedTo: attachedToId, 
-                attachedToType: ReactionsTypes.ATTACHED_TO_TYPES.comment
-            }))
+            dispatch(createReaction(newReaction))
             return
         } 
             
-        dispatch(
-            removeReaction({
-                id: userReaction.id,
-                attachedTo: attachedToId,
-            })
-        )
+        dispatch(removeReaction({
+            id: userReaction.id,
+            attachedTo: attachedToId,
+        }))
 
         if(userReaction.type !== reactionType.type) {
-            dispatch(createReaction({
-                userUid: user.uid, 
-                type: reactionType.type, 
-                attachedTo: attachedToId, 
-                attachedToType: ReactionsTypes.ATTACHED_TO_TYPES.comment
-            }))
+            dispatch(createReaction(newReaction))
         }
     }
 
     return  {
         reactionsData,
-        reactions,
         userReactionsByType,
         toggleReaction
     }
-}
-
-function ReactionsCont({reactions}) {
-    if(!reactions.length) return <></>
-    return (<div>
-        {reactions?.map(reaction => 
-            // <Reaction key={Reaction.id} Reaction={Reaction}/>
-            <p key={reaction.id} > {reaction.toString()} </p>
-        )}
-    </div>)
 }

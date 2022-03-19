@@ -1,6 +1,6 @@
-
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { AiOutlineDislike, AiFillDislike } from "react-icons/ai";
+import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 
 const TYPES = Object.freeze({
     "like": {
@@ -14,6 +14,12 @@ const TYPES = Object.freeze({
         unActiveIcon: AiOutlineDislike,
         activeIcon: AiFillDislike,
         group: 0
+    },
+    "save": {
+        type: "ReactionType.SAVE",
+        unActiveIcon: BsBookmark,
+        activeIcon: BsBookmarkFill,
+        group: 1
     },
 })
 
