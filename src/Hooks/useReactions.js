@@ -1,6 +1,5 @@
 import { createReaction, getReactionByPost, removeReaction } from "actions/reactionsActions"
 import { useUser } from "api/auth"
-import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import ReactionsTypes from "types/reactions"
 import useCallbackSelector from "./useCallbackSelector"

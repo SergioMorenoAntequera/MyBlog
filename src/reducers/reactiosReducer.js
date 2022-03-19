@@ -55,7 +55,8 @@ export function reactionsReducer(state = INITIAL_STATE, action) {
                     },
                     allIds: state.reactions.allIds.filter(it=>it!==payload.id),
                     byAttachedTo: {
-                        ...removeKey(state.reactions.byAttachedTo, payload.attachedTo),
+                        ...state.reactions.byAttachedTo,
+                        [payload.attachedTo]: state.reactions.byAttachedTo[payload.attachedTo].filter(it=>it!==payload.id)
                     }
                 }
             }

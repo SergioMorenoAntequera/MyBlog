@@ -13,7 +13,7 @@ export const createReaction = (newReaction) => async (dispatch) => {
 
 export const removeReaction = ({id, attachedTo}) => async (dispatch) => {
     if(!id) return
-    await ReactionsAPI.remove(id)
+    ReactionsAPI.remove(id)
     
     dispatch({
         type: REMOVE_REACTION,
