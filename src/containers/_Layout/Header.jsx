@@ -14,8 +14,14 @@ export default function Header() {
     <div className='HeaderOffset'> </div>
     <div className='Header'>
       <div>
-        <Link to={"/"} > Home </Link>
+        <div>
+          <Link to={"/"} > Home </Link>
+        </div>
+        <div>
+          <Link to={"/news"} > News </Link>
+        </div>
       </div>
+      
       
       <div>
         <UserImage user={user} redirect={false}/>
