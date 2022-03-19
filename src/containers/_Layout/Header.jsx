@@ -18,7 +18,7 @@ export default function Header() {
       </div>
       
       <div>
-        <UserImage user={user}/>
+        <UserImage user={user} redirect={false}/>
         <SignToggle/>
       </div>
     </div>
