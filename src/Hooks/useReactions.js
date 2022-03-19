@@ -26,12 +26,12 @@ export default function useReactions(attachedToId, reactionType) {
     const dispatch = useDispatch()
 
     function toggleReaction() {
-        const userReaction = userReactionsByType[reactionType]
+        const userReaction = userReactionsByType[reactionType.id]
         if(!userReaction){
             dispatch(
                 createReaction({
                     userUid: user.uid, 
-                    type: reactionType, 
+                    type: reactionType.id, 
                     attachedTo: attachedToId, 
                     attachedToType: ReactionsTypes.ATTACHED_TO_TYPES.comment
                 })

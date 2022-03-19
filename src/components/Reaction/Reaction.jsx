@@ -9,9 +9,9 @@ export default function Reaction({attachedToId, reactionType}) {
 
     return (<div className='Reaction'>
         <div onClick={toggleReaction} style={{cursor:"pointer"}}>
-            {!userReactionsByType[reactionType] && <AiOutlineHeart />}
-            {userReactionsByType[reactionType] && <AiFillHeart />}
-            {reactionsData.filter(it=>it.type === reactionType).length}
+            {!userReactionsByType[reactionType.id] && reactionType.unActiveIcon()}
+            {userReactionsByType[reactionType.id] && reactionType.activeIcon()}
+            {reactionsData.filter(it=>it.type === reactionType.id).length}
         </div>
     </div>)
 }
