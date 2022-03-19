@@ -4,14 +4,16 @@ import { AiOutlineDislike, AiFillDislike } from "react-icons/ai";
 
 const TYPES = Object.freeze({
     "like": {
-        id: "ReactionType.LIKE",
+        type: "ReactionType.LIKE",
         unActiveIcon: AiOutlineHeart,
         activeIcon: AiFillHeart,
+        group: 0
     },
     "disLike": {
-        id: "ReactionType.DISLIKE",
+        type: "ReactionType.DISLIKE",
         unActiveIcon: AiOutlineDislike,
         activeIcon: AiFillDislike,
+        group: 0
     },
 })
 

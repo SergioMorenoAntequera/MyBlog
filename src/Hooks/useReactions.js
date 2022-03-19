@@ -20,29 +20,51 @@ export default function useReactions(attachedToId, reactionType) {
     
     let reactions = <ReactionsCont reactions={reactionsData}/>
     const { user } = useUser()
+    const userReactions = reactionsData.filter(it => it.userUid === user?.uid)
+
     const userReactionsByType = {}
-    reactionsData.filter(it => it.userUid === user?.uid).forEach(it =>  userReactionsByType[it.type] = it )
+    userReactions.forEach(it => userReactionsByType[it.type] = it )
+
+    const userReactionsByGroup = {}
+    userReactions.forEach(reaction => {
+        var reactionGroup = -1
+        Object.keys(ReactionsTypes.TYPES).forEach(key => {
+            let possibleType = ReactionsTypes.TYPES[key]
+            if(possibleType.type !== reaction.type) return
+            reactionGroup = possibleType.group
+        })
+        userReactionsByGroup[reactionGroup] = {...reaction}
+    })
 
     const dispatch = useDispatch()
 
     function toggleReaction() {
-        const userReaction = userReactionsByType[reactionType.id]
+        const userReaction = userReactionsByGroup[reactionType.group]
+        
         if(!userReaction){
-            dispatch(
-                createReaction({
-                    userUid: user.uid, 
-                    type: reactionType.id, 
-                    attachedTo: attachedToId, 
-                    attachedToType: ReactionsTypes.ATTACHED_TO_TYPES.comment
-                })
-            )
-        } else {
-            dispatch(
-                removeReaction({
-                    id: userReaction.id,
-                    attachedTo: attachedToId,
-                })
-            )
+            dispatch(createReaction({
+                userUid: user.uid, 
+                type: reactionType.type, 
+                attachedTo: attachedToId, 
+                attachedToType: ReactionsTypes.ATTACHED_TO_TYPES.comment
+            }))
+            return
+        } 
+            
+        dispatch(
+            removeReaction({
+                id: userReaction.id,
+                attachedTo: attachedToId,
+            })
+        )
+
+        if(userReaction.type !== reactionType.type) {
+            dispatch(createReaction({
+                userUid: user.uid, 
+                type: reactionType.type, 
+                attachedTo: attachedToId, 
+                attachedToType: ReactionsTypes.ATTACHED_TO_TYPES.comment
+            }))
         }
     }
 
