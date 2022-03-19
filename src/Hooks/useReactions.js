@@ -43,7 +43,7 @@ export default function useReactions(attachedToId, reactionType) {
             userUid: user.uid, 
             type: reactionType.type, 
             attachedTo: attachedToId, 
-            attachedToType: ReactionsTypes.ATTACHED_TO_TYPES.comment
+            attachedToType: ReactionsTypes.ATTACHED_TO_TYPES.disabled
         }
         
         if(!userReaction){

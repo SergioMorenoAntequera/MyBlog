@@ -26,7 +26,8 @@ const TYPES = Object.freeze({
 
 const ATTACHED_TO_TYPES = Object.freeze({
     "post": "ReactionAttachedToType.POST",
-    "comment": "ReactionAttachedToType.COMMENT"
+    "comment": "ReactionAttachedToType.COMMENT",
+    "disabled": "ReactionAttachedToType.DISABLED"
 })
 
 const ReactionsTypes = {TYPES, ATTACHED_TO_TYPES}
