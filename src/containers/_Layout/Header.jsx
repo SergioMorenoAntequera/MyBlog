@@ -10,14 +10,17 @@ export default function Header() {
   
   const { user } = useUser()
 
-  return (<div className='Header'>
-    <div>
-      <Link to={"/"} > Home </Link>
+  return (<>
+    <div className='HeaderOffset'> </div>
+    <div className='Header'>
+      <div>
+        <Link to={"/"} > Home </Link>
+      </div>
+      
+      <div>
+        <UserImage user={user}/>
+        <SignToggle/>
+      </div>
     </div>
-    
-    <div>
-      <UserImage user={user}/>
-      <SignToggle/>
-    </div>
-  </div>)
+  </>)
 }

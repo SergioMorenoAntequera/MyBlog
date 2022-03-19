@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import "./style.scss"
 
-export default function UserImage({user}) {
+export default function UserImage({user, redirect}) {
 
     if(!user) return <></>
     return (<>
