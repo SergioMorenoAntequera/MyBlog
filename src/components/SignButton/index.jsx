@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux"
 import { Link } from 'react-router-dom'
 
 const SignIn = () => {
-    return <Button onClick={authAPI.signInWithGoogle}> 
+    return <Button contained onClick={authAPI.signInWithGoogle}> 
         Sign in with Google 
     </Button>  
 }
@@ -16,7 +16,7 @@ const SignOut = () => {
     const dispatch = useDispatch()
 
     return <>
-        <Button onClick={()=>{
+        <Button contained onClick={()=>{
             authAPI.signOut()   
             dispatch(clearUserFeed())
         }}> 

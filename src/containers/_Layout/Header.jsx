@@ -20,10 +20,10 @@ export default function Header() {
     <div>
       <UserImage user={user}/>
       <SignToggle/>
-      
-      <Button text> Outlined </Button>
-      <Button outlined> Outlined </Button>
-      <Button contained> Contained </Button>
+      <div>      </div>
+      <Button> asd </Button>
+      <Button outlined secondary> asd </Button>
+      <Button contained> asd </Button>
     </div>
   </div>)
 }

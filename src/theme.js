@@ -7,16 +7,16 @@ const THEME_BASES = Object.freeze({
             white: "#fff",
         },
         primary: {
-            main: "#000",
-            light: "#fff",
-            dark: "#fff",
-            constrastText: "#fff",
+            main: "#1a1a1a",
+            light: "#ededed",
+            dark: "#000000",
+            constrast: "#ffffff",
         },
         secondary: {
-            main: "#000",
-            light: "#fff",
-            dark: "#fff",
-            constrastText: "#fff",
+            main: "#af0716",
+            light: "#b81b29",
+            dark: "#93010e",
+            constrast: "#ffffff",
         },
         divider: "rgba(255, 255, 255, 0.12)" 
     },
@@ -31,11 +31,9 @@ const THEME_BASES = Object.freeze({
             xxl: "3rem",
         },
         fontWeights: {
-            extraLight:"100",
             light:"300",
-            regular:"500",
-            bold:"700",
-            extraBold:"900",
+            regular:"700",
+            bold:"900",
         },
         lineHeights: {
             
@@ -52,10 +50,15 @@ const THEME_BLOCKS = Object.freeze({
     },
     borders : {
         none:"none",
-        thin:`solid 1px ${THEME_BASES.palette.common.black}`
+        thin:`solid 1px ${THEME_BASES.palette.primary.main}`
     },
     shape: {
         borderRadius: "4px", 
+    },
+    transitions: {
+        fast: ".1s",
+        medium: ".3s",
+        slow: ".6s"
     }
 })
 
@@ -68,82 +71,35 @@ const APP_THEME = Object.freeze({
             padding: 1rem 1.5rem;
             background: none;
             font-size: ${THEME_BLOCKS.typography.fontSizes.m};
+            font-weight: ${THEME_BLOCKS.typography.fontWeights.regular};
             border-radius: ${THEME_BLOCKS.shape.borderRadius};
             border: ${THEME_BLOCKS.borders.none};
+            transition: ${THEME_BLOCKS.transitions.fast};
+            :hover {
+                background-color: ${THEME_BLOCKS.palette.primary.light};
+            }
         `,
         contained: `
             box-shadow: ${THEME_BLOCKS.shadows.light};
-            font-weight: ${THEME_BLOCKS.typography.fontWeights.extraBold};
-            background:  ${THEME_BLOCKS.palette.common.black};
-            color:  ${THEME_BLOCKS.palette.common.white};
+            background:  ${THEME_BLOCKS.palette.primary.main};
+            color:  ${THEME_BLOCKS.palette.primary.constrast};
+            :hover {
+                background-color: ${THEME_BLOCKS.palette.primary.dark};
+            }
         `,
         outlined: `
-            background:  ${THEME_BLOCKS.palette.common.white};
-            color:  ${THEME_BLOCKS.palette.common.black};
+            background:  ${THEME_BLOCKS.palette.primary.constrast};
+            color:  ${THEME_BLOCKS.palette.primary.main};
             border: ${THEME_BLOCKS.borders.thin};
+            :hover {
+                background-color: ${THEME_BLOCKS.palette.primary.light};
+            }
         `
     },
     typography: {
-        h1: {
-            fontSize: "clamp(2.625rem, 1.2857rem + 3.5714vw, 4rem)",
-            fontWeight: THEME_BLOCKS.typography.fontWeights.extraBold,
-            lineHeight: 1.1142857142857143,
-            color: "#0A1929"
-        },
-        h2: {
-            fontSize: "clamp(1.5rem, 0.9643rem + 1.4286vw, 2.25rem)",
-            fontWeight: 800,
-            lineHeight: 1.2222222222222223,
-            color: "#132F4C"
-        },
-        h3: {
-            fontSize: "2.25rem",
-            lineHeight: 1.2222222222222223,
-            letterSpacing: 0.2,
-            fontWeight: 400
-        },
-        h4: {
-            fontSize: "1.75rem",
-            lineHeight: 1.5,
-            letterSpacing: 0.2,
-            fontWeight: 400
-        },
-        body1: {
-            fontSize: "1rem",
-            lineHeight: 1.5,
-            letterSpacing: 0,
-            fontWeight: 400
-        },
-        body2: {
-            fontSize: "0.875rem",
-            lineHeight: 1.5,
-            letterSpacing: 0,
-            fontWeight: 400
-        },
-        caption: {
-            display: "inline-block",
-            fontSize: "0.75rem",
-            lineHeight: 1.5,
-            letterSpacing: 0,
-            fontWeight: 700,  
-        },
-        subtitle1: {
-            fontSize: "1.125rem",
-            lineHeight: 1.3333333333333333,
-            letterSpacing: 0,
-            fontWeight: 500,
-        },
-        subtitle2: {
-            fontWeight: 500,
-            fontSize: "0.875rem",
-            lineHeight: 1.57
-        },
-        overline: {
-            fontWeight: 400,
-            fontSize: "0.75rem",
-            lineHeight: 2.66,
-            textTransform: "uppercase"
-        }
+       h1 : {},
+       caption: {},
+       body: {},
     },  
 });
 
