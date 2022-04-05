@@ -9,8 +9,7 @@ const INITIAL_STATE = {
             //     title: "",
             //     body: "",
             //     createdAt: "",
-                // author: "",
-                // comments: [""]
+            //     comments: [""]
             // }
         },
         allIds: [],

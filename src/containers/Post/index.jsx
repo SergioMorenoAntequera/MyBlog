@@ -2,7 +2,7 @@ import { getCommentByPost } from 'actions/commentsActions'
 import { getUserByUid } from 'actions/usersActions'
 import Spinner from 'components/Spinner'
 import UserImage from 'components/UserImage'
-import useComments from 'hooks/useComments'
+import useComments from 'hooks/useComments.js'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { FaComment } from "react-icons/fa";
