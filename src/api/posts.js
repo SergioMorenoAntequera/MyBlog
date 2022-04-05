@@ -2,9 +2,19 @@ import { collection, where, query, getDocs, orderBy, limit, addDoc, Timestamp, d
 import { db } from './_config';
 import { getData } from '../utils/api';
 
-
 const collectionName = "posts"
 const postsCol = collection(db, collectionName)
+
+const createNew = async (userId, {body, title}) => {
+    const newPost = {
+        userId: userId,
+        title: title,
+        body: body,
+        createdAt: Timestamp.now()
+    }
+    const docRef = await addDoc(postsCol, newPost);
+    return {...newPost, id:docRef.id}
+}
 
 const getRecent = async (limitAmt = 25) => {
     const q = query(postsCol, orderBy("createdAt", "desc"), limit(limitAmt));
@@ -20,18 +30,6 @@ const getById = async (postId) => {
     const q = query(postsCol, where(documentId(), '==', postId));
     return getData(await getDocs(q))
 }
-
-const createNew = async (userId, {body, title}) => {
-    const newPost = {
-        userId: userId,
-        title: title,
-        body: body,
-        createdAt: Timestamp.now()
-    }
-    const docRef = await addDoc(postsCol, newPost);
-    return {...newPost, id:docRef.id}
-}
-
 
 export {
     getRecent,

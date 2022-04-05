@@ -8,20 +8,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FaComment } from "react-icons/fa";
 import "./style.scss"
 import { Link } from 'react-router-dom'
+import useCallbackSelector from 'hooks/useCallbackSelector'
 
 export default function Post({post: {id, body, title, userId, createdAt}}) {
-  let author = useSelector(state => state.usersEntity.users.byId[userId])
-  let {  comments, commentsData, AddComment } = useComments(id)
-
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    if(!author) {
-      dispatch(getUserByUid(userId))
-    }
-    // dispatch()
-  }, [])
-
+  let author = useCallbackSelector(state => state.usersEntity.users.byId[userId], getUserByUid(userId))
+  let { commentsData } = useComments(id)
   
   
   if(!id || !author) {

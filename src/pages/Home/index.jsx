@@ -7,7 +7,7 @@ import Fatal from 'components//Fatal'
 import H1 from 'components/H1'
 import * as PostsAPI from 'api/posts'
 import { getMainFeed } from 'actions/postsActions'
-import Post from 'containers/Post'
+import Post from 'containers/PostCard'
 
 
 function HomePage() {
