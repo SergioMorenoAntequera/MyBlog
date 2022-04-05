@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 import { usersReducer } from "reducers/usersReducer";
 import { postsReducer } from "reducers/postsReducer";
-import { commentsReducer } from "reducers/commentsReducer";
 import { reactionsReducer } from "./reactiosReducer";
+import commentsReducer from "features/commentsSlice";
 
 export default combineReducers({
     usersEntity : usersReducer,

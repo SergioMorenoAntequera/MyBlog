@@ -10,7 +10,8 @@
       "actions*": ["./actions*"],
       "types*": ["./types*"],
       "api*": ["./api*"],
-      "utils*": ["./utils*"]
+      "utils*": ["./utils*"],
+      "features*": ["./features*"]
     }
   }
 }
