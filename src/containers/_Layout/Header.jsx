@@ -21,9 +21,9 @@ export default function Header() {
       <UserImage user={user}/>
       <SignToggle/>
       <div>      </div>
-      <Button> asd </Button>
-      <Button outlined secondary> asd </Button>
-      <Button contained> asd </Button>
+      <Button color="primary"> asd </Button>
+      <Button variant="outlined" color="secondary"> asd </Button>
+      <Button variant="contained" > asd </Button>
     </div>
   </div>)
 }

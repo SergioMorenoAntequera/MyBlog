@@ -66,35 +66,63 @@ const APP_THEME = Object.freeze({
     ...THEME_BLOCKS,
     
     button: {
-        text: `
+        base: `
             cursor: pointer;
             padding: 1rem 1.5rem;
             background: none;
             font-size: ${THEME_BLOCKS.typography.fontSizes.m};
             font-weight: ${THEME_BLOCKS.typography.fontWeights.regular};
+            transition: ${THEME_BLOCKS.transitions.fast};
             border-radius: ${THEME_BLOCKS.shape.borderRadius};
             border: ${THEME_BLOCKS.borders.none};
-            transition: ${THEME_BLOCKS.transitions.fast};
-            :hover {
-                background-color: ${THEME_BLOCKS.palette.primary.light};
-            }
         `,
-        contained: `
-            box-shadow: ${THEME_BLOCKS.shadows.light};
-            background:  ${THEME_BLOCKS.palette.primary.main};
-            color:  ${THEME_BLOCKS.palette.primary.constrast};
-            :hover {
-                background-color: ${THEME_BLOCKS.palette.primary.dark};
-            }
-        `,
-        outlined: `
-            background:  ${THEME_BLOCKS.palette.primary.constrast};
-            color:  ${THEME_BLOCKS.palette.primary.main};
-            border: ${THEME_BLOCKS.borders.thin};
-            :hover {
-                background-color: ${THEME_BLOCKS.palette.primary.light};
-            }
-        `
+        text: {
+            base: ``,
+            primary: `
+                color: ${THEME_BLOCKS.palette.primary.main}; 
+                :hover { background-color: ${THEME_BLOCKS.palette.primary.light}; } 
+            `,
+            secondary: `
+                color: ${THEME_BLOCKS.palette.secondary.main}; 
+                :hover { background-color: ${THEME_BLOCKS.palette.secondary.light}; } 
+            `
+        },
+        outlined: {
+            base: `border: ${THEME_BLOCKS.borders.thin};`,
+            primary: `
+                background:  ${THEME_BLOCKS.palette.primary.constrast};
+                color:  ${THEME_BLOCKS.palette.primary.main};
+                :hover {
+                    background-color: ${THEME_BLOCKS.palette.primary.light};
+                }
+            `,
+            secondary: `
+                background:  ${THEME_BLOCKS.palette.secondary.constrast};
+                color:  ${THEME_BLOCKS.palette.secondary.main};
+                border-color: ${THEME_BLOCKS.palette.secondary.main};
+                :hover {
+                    background-color: ${THEME_BLOCKS.palette.secondary.light};
+                    color: ${THEME_BLOCKS.palette.secondary.constrast};
+                }
+            `
+        },
+        contained: { 
+            base: `box-shadow: ${THEME_BLOCKS.shadows.light};`,
+            primary: `
+                background:  ${THEME_BLOCKS.palette.primary.main};
+                color:  ${THEME_BLOCKS.palette.primary.constrast};
+                :hover {
+                    background-color: ${THEME_BLOCKS.palette.primary.dark};
+                }
+            `,
+            secondary: `
+                background:  ${THEME_BLOCKS.palette.secondary.main};
+                color:  ${THEME_BLOCKS.palette.secondary.constrast};
+                :hover {
+                    background-color: ${THEME_BLOCKS.palette.secondary.dark};
+                }
+            `
+        },
     },
     typography: {
        h1 : {},
