@@ -1,5 +1,6 @@
 import { ADD_COMMENT } from "actions/commentsActionTypes";
 import * as CommentsAPI from 'api/comments'
+import { addComment } from "features/commentsSlice";
 
 export const createComment = (newComment) => async (dispatch) => {
     if(!newComment) return
@@ -16,9 +17,6 @@ export const getCommentByPost = (postId) => async (dispatch) => {
     var fetchedComments = await CommentsAPI.getByPost(postId)
 
     fetchedComments.forEach(comment => {
-        dispatch({
-            type: ADD_COMMENT,
-            payload: comment
-        })
+        dispatch(addComment(comment))
     })
 }
