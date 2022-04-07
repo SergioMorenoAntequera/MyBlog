@@ -21,7 +21,9 @@ const getByPost = async (postId) => {
     return getData(await getDocs(q));
 }
 
-export {
+
+const CommentsApi = {
     getByPost,
     createNew
 }   
+export default CommentsApi

@@ -41,7 +41,7 @@ export default function PostPage() {
         <Reaction attachedToId={id} reactionType={ReactionsTypes.TYPES.disLike}/>
         <Reaction attachedToId={id} reactionType={ReactionsTypes.TYPES.save}/>
         
-        <AddComment/>
+        { AddComment }
         { comments }
     </div>)
 }
