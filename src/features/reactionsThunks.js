@@ -3,7 +3,7 @@ import { addReaction, removeReaction as removeReactionAction } from "features/re
 const { createAsyncThunk } = require("@reduxjs/toolkit")
 
 const createReaction = createAsyncThunk(
-    'Reactions/createReaction',
+    'reactions/createReaction',
     async (newReaction, {dispatch}) => {
         if(!newReaction) return
         var newReactionCreated = await ReactionsAPI.createNew(newReaction) 
@@ -13,7 +13,7 @@ const createReaction = createAsyncThunk(
 )
 
 const removeReaction = createAsyncThunk(
-    'Reactions/removeReaction',
+    'reactions/removeReaction',
     async (id, {dispatch}) => {
         if(!id) return
         ReactionsAPI.remove(id)
@@ -24,7 +24,7 @@ const removeReaction = createAsyncThunk(
 
 
 const fetchReactionsByPost = createAsyncThunk(
-    'Reactions/fetchReactionsByPost',
+    'reactions/fetchReactionsByPost',
     async (postId, {dispatch}) => {
         if(!postId) return
         var fetchedReactions = await ReactionsAPI.getByPost(postId)

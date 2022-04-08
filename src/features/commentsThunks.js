@@ -1,7 +1,15 @@
-import CommentsApi from "api/comments"
+import CommentsApi from "api/commentsAPI"
 import { addComment } from "./commentsSlice"
 const { createAsyncThunk } = require("@reduxjs/toolkit")
 
+const createComment = createAsyncThunk(
+    'comments/createComment',
+    async (newComment, {dispatch}) => {
+        if(!newComment) return
+        var newCommentCreated = await CommentsApi.createNew(newComment)
+        dispatch(addComment(newCommentCreated))
+    }
+)
 
 const fetchCommentsByPost = createAsyncThunk(
     'comments/fetchCommentsByPost',
@@ -15,14 +23,7 @@ const fetchCommentsByPost = createAsyncThunk(
     }
 )
 
-const createComment = createAsyncThunk(
-    'comments/createComment',
-    async (newComment, {dispatch}) => {
-        if(!newComment) return
-        var newCommentCreated = await CommentsApi.createNew(newComment)
-        dispatch(addComment(newCommentCreated))
-    }
-)
+
 
 const CommentsThunks = {
     fetchCommentsByPost,
