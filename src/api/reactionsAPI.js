@@ -28,8 +28,9 @@ const getByPost = async (postId) => {
     return getData(await getDocs(q));
 }
 
-export {
+const ReactionsAPI = {
     getByPost,
     remove,
     createNew
-}   
+}
+export default ReactionsAPI;
