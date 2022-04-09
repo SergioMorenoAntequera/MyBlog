@@ -23,16 +23,17 @@ const reactionsSlice = createSlice({
     initialState,
     reducers: {
         addReaction: (state, action) => {
+            let reactions = state.reactions;
             let newReaction = action.payload;
-            if(state.comments.allIds.includes(newReaction.id)) return state
-            state.comments.allIds.push(newReaction.id)
-            state.comments.byId[newReaction.id] = newReaction
+            if(reactions.allIds.includes(newReaction.id)) return state
+            reactions.allIds.push(newReaction.id)
+            reactions.byId[newReaction.id] = newReaction
             
-            if(!state.comments.byAttachedTo[newReaction.attachedTo]) 
-                state.comments.byAttachedTo[newReaction.attachedTo] = []
+            if(!reactions.byAttachedTo[newReaction.attachedTo]) 
+                reactions.byAttachedTo[newReaction.attachedTo] = []
 
-            if(state.comments.byAttachedTo[newReaction.attachedTo].includes(newReaction.id)) return state
-            state.comments.byAttachedTo[newReaction.attachedTo].push(newReaction.id)
+            if(reactions.byAttachedTo[newReaction.attachedTo].includes(newReaction.id)) return state
+            reactions.byAttachedTo[newReaction.attachedTo].push(newReaction.id)
         },
         removeReaction: (state, {payload}) => {
             delete state.reactions.byId[payload.id]

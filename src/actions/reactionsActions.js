@@ -4,7 +4,7 @@ import { addReaction, removeReaction as removeReactionAction } from "features/re
 export const createReaction = (newReaction) => async (dispatch) => {
     if(!newReaction) return
     var newReactionCreated = await ReactionsAPI.createNew(newReaction) 
-
+    
     dispatch(addReaction(newReactionCreated))
 }
 
