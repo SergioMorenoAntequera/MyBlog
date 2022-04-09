@@ -1,5 +1,5 @@
-import { createReaction, getReactionByPost, removeReaction } from "actions/reactionsActions"
 import { useUser } from "api/auth"
+import ReactionsThunks from "features/reactionsThunks"
 import { useDispatch, useSelector } from "react-redux"
 import ReactionsTypes from "types/reactions"
 import useCallbackSelector from "./useCallbackSelector"
@@ -9,7 +9,7 @@ export default function useReactions(attachedToId, reactionType) {
 
     let reactionsId = useCallbackSelector(
         state => state.reactionsEntity.reactions.byAttachedTo[attachedToId],
-        getReactionByPost(attachedToId)
+        ReactionsThunks.fetchReactionsByPost(attachedToId)
     )
     reactionsId = reactionsId ?? []
     let reactionsData = useSelector(state => {
@@ -47,17 +47,17 @@ export default function useReactions(attachedToId, reactionType) {
         }
         
         if(!userReaction){
-            dispatch(createReaction(newReaction))
+            dispatch(ReactionsThunks.createReaction(newReaction))
             return
         } 
             
-        dispatch(removeReaction({
+        dispatch(ReactionsThunks.removeReaction({
             id: userReaction.id,
             attachedTo: attachedToId,
         }))
 
         if(userReaction.type !== reactionType.type) {
-            dispatch(createReaction(newReaction))
+            dispatch(ReactionsThunks.createReaction(newReaction))
         }
     }
 

@@ -14,7 +14,7 @@ const createReaction = createAsyncThunk(
 
 const removeReaction = createAsyncThunk(
     'reactions/removeReaction',
-    async (id, {dispatch}) => {
+    async ({id, attachedTo}, {dispatch}) => {
         if(!id) return
         ReactionsAPI.remove(id)
         

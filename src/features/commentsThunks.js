@@ -23,8 +23,6 @@ const fetchCommentsByPost = createAsyncThunk(
     }
 )
 
-
-
 const CommentsThunks = {
     fetchCommentsByPost,
     createComment
