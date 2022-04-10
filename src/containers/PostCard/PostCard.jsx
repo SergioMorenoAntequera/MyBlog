@@ -6,15 +6,16 @@ import { FaComment } from "react-icons/fa";
 import { Link } from 'react-router-dom'
 import useCallbackSelector from 'hooks/useCallbackSelector'
 import UsersThunks from 'features/usersThunks';
+import { H1 } from "components";
 
-export default function Post({post: {id, body, title, userId, createdAt}}) {
+export default function PostCard({post: {id, body, title, userId, createdAt}}) {
   let author = useCallbackSelector(state => state.usersEntity.users.byId[userId], UsersThunks.fetchUserByUid(userId))
   let { commentsData } = useComments(id)
   
   if(!id || !author) {
     return <Spinner/>
   }
-  return (<div className='Post'> 
+  return (<div className='PostCard'> 
 
     <div className='header'>
         <Avatar user={author}/>
@@ -25,7 +26,7 @@ export default function Post({post: {id, body, title, userId, createdAt}}) {
     </div>
 
     <div className="body">
-        <p> { title } </p>    
+        <H1> { title } </H1>    
         <p> { body } </p>    
     </div>
 

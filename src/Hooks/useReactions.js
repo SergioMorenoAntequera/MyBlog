@@ -38,6 +38,7 @@ export default function useReactions(attachedToId, reactionType) {
 
 
     function toggleReaction() {
+        if(!user) return;
         const userReaction = userReactionsByGroup[reactionType.group]
         const newReaction = {
             userUid: user.uid, 
