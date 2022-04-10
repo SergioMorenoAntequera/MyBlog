@@ -1,16 +1,15 @@
-import { getUserByUid } from 'actions/usersActions'
+import "./style.scss"
 import Spinner from 'components/Spinner'
 import UserImage from 'components/UserImage'
 import useComments from 'hooks/useComments.js'
 import { FaComment } from "react-icons/fa";
-import "./style.scss"
 import { Link } from 'react-router-dom'
 import useCallbackSelector from 'hooks/useCallbackSelector'
+import UsersThunks from 'features/usersThunks';
 
 export default function Post({post: {id, body, title, userId, createdAt}}) {
-  let author = useCallbackSelector(state => state.usersEntity.users.byId[userId], getUserByUid(userId))
+  let author = useCallbackSelector(state => state.usersEntity.users.byId[userId], UsersThunks.fetchUserByUid(userId))
   let { commentsData } = useComments(id)
-  
   
   if(!id || !author) {
     return <Spinner/>

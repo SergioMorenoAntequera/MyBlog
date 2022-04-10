@@ -1,6 +1,6 @@
-import { getUserByUid } from 'actions/usersActions'
 import Reaction from 'components/Reaction'
 import UserImage from 'components/UserImage'
+import UsersThunks from 'features/usersThunks'
 import useComments from 'hooks/useComments'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,7 +14,7 @@ export default function Comment({comment: {id, body, userUid, createdAt}}) {
     
     useEffect(() => {
         if(user) return
-        dispatch(getUserByUid(userUid))
+        dispatch(UsersThunks.fetchUserByUid(userUid))
     }, [])
     
 

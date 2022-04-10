@@ -10,6 +10,7 @@ import usersActions from 'actions/usersActions'
 import "./style.scss"
 import Reaction from 'components/Reaction'
 import ReactionsTypes from 'types/reactions'
+import UsersThunks from 'features/usersThunks'
 
 export default function PostPage() {
 
@@ -23,7 +24,7 @@ export default function PostPage() {
     )
     const author = useCallbackSelector(
         state => state.usersEntity.users.byId[post?.userId],
-        usersActions.getUserByUid(post?.userId)
+        UsersThunks.fetchUserByUid(post?.userId)
     )
     
     if(!post) return <Spinner/>
