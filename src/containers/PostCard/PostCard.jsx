@@ -1,6 +1,6 @@
 import "./style.scss"
 import Spinner from 'components/Spinner'
-import UserImage from 'components/UserImage'
+import Avatar from 'components/Avatar'
 import useComments from 'hooks/useComments.js'
 import { FaComment } from "react-icons/fa";
 import { Link } from 'react-router-dom'
@@ -17,7 +17,7 @@ export default function Post({post: {id, body, title, userId, createdAt}}) {
   return (<div className='Post'> 
 
     <div className='header'>
-        <UserImage user={author}/>
+        <Avatar user={author}/>
         <div>
             <p> { author?.displayName } </p>
             <p> { new Date(createdAt.toDate()).toString() } </p>

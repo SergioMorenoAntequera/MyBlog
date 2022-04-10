@@ -1,11 +1,9 @@
 import { clearUserFeed } from "actions/postsActions"
-import { createUser } from "actions/usersActions"
 import * as authAPI from "api/auth"
 import Button from "components/Button"
 import UsersThunks from "features/usersThunks"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
-import { Link } from 'react-router-dom'
 
 const SignIn = () => {
     return <Button variant="contained" onClick={authAPI.signInWithGoogle}> 

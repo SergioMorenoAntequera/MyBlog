@@ -4,9 +4,8 @@ import Spinner from 'components/Spinner'
 import useComments from 'hooks/useComments'
 import useCallbackSelector from 'hooks/useCallbackSelector'
 import { useParams } from 'react-router-dom'
-import UserImage from 'components/UserImage'
+import Avatar from 'components/Avatar'
 import postActions from 'actions/postsActions'
-import usersActions from 'actions/usersActions'
 import "./style.scss"
 import Reaction from 'components/Reaction'
 import ReactionsTypes from 'types/reactions'
@@ -31,7 +30,7 @@ export default function PostPage() {
     
     return (<div className='PostPage'>
         <div className='PostPage_Post'>
-            <UserImage user={author}/>
+            <Avatar user={author}/>
             <div>
                 <H1>INFO DEL POST {post.title} </H1>
                 <p> {post.body} </p>

@@ -1,5 +1,5 @@
 import Reaction from 'components/Reaction'
-import UserImage from 'components/UserImage'
+import Avatar from 'components/Avatar'
 import UsersThunks from 'features/usersThunks'
 import useComments from 'hooks/useComments'
 import React, { useEffect } from 'react'
@@ -21,7 +21,7 @@ export default function Comment({comment: {id, body, userUid, createdAt}}) {
     return (<div className='Comment'>
         <div className='body'>
             <div>
-                <UserImage user={user}/>
+                <Avatar user={user}/>
             </div>
             <div>
                 <p> { new Date(createdAt.toDate()).toString() } </p>

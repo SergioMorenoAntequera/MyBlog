@@ -4,7 +4,7 @@ import "./Header.scss"
 
 import { SignToggle } from 'components/SignButton'
 import { useUser } from 'api/auth'
-import UserImage from 'components/UserImage'
+import Avatar from 'components/Avatar'
 import Button from 'components/Button'
 
 export default function Header() {
@@ -25,13 +25,13 @@ export default function Header() {
       
       
       <div>
-        <UserImage user={user} redirect={false}/>
+        <Avatar user={user} redirect={false}/>
         <SignToggle/>
       </div>
     </div>
     
     <div>
-      <UserImage user={user}/>
+      <Avatar user={user}/>
       <SignToggle/>
       <div>      </div>
       <Button color="primary"> asd </Button>
