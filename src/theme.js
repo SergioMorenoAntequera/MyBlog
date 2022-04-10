@@ -75,6 +75,9 @@ const APP_THEME = Object.freeze({
             transition: ${THEME_BLOCKS.transitions.fast};
             border-radius: ${THEME_BLOCKS.shape.borderRadius};
             border: ${THEME_BLOCKS.borders.none};
+            :active {
+                transform: Scale(.95) !important
+            };
         `,
         text: {
             base: ``,
