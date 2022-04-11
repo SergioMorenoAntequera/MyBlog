@@ -1,0 +1,20 @@
+.PostCard {
+    margin-bottom: 1em;
+    padding: 1em;
+    a { 
+        text-decoration: none; 
+        color: black;
+    }
+
+    .Avatar { 
+        margin-right: .5em;
+    }
+
+    .header { 
+        display: flex;
+    }
+
+    .body {
+        padding-left: 35px;
+    }
+}

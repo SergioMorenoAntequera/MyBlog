@@ -128,9 +128,12 @@ const APP_THEME = Object.freeze({
         },
     },
     typography: {
-       h1 : {},
-       caption: {},
-       body: {},
+        h1 : {},
+        caption: `
+            color:${THEME_BASES.palette.primary.main};
+            font-size: ${THEME_BASES.typography.fontSizes.s};
+        `,
+        body: {},
     },  
 });
 
