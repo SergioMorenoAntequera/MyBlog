@@ -22,6 +22,9 @@ const THEME_BASES = Object.freeze({
     },
     typography: {
         htmlFontSize: "16px",
+        fontFamilies: {
+            helvetica: "Helvetica Neue,Helvetica,Arial,sans-serif"
+        },
         fontSizes: {
             xs: ".5rem",
             s: ".75rem",
@@ -128,6 +131,7 @@ const APP_THEME = Object.freeze({
         },
     },
     typography: {
+        ...THEME_BLOCKS.typography,
         h1 : {},
         caption: `
             color:${THEME_BASES.palette.primary.main};
