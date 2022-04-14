@@ -132,12 +132,18 @@ const APP_THEME = Object.freeze({
     },
     typography: {
         ...THEME_BLOCKS.typography,
-        h1 : {},
+        
+        base: `
+            color:${THEME_BASES.palette.primary.main};
+            font-size: ${THEME_BASES.typography.fontSizes.m};
+            font-family: ${THEME_BASES.typography.fontFamilies.helvetica};
+            font-weight: ${THEME_BASES.typography.fontWeights.light};
+        `,
         caption: `
             color:${THEME_BASES.palette.primary.main};
             font-size: ${THEME_BASES.typography.fontSizes.s};
         `,
-        body: {},
+        h1 : {},
     },  
 });
 

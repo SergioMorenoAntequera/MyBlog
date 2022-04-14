@@ -10,6 +10,12 @@ const GlobalStyle = createGlobalStyle`
     `}
 
   }
+
+  .unstyled-link {
+    ${props => `
+      
+    `}
+  }  
 `
  
 export default GlobalStyle;
