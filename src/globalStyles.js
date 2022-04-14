@@ -13,7 +13,8 @@ const GlobalStyle = createGlobalStyle`
 
   .unstyled-link {
     ${props => `
-      
+      text-decoration: none; 
+      color: ${props.theme.palette.common.black};
     `}
   }  
 `

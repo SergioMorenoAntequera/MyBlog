@@ -29,14 +29,5 @@ export default function Header() {
         <SignToggle/>
       </div>
     </div>
-    
-    <div>
-      <Avatar user={user}/>
-      <SignToggle/>
-      <div>      </div>
-      <Button color="primary"> asd </Button>
-      <Button variant="outlined" color="secondary"> asd </Button>
-      <Button variant="contained" > asd </Button>
-    </div>
   </>)
 }

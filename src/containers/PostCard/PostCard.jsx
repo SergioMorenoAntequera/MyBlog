@@ -37,13 +37,15 @@ export default function PostCard({post: {id, body, title, userId, createdAt}}) {
     
 
     <div className="body">
-      <Link to={`/posts/${id}`}>
+      <Link to={`/posts/${id}`} className="unstyled-link">
         <H1> { title } </H1>    
-        
-      
-        <FaComment/> {commentsData.length}
-        <FaHeart/> {reactionsData.filter(it=>it.type===ReactionsTypes.TYPES.like.type).length}
-        
+
+        <p> { body } </p>
+
+        <div className="reactions">
+          <FaComment/> {commentsData.length}
+          <FaHeart/> {reactionsData.filter(it=>it.type===ReactionsTypes.TYPES.like.type).length}
+        </div>
       </Link>
     </div>
   </div>)
