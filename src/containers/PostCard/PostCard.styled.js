@@ -1,4 +1,3 @@
-import { Avatar } from 'components';
 import styled from 'styled-components';
 
 export const PostCard = styled.div`
@@ -6,29 +5,15 @@ export const PostCard = styled.div`
     padding: 1em;
 `;
 
-export const SAvatar = styled(Avatar)`
-    display: inline-block;
-    
+export const Header = styled.div`
+    display: flex;
 `;
 
-// const PostCard = styledComponents(_PostCard)`
+export const Body = styled.div`
+    padding: 10px;
+    padding-left: 35px;
 
-    
-//     .Avatar { 
-//         margin-right: .5em;
-//     }
-    
-//     .header { 
-//         display: flex;
-//     }
-
-//     .body {
-//         padding: 10px;
-//         padding-left: 35px;
-
-//         .reactions {
-//             margin-top: 1em;
-//         }
-//     }
-// `;
-
+    .reactions {
+        margin-top: 1em;
+    }
+`;

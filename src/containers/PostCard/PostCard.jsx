@@ -4,11 +4,11 @@ import { FaComment, FaHeart } from "react-icons/fa";
 import { Link } from 'react-router-dom'
 import useCallbackSelector from 'hooks/useCallbackSelector'
 import UsersThunks from 'features/usersThunks';
-import { H1 } from "components";
 import Caption from "components/Caption";
 import useReactions from "hooks/useReactions";
 import ReactionsTypes from "types/reactions";
 import * as S from './PostCard.styled';
+import { Avatar, H1 } from 'components';
 
 export default function PostCard ({className, post: {id, body, title, userId, createdAt}}) {
   let author = useCallbackSelector(state => state.usersEntity.users.byId[userId], UsersThunks.fetchUserByUid(userId))
@@ -24,17 +24,17 @@ export default function PostCard ({className, post: {id, body, title, userId, cr
   
   return (<S.PostCard> 
 
-    <div className="header">
-      <S.SAvatar className={className} user={author}/>
+    <S.Header>
+      <Avatar className={className} user={author}/>
       <div>
         <Link to={`/user/${author.uid}`}>
           <p> { author?.displayName } </p>
         </Link>
         <Caption> { new Date(createdAt.toDate()).toDateString() }  </Caption>
       </div>
-    </div>
+    </S.Header>
 
-    <div className="body">
+    <S.Body>
       <Link to={`/posts/${id}`} className="unstyled-link">
         <H1> { title } </H1>    
 
@@ -45,7 +45,7 @@ export default function PostCard ({className, post: {id, body, title, userId, cr
           <FaHeart/> {reactionsData.filter(it=>it.type===ReactionsTypes.TYPES.like.type).length}
         </div>
       </Link>
-    </div>
+    </S.Body>
     
   </S.PostCard>)
 }
