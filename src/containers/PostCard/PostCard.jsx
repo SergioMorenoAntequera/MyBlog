@@ -1,6 +1,4 @@
-import "./PostCard.scss"
 import Spinner from 'components/Spinner'
-import Avatar from 'components/Avatar'
 import useComments from 'hooks/useComments.js'
 import { FaComment, FaHeart } from "react-icons/fa";
 import { Link } from 'react-router-dom'
@@ -10,8 +8,9 @@ import { H1 } from "components";
 import Caption from "components/Caption";
 import useReactions from "hooks/useReactions";
 import ReactionsTypes from "types/reactions";
+import * as S from './PostCard.styled';
 
-export default function PostCard({post: {id, body, title, userId, createdAt}}) {
+export default function PostCard ({className, post: {id, body, title, userId, createdAt}}) {
   let author = useCallbackSelector(state => state.usersEntity.users.byId[userId], UsersThunks.fetchUserByUid(userId))
   let { commentsData } = useComments(id)
   let {reactionsData } = useReactions(id)
@@ -23,10 +22,10 @@ export default function PostCard({post: {id, body, title, userId, createdAt}}) {
     console.log(reactionsData)
   }
   
-  return (<div className='PostCard'> 
+  return (<S.PostCard> 
 
     <div className="header">
-      <Avatar user={author}/>
+      <S.SAvatar className={className} user={author}/>
       <div>
         <Link to={`/user/${author.uid}`}>
           <p> { author?.displayName } </p>
@@ -34,7 +33,6 @@ export default function PostCard({post: {id, body, title, userId, createdAt}}) {
         <Caption> { new Date(createdAt.toDate()).toDateString() }  </Caption>
       </div>
     </div>
-    
 
     <div className="body">
       <Link to={`/posts/${id}`} className="unstyled-link">
@@ -48,5 +46,6 @@ export default function PostCard({post: {id, body, title, userId, createdAt}}) {
         </div>
       </Link>
     </div>
-  </div>)
+    
+  </S.PostCard>)
 }
