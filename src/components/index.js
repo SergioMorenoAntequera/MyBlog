@@ -5,6 +5,7 @@ import Reaction from "./Reaction"
 import { SignToggle } from "./SignButton"
 import Spinner from "./Spinner"
 import Avatar from "./Avatar"
+import Separator from "./Separator"
 
 
 export {
@@ -15,4 +16,5 @@ export {
     Reaction,
     SignToggle,
     Spinner,
+    Separator
  } 
