@@ -25,7 +25,7 @@ export default function PostCard ({className, post: {id, body, title, userId, cr
   return (<S.PostCard> 
 
     <S.Header>
-      <Avatar className={className} user={author}/>
+      <Avatar user={author}/>
       <div>
         <Link to={`/user/${author.uid}`}>
           <p> { author?.displayName } </p>

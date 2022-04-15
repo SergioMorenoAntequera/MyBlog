@@ -12,7 +12,6 @@ export default function Header() {
   const { user } = useUser()
 
   return (<>
-    <S.HeaderOffset />
     <S.Header>
       <div>
         <div>

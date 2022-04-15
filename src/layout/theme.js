@@ -23,7 +23,9 @@ const THEME_BASES = Object.freeze({
     typography: {
         htmlFontSize: "16px",
         fontFamilies: {
-            helvetica: "Helvetica Neue,Helvetica,Arial,sans-serif"
+            helvetica: "Helvetica Neue,Helvetica,Arial,sans-serif",
+            roboto: "Roboto",
+            montserrat: "Montserrat"
         },
         fontSizes: {
             xs: ".5rem",
