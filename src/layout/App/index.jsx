@@ -1,12 +1,13 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import Layout from 'containers/_Layout';
 import HomePage from "pages/Home";
 import UserPage from "pages/UserPage";
 import PostPage from "pages/PostPage";
+import Scaffold from "layout/Scaffold";
+import '../reset.scss'
 
 function App() {
   return (<BrowserRouter>
-    <Layout>
+    <Scaffold>
       <div className="App">
         <Routes>
           <Route exact path="/" element={<HomePage/>} />
@@ -14,7 +15,7 @@ function App() {
           <Route exact path="/posts/:id" element={<PostPage/>} />
         </Routes>
       </div>
-    </Layout>
+    </Scaffold>
   </BrowserRouter>);
 }
 

@@ -1,19 +1,19 @@
 import { Link } from 'react-router-dom'
 import React from 'react'
-import "./Header.scss"
 
 import { SignToggle } from 'components/SignButton'
 import { useUser } from 'api/auth'
 import Avatar from 'components/Avatar'
-import Button from 'components/Button'
+
+import * as S from './Header.styled'
 
 export default function Header() {
   
   const { user } = useUser()
 
   return (<>
-    <div className='HeaderOffset'> </div>
-    <div className='Header'>
+    <S.HeaderOffset />
+    <S.Header>
       <div>
         <div>
           <Link to={"/"} > Home </Link>
@@ -28,6 +28,6 @@ export default function Header() {
         <Avatar user={user} redirect={false}/>
         <SignToggle/>
       </div>
-    </div>
+    </S.Header>
   </>)
 }
