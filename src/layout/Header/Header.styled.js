@@ -18,7 +18,6 @@ export const Header = styled.div`
   align-items: center;
 
   padding: 3em .5em;
-  margin-right: 1em;
 
   & > * {
     text-align: center;

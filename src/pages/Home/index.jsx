@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import H1 from 'components/H1'
 import { getMainFeed } from 'actions/postsActions'
 import PostCard from 'containers/PostCard';
+import { Separator, H1 } from 'components';
 
 
 function HomePage() {
@@ -12,13 +12,19 @@ function HomePage() {
 
   useEffect(() => {
     dispatch(getMainFeed())
-  }, [])
+  }, [dispatch])
   
   return (<>
 
     <H1> Home, most recent posts </H1>
     
-    { mainFeedPosts?.map(post => <PostCard key={post.id} post={post} />) }
+    { mainFeedPosts?.map((post, index) => <>
+        <PostCard key={post.id} post={post} />
+        {index < mainFeedPosts.length ? 
+          <Separator /> 
+          : ""
+        }
+    </>) }
     
   </>)
 }

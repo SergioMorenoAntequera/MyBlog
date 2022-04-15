@@ -4,11 +4,10 @@ import { FaComment, FaHeart } from "react-icons/fa";
 import { Link } from 'react-router-dom'
 import useCallbackSelector from 'hooks/useCallbackSelector'
 import UsersThunks from 'features/usersThunks';
-import Caption from "components/Caption";
 import useReactions from "hooks/useReactions";
 import ReactionsTypes from "types/reactions";
 import * as S from './PostCard.styled';
-import { Avatar, H1 } from 'components';
+import { H1 } from 'components';
 
 export default function PostCard ({className, post: {id, body, title, userId, createdAt}}) {
   let author = useCallbackSelector(state => state.usersEntity.users.byId[userId], UsersThunks.fetchUserByUid(userId))
@@ -25,13 +24,11 @@ export default function PostCard ({className, post: {id, body, title, userId, cr
   return (<S.PostCard> 
 
     <S.Header>
-      <Avatar user={author}/>
-      <div>
-        <Link to={`/user/${author.uid}`}>
-          <p> { author?.displayName } </p>
-        </Link>
-        <Caption> { new Date(createdAt.toDate()).toDateString() }  </Caption>
-      </div>
+      <S.SAvatar user={author}/>
+      <Link to={`/user/${author.uid}`}>
+        <p> { author?.displayName } </p>
+      </Link>
+      <S.SCaption> • { new Date(createdAt.toDate()).toDateString() }  </S.SCaption>
     </S.Header>
 
     <S.Body>
