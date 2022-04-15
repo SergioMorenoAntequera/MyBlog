@@ -8,6 +8,7 @@ import useReactions from "hooks/useReactions";
 import ReactionsTypes from "types/reactions";
 import * as S from './PostCard.styled';
 import { H1 } from 'components';
+import { Reaction } from 'components';
 
 export default function PostCard ({className, post: {id, body, title, userId, createdAt}}) {
   let author = useCallbackSelector(state => state.usersEntity.users.byId[userId], UsersThunks.fetchUserByUid(userId))
@@ -25,9 +26,7 @@ export default function PostCard ({className, post: {id, body, title, userId, cr
 
     <S.Header>
       <S.SAvatar user={author}/>
-      <Link to={`/user/${author.uid}`}>
-        <p> { author?.displayName } </p>
-      </Link>
+      <Link to={`/user/${author.uid}`}> <p> { author?.displayName } </p> </Link>
       <S.SCaption> • { new Date(createdAt.toDate()).toDateString() }  </S.SCaption>
     </S.Header>
 
@@ -37,10 +36,10 @@ export default function PostCard ({className, post: {id, body, title, userId, cr
 
         <p> { body } </p>
 
-        <div className="reactions">
+        <S.ReactionsContainer>
           <FaComment/> {commentsData.length}
-          <FaHeart/> {reactionsData.filter(it=>it.type===ReactionsTypes.TYPES.like.type).length}
-        </div>
+          <Reaction attachedToId={id} reactionType={ReactionsTypes.TYPES.like} onClick={event=>event.preventDefault()}/>
+        </S.ReactionsContainer>
       </Link>
     </S.Body>
     

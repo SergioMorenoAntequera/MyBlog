@@ -2,11 +2,11 @@ import React from 'react'
 import useReactions from 'hooks/useReactions'
 import "./style.scss"
 
-export default function Reaction({attachedToId, reactionType}) {
+export default function Reaction({attachedToId, reactionType, onClick}) {
 
     const { reactionsData, userReactionsByType, toggleReaction } = useReactions(attachedToId, reactionType)
 
-    return (<div className='Reaction'>
+    return (<div className='Reaction' onClick={onClick}>
         <div onClick={toggleReaction} style={{cursor:"pointer"}}>
             {!userReactionsByType[reactionType.type] && reactionType.unActiveIcon()}
             {userReactionsByType[reactionType.type] && reactionType.activeIcon()}

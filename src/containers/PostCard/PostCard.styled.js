@@ -23,8 +23,12 @@ export const Header = styled.div`
 export const Body = styled.div`
     padding: 10px;
     padding-left: 35px;
+`;
 
-    .reactions {
-        margin-top: 1em;
-    }
+export const ReactionsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  
+  margin: 15px 0;
 `;
