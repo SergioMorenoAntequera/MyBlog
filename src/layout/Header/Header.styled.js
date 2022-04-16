@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-const HeaderWidth = "79px";
+
 
 export const Header = styled.div`
-  width: ${HeaderWidth};
+  width: 79px;
   height: 100vh;
 
   position: sticky;

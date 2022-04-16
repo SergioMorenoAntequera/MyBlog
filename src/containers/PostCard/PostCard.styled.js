@@ -3,7 +3,7 @@ import Caption from 'components/Caption';
 import styled from 'styled-components';
 
 export const PostCard = styled.div`
-    padding: 1em;
+  padding: 1em 0;
 `;
 
 export const SAvatar = styled(Avatar)`
@@ -21,14 +21,15 @@ export const Header = styled.div`
 `;
 
 export const Body = styled.div`
-    padding: 10px;
-    padding-left: 35px;
+  
+`;
+
+export const ContentContainer = styled.div`
+  margin: 10px 0;
 `;
 
 export const ReactionsContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 5px;
-  
-  margin: 15px 0;
+  gap: 15px;
 `;

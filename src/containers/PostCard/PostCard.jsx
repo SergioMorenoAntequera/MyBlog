@@ -1,14 +1,14 @@
 import Spinner from 'components/Spinner'
 import useComments from 'hooks/useComments.js'
-import { FaComment, FaHeart } from "react-icons/fa";
+import { FaComment } from "react-icons/fa";
 import { Link } from 'react-router-dom'
 import useCallbackSelector from 'hooks/useCallbackSelector'
 import UsersThunks from 'features/usersThunks';
 import useReactions from "hooks/useReactions";
 import ReactionsTypes from "types/reactions";
 import * as S from './PostCard.styled';
-import { H1 } from 'components';
 import { Reaction } from 'components';
+import H2 from 'components/H2';
 
 export default function PostCard ({className, post: {id, body, title, userId, createdAt}}) {
   let author = useCallbackSelector(state => state.usersEntity.users.byId[userId], UsersThunks.fetchUserByUid(userId))
@@ -22,7 +22,7 @@ export default function PostCard ({className, post: {id, body, title, userId, cr
     console.log(reactionsData)
   }
   
-  return (<S.PostCard> 
+  return (<S.PostCard className={className}> 
 
     <S.Header>
       <S.SAvatar user={author}/>
@@ -32,13 +32,17 @@ export default function PostCard ({className, post: {id, body, title, userId, cr
 
     <S.Body>
       <Link to={`/posts/${id}`} className="unstyled-link">
-        <H1> { title } </H1>    
 
-        <p> { body } </p>
+        <S.ContentContainer>
+          <H2> { title } </H2>    
+          <p> { body } </p>
+        </S.ContentContainer>
+        
 
         <S.ReactionsContainer>
-          <FaComment/> {commentsData.length}
+          <div> <FaComment/> {commentsData.length} </div>
           <Reaction attachedToId={id} reactionType={ReactionsTypes.TYPES.like} onClick={event=>event.preventDefault()}/>
+          <Reaction attachedToId={id} reactionType={ReactionsTypes.TYPES.disLike} onClick={event=>event.preventDefault()}/>
         </S.ReactionsContainer>
       </Link>
     </S.Body>
