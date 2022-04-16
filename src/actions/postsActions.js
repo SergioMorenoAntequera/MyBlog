@@ -47,6 +47,10 @@ export const createPost = (userId, newPost) => async (dispatch) => {
         type: ADD_POST_USER_FEED,
         payload: newPostCreated.id
     })
+    dispatch({
+        type: ADD_POST_MAIN_FEED,
+        payload: newPostCreated.id
+    })
 }
 export const getById = (postId) => async (dispatch) => {
     if(!postId) return

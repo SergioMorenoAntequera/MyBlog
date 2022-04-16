@@ -1,5 +1,5 @@
 import React from 'react'
-import H1 from 'components/H1'
+import H2 from 'components/H2'
 import Spinner from 'components/Spinner'
 import useComments from 'hooks/useComments'
 import useCallbackSelector from 'hooks/useCallbackSelector'
@@ -32,7 +32,7 @@ export default function PostPage() {
         <div className='PostPage_Post'>
             <Avatar user={author}/>
             <div>
-                <H1>INFO DEL POST {post.title} </H1>
+                <H2>INFO DEL POST {post.title} </H2>
                 <p> {post.body} </p>
             </div>
         </div>

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getMainFeed } from 'actions/postsActions'
 import PostCard from 'containers/PostCard';
 import { Separator, H1 } from 'components';
+import AddPost from 'containers/AddPost';
 
 
 function HomePage() {
@@ -17,6 +18,8 @@ function HomePage() {
   return (<>
 
     <H1> Home, most recent posts </H1>
+
+    <AddPost />
     
     { mainFeedPosts?.map((post, index) => <>
         <PostCard key={post.id} post={post} />
