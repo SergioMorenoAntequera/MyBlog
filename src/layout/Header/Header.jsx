@@ -17,13 +17,14 @@ export default function Header() {
         <div>
           <Link to={"/"} > Home </Link>
         </div>
-        <div>
+        {/* <div>
           <Link to={"/news"} > News </Link>
-        </div>
+        </div> */}
       </div>
       
       
       <div>
+        {user && <div> <Link to={"posts/new"}> New Post </Link> </div> }
         <Avatar user={user} redirect={false}/>
         <SignToggle/>
       </div>
