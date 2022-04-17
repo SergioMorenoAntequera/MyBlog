@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const baseNotAxis = "3px"
-const baseAxis = "3px"
+// const baseAxis = "3px"
 
 const Separator = styled.div`
     display: block;

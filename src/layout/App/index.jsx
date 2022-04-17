@@ -4,6 +4,7 @@ import UserPage from "pages/UserPage";
 import PostPage from "pages/PostPage";
 import Scaffold from "layout/Scaffold";
 import '../reset.scss'
+import NewPostPage from "pages/NewPostPage";
 
 function App() {
   return (<BrowserRouter>
@@ -13,6 +14,7 @@ function App() {
           <Route exact path="/" element={<HomePage/>} />
           <Route exact path="/user/:id" element={<UserPage />} />
           <Route exact path="/posts/:id" element={<PostPage/>} />
+          <Route exact path="/posts/new" element={<NewPostPage/>} />
         </Routes>
       </div>
     </Scaffold>

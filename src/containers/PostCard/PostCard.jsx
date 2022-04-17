@@ -26,7 +26,9 @@ export default function PostCard ({className, post: {id, body, title, userId, cr
 
     <S.Header>
       <S.SAvatar user={author}/>
-      <Link to={`/user/${author.uid}`}> <p> { author?.displayName } </p> </Link>
+      <Link to={`/user/${author.uid}`}  className="unstyled-link"> 
+        <p> { author?.displayName } </p> 
+      </Link>
       <S.SCaption> • { new Date(createdAt.toDate()).toDateString() }  </S.SCaption>
     </S.Header>
 

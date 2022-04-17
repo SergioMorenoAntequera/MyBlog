@@ -7,17 +7,21 @@ export const PostCard = styled.div`
 `;
 
 export const SAvatar = styled(Avatar)`
-  
+
 `;
 
 export const SCaption = styled(Caption)`
-  margin-top: .5em;
+  margin-top: 4px;
 `;
 
 export const Header = styled.div`
-    display: flex;
-    place-items: center;
-    gap: 5px;  
+  display: flex;
+  place-items: center;
+  gap: 5px;  
+  
+  a {
+    color: ${({theme})=>theme.palette.common.black};
+  }
 `;
 
 export const Body = styled.div`
@@ -25,7 +29,10 @@ export const Body = styled.div`
 `;
 
 export const ContentContainer = styled.div`
-  margin: 10px 0;
+  margin: 20px 0;
+  H2 {
+    margin-bottom : 5px;
+  }
 `;
 
 export const ReactionsContainer = styled.div`
