@@ -18,8 +18,6 @@ function HomePage() {
   return (<>
 
     <H1> Home, most recent posts </H1>
-
-    <AddPost />
     
     { mainFeedPosts?.map((post, index) => <>
         <PostCard key={post.id} post={post} />
