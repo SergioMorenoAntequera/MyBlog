@@ -4,6 +4,8 @@ import * as S from './Body.styled';
 export default function Body({children}) {
 
     return (<S.Body>
-        {children}
+        <div className='Body__container'>
+            {children}
+        </div>
     </S.Body>)
 }

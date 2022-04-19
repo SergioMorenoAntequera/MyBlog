@@ -10,5 +10,6 @@ export default function Scaffold({children}) {
         <Body>
             {children}
         </Body>
+        <Header/>
     </S.Scaffold>)
 }

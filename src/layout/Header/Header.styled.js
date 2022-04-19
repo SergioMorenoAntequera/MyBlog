@@ -1,10 +1,15 @@
 import styled from 'styled-components';
 
 
-
 export const Header = styled.div`
-  width: 79px;
+  min-width: 80px;
   height: 100vh;
+
+  @media (max-width: 800px) {
+    height: 100%;
+    padding: 1em;
+    flex-direction: row;
+  }
 
   position: sticky;
   top: 0;
