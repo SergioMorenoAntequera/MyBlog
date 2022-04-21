@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer } from "react";
 
 const initialState = (initialValue) => ({
     storageItem: initialValue,
@@ -38,7 +38,6 @@ const reducerObject = (state, payload) => ({
     },
 })
 const reducer = (state, action) => {
-    console.log(state)
     if(reducerObject(state, action.payload)[action.type]){
         return reducerObject(state, action.payload)[action.type]
     }
@@ -47,7 +46,6 @@ const reducer = (state, action) => {
 
 export const useLocalStorage = (name, defaultValue) => {
     const [state, dispatch] = useReducer(reducer, initialState(defaultValue));
-    console.log(state.storageItem)
     const onShow = (storageItem) => dispatch({type:actionTypes.showing, payload:storageItem})
     const onLoading = () => dispatch({type:actionTypes.loading})
     const onError = (error) => dispatch({type:actionTypes.error, payload:error})
@@ -65,10 +63,9 @@ export const useLocalStorage = (name, defaultValue) => {
                 } else {
                     parsedLocalStorage = JSON.parse(inLocalStorage);
                 }
-                
                onShow(parsedLocalStorage)
             }, 1000);
-        }, [state.synchronized])
+        }, [])
     } catch(error) {
         console.log(error)
         onError(error)
@@ -85,9 +82,10 @@ export const useLocalStorage = (name, defaultValue) => {
         }
     }
 
+    console.log(state.loading)
     return {
         storageItem: state.storageItem, 
-        setLocalElement: setLocalElement,
+        setStorageItem: setLocalElement,
         auxSetSynchronized: onSyncronize,
         loading: state.loading, 
         error: state.error
