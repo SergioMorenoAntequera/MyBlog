@@ -1,10 +1,11 @@
 import { H1, Avatar } from 'components'
 import * as authAPI from "api/auth"
 import * as S from './NewPostPage.styled' 
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Button } from 'components'
 import { useDispatch } from 'react-redux'
 import { createPost } from 'actions/postsActions'
+import { useLocalStorage } from 'hooks/useLocalStorage'
 
 export default function NewPostPage() {
   
@@ -13,13 +14,30 @@ export default function NewPostPage() {
   const postTitle = useRef()
   const postBody = useRef()
 
+  let newPost = {
+    title: "",
+    body: ""
+  } 
+  const {storageItem, setStorageItem, loading} = useLocalStorage("DRAFT_POST_V1", newPost)
+
+  useEffect(() => {
+    setInterval(() => {
+      if(loading) return
+      var auxStorageItem = {...storageItem}
+      auxStorageItem.title = postTitle.current.value
+      auxStorageItem.body = postBody.current.value
+      setStorageItem(auxStorageItem)
+    }, 3000);
+  }, [])
+  
+
   function crateNewPost(event) {
     event.preventDefault()
-    let newPost = {
-      title: postTitle.current.value,
-      body: postBody.current.value
-    }
-    dispatch(createPost(user?.uid, newPost))
+    var auxStorageItem = {...storageItem}
+    auxStorageItem.title = postTitle.current.value
+    auxStorageItem.body = postBody.current.value
+
+    dispatch(createPost(user?.uid, auxStorageItem))
   }
 
   return (<S.NewPostPage>
