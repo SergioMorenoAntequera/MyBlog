@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getMainFeed } from 'actions/postsActions'
 import PostCard from 'containers/PostCard';
 import { Separator, H1 } from 'components';
-import AddPost from 'containers/AddPost';
 
 
 function HomePage() {
