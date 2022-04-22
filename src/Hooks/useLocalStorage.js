@@ -82,7 +82,6 @@ export const useLocalStorage = (name, defaultValue) => {
         }
     }
 
-    console.log(state.loading)
     return {
         storageItem: state.storageItem, 
         setStorageItem: setLocalElement,
