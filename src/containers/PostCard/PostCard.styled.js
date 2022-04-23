@@ -3,7 +3,7 @@ import Caption from 'components/Caption';
 import styled from 'styled-components';
 
 export const PostCard = styled.div`
-  padding: 1em 0;
+  padding: 24px 0;
 `;
 
 export const SAvatar = styled(Avatar)`
@@ -17,11 +17,8 @@ export const SCaption = styled(Caption)`
 export const Header = styled.div`
   display: flex;
   place-items: center;
-  gap: 5px;  
+  gap: 5px;
   
-  a {
-    color: ${({theme})=>theme.palette.common.black};
-  }
 `;
 
 export const Body = styled.div`
@@ -32,6 +29,19 @@ export const ContentContainer = styled.div`
   margin: 20px 0;
   H2 {
     margin-bottom : 5px;
+  }
+  p {
+    display: block;
+    display: -webkit-box;
+    
+    height: 2.6em;
+    line-height: 1.3em;
+    
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
 

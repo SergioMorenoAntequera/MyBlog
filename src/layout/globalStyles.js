@@ -10,6 +10,7 @@ const GlobalStyle = createGlobalStyle`
     ${({theme}) => `
       font-family: ${theme.typography.fontFamilies.roboto};
       font-weight: ${theme.typography.fontWeights.light};
+      color: ${theme.palette.primary.main};
     `}
 
   }
@@ -17,8 +18,15 @@ const GlobalStyle = createGlobalStyle`
   .unstyled-link {
     ${({theme}) => `
       text-decoration: none; 
-      color: ${theme.palette.common.black};
+      color: ${theme.palette.primary.main};
     `}
+
+    transition: .1s;
+    :hover {
+      ${({theme}) => `
+      color: ${theme.palette.primary.dark};
+    `}
+    }
   }  
 `
  
