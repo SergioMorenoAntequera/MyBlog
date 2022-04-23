@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 
 export const Header = styled(Sidebar)`
-  border-left: none;
+  justify-content: space-between;
   border-right: ${({theme})=>theme.borders.thin};
 `;
 

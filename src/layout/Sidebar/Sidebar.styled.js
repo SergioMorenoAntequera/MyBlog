@@ -2,30 +2,33 @@ import styled from 'styled-components';
 
 
 export const Sidebar = styled.div`
-  min-width: 80px;
+  position: sticky;
+  display: flex;
+  flex-direction: column;
+  
+  align-items: center;
+  
   height: 100vh;
+  min-width: 80px;
+  top: 0;
+  padding: 3em .5em;
 
   @media (max-width: 800px) {
     height: 100%;
     padding: 1em;
     flex-direction: row;
   }
-
-  position: sticky;
-  top: 0;
-  
-  background-color: ${({theme})=>theme.palette.common.white};
-  border-left: ${({theme})=>theme.borders.thin};
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 3em .5em;
-
-  & > * {
-    text-align: center;
-  }
 `;
 
+export const RightSidebar = styled(Sidebar)`
+  justify-content: end;
+  text-align: left;
+  border-left: ${({theme})=>theme.borders.thin};
+  
+  .all-rights-reserved {
+    word-wrap: break-word;
+    & p:first-child {
+      margin-bottom: 10px;
+    }
+  }
+`;
