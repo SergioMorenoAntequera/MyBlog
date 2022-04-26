@@ -9,12 +9,17 @@ import ReactionsTypes from "types/reactions";
 import * as S from './PostCard.styled';
 import { Reaction } from 'components';
 import H2 from 'components/H2';
+import { Button } from 'components';
+import useUser from 'api/auth';
 
 export default function PostCard ({className, post: {id, body, title, userId, createdAt}}) {
   let author = useCallbackSelector(state => state.usersEntity.users.byId[userId], UsersThunks.fetchUserByUid(userId))
   let { commentsData } = useComments(id)
   let {reactionsData } = useReactions(id)
   
+  const { user } = useUser()
+  const isAuthorLoggedIn = user?.uid == author?.uid
+
   if(!id || !author) {
     return <Spinner/>
   }
@@ -25,13 +30,22 @@ export default function PostCard ({className, post: {id, body, title, userId, cr
   return (<S.PostCard className={className}> 
 
     <S.Header>
-      <S.SAvatar user={author}/>
-      <div>
-        <Link to={`/user/${author.uid}`}  className="unstyled-link"> 
-          <p> { author?.displayName } </p> 
-        </Link>
-        <S.SCaption> { new Date(createdAt.toDate()).toDateString() }  </S.SCaption>
+      <div className='Author'> 
+        <S.SAvatar user={author}/>
+        <div>
+          <Link to={`/user/${author.uid}`}  className="unstyled-link"> 
+            <p> { author?.displayName } </p> 
+          </Link>
+          <S.SCaption> { new Date(createdAt.toDate()).toDateString() }  </S.SCaption>
+        </div>
       </div>
+
+      {isAuthorLoggedIn &&
+        <div>
+          <Button> Edit </Button>
+          <Button> Remove </Button>
+        </div>
+      }
     </S.Header>
 
     <S.Body>

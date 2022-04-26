@@ -17,7 +17,14 @@ export const SCaption = styled(Caption)`
 export const Header = styled.div`
   display: flex;
   place-items: center;
-  gap: 5px;
+  justify-content: space-between;
+  
+  
+  .Author {
+    display: flex;
+    place-items: center;
+    gap: 5px;
+  }
   
 `;
 
