@@ -16,6 +16,10 @@ const createNew = async ({body, userUid, attachedTo}) => {
     return {...newComment, id:docRef.id}
 }
 
+const deleteComment = async (commentId) => {
+    return await deleteDoc(doc(commentsCol, commentId));
+}
+
 const getByPost = async (postId) => {
     const q = query(commentsCol, where("attachedTo", "==", postId));
     return getData(await getDocs(q));

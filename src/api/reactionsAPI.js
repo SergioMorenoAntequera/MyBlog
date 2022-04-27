@@ -19,6 +19,10 @@ const createNew = async ({userUid, type, attachedTo, attachedToType}) => {
     return {...newReaction, id:newReactionId}
 }
 
+const deleteReaction = async (reactionId) => {
+    return await deleteDoc(doc(reactionsCol, reactionId));
+}
+
 const remove = async (id) => {
     await deleteDoc(doc(db, collectionName, id));
 }
