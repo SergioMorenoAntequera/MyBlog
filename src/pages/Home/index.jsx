@@ -18,13 +18,13 @@ function HomePage() {
 
     <H1> Home, most recent posts </H1>
     
-    { mainFeedPosts?.map((post, index) => <>
-        <PostCard key={post.id} post={post} />
+    { mainFeedPosts?.map((post, index) => <div key={post.id}>
+        <PostCard post={post} />
         {index < mainFeedPosts.length ? 
           <Separator /> 
           : ""
         }
-    </>) }
+    </div>) }
     
   </>)
 }

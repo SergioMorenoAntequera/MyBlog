@@ -1,4 +1,4 @@
-import { collection, where, query, getDocs, addDoc, Timestamp } from 'firebase/firestore';
+import { collection, where, query, getDocs, addDoc, Timestamp, deleteDoc, doc } from 'firebase/firestore';
 import { db } from './_config';
 import { getData } from '../utils/api';
 
@@ -28,6 +28,7 @@ const getByPost = async (postId) => {
 
 const CommentsApi = {
     getByPost,
-    createNew
+    createNew,
+    deleteComment
 }   
 export default CommentsApi

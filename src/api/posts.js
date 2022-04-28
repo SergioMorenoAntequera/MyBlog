@@ -1,4 +1,4 @@
-import { collection, where, query, getDocs, orderBy, limit, addDoc, Timestamp, documentId } from 'firebase/firestore';
+import { collection, where, query, getDocs, orderBy, limit, addDoc, Timestamp, documentId, doc, deleteDoc } from 'firebase/firestore';
 import { db } from './_config';
 import { getData } from '../utils/api';
 import CommentsApi from './commentsAPI';
@@ -20,11 +20,12 @@ const createNew = async (userId, {body, title}) => {
 
 const deletePost = async (postId) => {
     await deleteDoc(doc(postsCol, postId));
+    
     const comments = await CommentsApi.getByPost(postId)
-    comments.forEach(comment=>await CommentsApi.deleteComment(comment.id))
+    comments.forEach(comment => CommentsApi.deleteComment(comment.id))
 
     const reactions = await ReactionsAPI.getByPost(postId)
-    reactions.forEach(reaction=>await CommentsApi.deleteComment(reaction.id))
+    reactions.forEach(reaction => ReactionsAPI.deleteReaction(reaction.id))
 }
 
 const getRecent = async (limitAmt = 25) => {

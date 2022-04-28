@@ -15,7 +15,6 @@ import useUser from 'api/auth';
 export default function PostCard ({className, post: {id, body, title, userId, createdAt}}) {
   let author = useCallbackSelector(state => state.usersEntity.users.byId[userId], UsersThunks.fetchUserByUid(userId))
   let { commentsData } = useComments(id)
-  let {reactionsData } = useReactions(id)
   
   const { user } = useUser()
   const isAuthorLoggedIn = user?.uid == author?.uid
@@ -23,10 +22,11 @@ export default function PostCard ({className, post: {id, body, title, userId, cr
   if(!id || !author) {
     return <Spinner/>
   }
-  if(reactionsData.length>0) {
-    console.log(reactionsData)
+
+  function handleDelete() {
+    console.log("pra")
   }
-  
+
   return (<S.PostCard className={className}> 
 
     <S.Header>
@@ -43,7 +43,7 @@ export default function PostCard ({className, post: {id, body, title, userId, cr
       {isAuthorLoggedIn &&
         <div>
           <Button> Edit </Button>
-          <Button> Remove </Button>
+          <Button onClick={handleDelete}> Remove </Button>
         </div>
       }
     </S.Header>

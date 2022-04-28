@@ -35,6 +35,7 @@ const getByPost = async (postId) => {
 const ReactionsAPI = {
     getByPost,
     remove,
-    createNew
+    createNew,
+    deleteReaction
 }
 export default ReactionsAPI;
