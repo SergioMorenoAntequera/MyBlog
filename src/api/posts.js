@@ -47,5 +47,6 @@ export {
     getRecent,
     getByUser,
     getById,
-    createNew
+    createNew,
+    deletePost,
 }   

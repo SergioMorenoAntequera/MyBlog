@@ -14,30 +14,33 @@ export default function NewPostPage() {
   const postTitle = useRef()
   const postBody = useRef()
 
+  const { user } = authAPI.useUser()
+
   let newPost = {
     title: "",
     body: ""
   } 
-//   const {storageItem, setStorageItem, loading} = useLocalStorage("DRAFT_POST_V1", "hola")
+
+  const {storageItem, setStorageItem, loading} = useLocalStorage("DRAFT_POST_V1", newPost)
 
   console.log("Reloading NewPostPage")
-//   useEffect(() => {
-//     setInterval(() => {
-//       if(loading) return
-//       var auxStorageItem = {...storageItem}
-//       auxStorageItem.title = postTitle.current.value
-//       auxStorageItem.body = postBody.current.value
-//       setStorageItem(auxStorageItem)
-//     }, 3000);    
-//   }, [])
+  useEffect(() => {
+    setInterval(() => {
+      if(loading) return
+      var auxStorageItem = {...storageItem}
+      auxStorageItem.title = postTitle.current.value
+      auxStorageItem.body = postBody.current.value
+      setStorageItem(auxStorageItem)
+    }, 3000);    
+  }, [])
 
   function crateNewPost(event) {
     event.preventDefault()
-    // var auxStorageItem = {...storageItem}
-    // auxStorageItem.title = postTitle.current.value
-    // auxStorageItem.body = postBody.current.value
+    var auxStorageItem = {...storageItem}
+    auxStorageItem.title = postTitle.current.value
+    auxStorageItem.body = postBody.current.value
 
-    // dispatch(createPost(user?.uid, auxStorageItem))
+    dispatch(createPost(user?.uid, auxStorageItem))
   }
 
   return (<S.NewPostPage>

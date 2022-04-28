@@ -11,6 +11,7 @@ import { Reaction } from 'components';
 import H2 from 'components/H2';
 import { Button } from 'components';
 import useUser from 'api/auth';
+import { deletePost } from 'api/posts';
 
 export default function PostCard ({className, post: {id, body, title, userId, createdAt}}) {
   let author = useCallbackSelector(state => state.usersEntity.users.byId[userId], UsersThunks.fetchUserByUid(userId))
@@ -24,7 +25,7 @@ export default function PostCard ({className, post: {id, body, title, userId, cr
   }
 
   function handleDelete() {
-    console.log("pra")
+    deletePost(id)
   }
 
   return (<S.PostCard className={className}> 
