@@ -1,6 +1,6 @@
 
 
-export const get = (keyName) => {
+const get = (keyName) => {
     const item = localStorage.getItem(keyName);
     try {
         return JSON.parse(item)
@@ -9,9 +9,16 @@ export const get = (keyName) => {
     }  
 }
 
-export const set = (keyName, value) => {
+const set = (keyName, value) => {
     if(value.constructor() === ({}).constructor()) {
         value = JSON.stringify(value)
     }
     localStorage.setItem(keyName, value);
 }
+
+const LocalStorage = {
+    get,
+    set
+}
+
+export default LocalStorage
