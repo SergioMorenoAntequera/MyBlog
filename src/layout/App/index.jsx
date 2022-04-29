@@ -14,7 +14,7 @@ function App() {
           <Route exact path="/" element={<HomePage/>} />
           <Route exact path="/user/:id" element={<UserPage />} />
           <Route exact path="/posts/:id" element={<PostPage/>} />
-          <Route exact path="/posts/new" element={<NewPostPage/>} />
+          <Route exact path="/posts/:id/edit" element={<NewPostPage/>} />
         </Routes>
       </div>
     </Scaffold>

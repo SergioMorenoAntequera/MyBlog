@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import React from 'react'
 
 import { SignToggle } from 'components/SignButton'
@@ -9,7 +9,13 @@ import * as S from './Header.styled'
 
 export default function Header() {
   
-  const { user } = useUser()
+  const { user } = useUser();
+  let navigate = useNavigate();
+
+  function handleNewPost() {
+    
+    navigate("posts/jzuyaRmocpMkXgXIXWPg/edit")
+  }
 
   return (<>
     <S.Header>
@@ -17,14 +23,11 @@ export default function Header() {
         <div>
           <Link to={"/"} > Home </Link>
         </div>
-        {/* <div>
-          <Link to={"/news"} > News </Link>
-        </div> */}
       </div>
       
       
       <div>
-        {user && <div> <Link to={"posts/new"}> New Post </Link> </div> }
+        {user && <div onClick={handleNewPost}> <a> New Post </a> </div> }
         <Avatar user={user} redirect={false}/>
         <SignToggle/>
       </div>
