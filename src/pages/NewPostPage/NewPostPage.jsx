@@ -6,6 +6,7 @@ import { Button } from 'components'
 import { useDispatch } from 'react-redux'
 import { createPost } from 'actions/postsActions'
 import { useLocalStorage } from 'hooks/useLocalStorage'
+import { PostStatus } from 'types/postTypes'
 
 export default function NewPostPage() {
   
@@ -16,31 +17,27 @@ export default function NewPostPage() {
 
   const { user } = authAPI.useUser()
 
-  let newPost = {
+  let post = {
+    status: PostStatus.DRAFT,
     title: "",
     body: ""
   } 
 
-  const {storageItem, setStorageItem, loading} = useLocalStorage("DRAFT_POST_V1", newPost)
-
-  console.log("Reloading NewPostPage")
   useEffect(() => {
     setInterval(() => {
-      if(loading) return
-      var auxStorageItem = {...storageItem}
-      auxStorageItem.title = postTitle.current.value
-      auxStorageItem.body = postBody.current.value
-      setStorageItem(auxStorageItem)
+      var auxPost = {...post}
+      auxPost.title = postTitle.current.value
+      auxPost.body = postBody.current.value
     }, 3000);    
   }, [])
 
   function crateNewPost(event) {
     event.preventDefault()
-    var auxStorageItem = {...storageItem}
-    auxStorageItem.title = postTitle.current.value
-    auxStorageItem.body = postBody.current.value
-
-    dispatch(createPost(user?.uid, auxStorageItem))
+    var auxPost = {...post}
+    auxPost.title = postTitle.current.value
+    auxPost.body = postBody.current.value
+    auxPost.status = PostStatus.PUBLIC
+    dispatch(createPost(user?.uid, auxPost))
   }
 
   return (<S.NewPostPage>
