@@ -11,21 +11,27 @@ import { Reaction } from 'components';
 import H2 from 'components/H2';
 import { Button } from 'components';
 import useUser from 'api/auth';
-import { deletePost } from 'api/posts';
+import { useDispatch } from 'react-redux';
+import { deletePost } from 'actions/postsActions';
 
 export default function PostCard ({className, post: {id, body, title, userId, createdAt}}) {
   let author = useCallbackSelector(state => state.usersEntity.users.byId[userId], UsersThunks.fetchUserByUid(userId))
   let { commentsData } = useComments(id)
   
   const { user } = useUser()
+  const dispatch = useDispatch()
   const isAuthorLoggedIn = user?.uid == author?.uid
 
   if(!id || !author) {
     return <Spinner/>
   }
 
-  function handleDelete() {
-    deletePost(id)
+  async function handleDelete() {
+    await dispatch(deletePost(id))
+  }
+  function handleEdit() {
+
+    //deletePost(id)
   }
 
   return (<S.PostCard className={className}> 

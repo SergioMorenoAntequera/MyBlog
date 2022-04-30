@@ -6,15 +6,18 @@ import { useUser } from 'api/auth'
 import Avatar from 'components/Avatar'
 
 import * as S from './Header.styled'
+import { createPost } from 'actions/postsActions'
+import { useDispatch } from 'react-redux'
 
 export default function Header() {
   
   const { user } = useUser();
+  const dispatch = useDispatch()
   let navigate = useNavigate();
 
-  function handleNewPost() {
-    
-    navigate("posts/jzuyaRmocpMkXgXIXWPg/edit")
+  async function handleNewPost() {
+    const newPost = await dispatch(createPost(user.uid, {title:"", body:""}))
+    // navigate(`posts/${newPost.id}/edit`)
   }
 
   return (<>
