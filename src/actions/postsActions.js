@@ -1,4 +1,4 @@
-import {ADD_POST, ADD_POST_MAIN_FEED, ADD_POST_USER_FEED, CLEAR_POST_USER_FEED} from "actions/postsActionTypes";
+import {ADD_POST, ADD_POST_MAIN_FEED, ADD_POST_USER_FEED, CLEAR_POST_USER_FEED, DELETE_POST, UPDATE_POST} from "actions/postsActionTypes";
 import * as PostsAPI from 'api/posts'
 
 export const getMainFeed = () => async (dispatch) => {
@@ -38,7 +38,7 @@ export const clearUserFeed = () => async (dispatch) => {
 export const createPost = (userId, newPost) => async (dispatch) => {
     if(!userId) return
     var newPostCreated = await PostsAPI.createNew(userId, newPost)
-
+    
     dispatch({
         type: ADD_POST,
         payload: newPostCreated
@@ -51,7 +51,32 @@ export const createPost = (userId, newPost) => async (dispatch) => {
         type: ADD_POST_MAIN_FEED,
         payload: newPostCreated.id
     })
+
+    return newPostCreated
 }
+export const updatePost = (post) => async (dispatch) => {
+    if(!post) return
+    var updatedPost = await PostsAPI.updatePost(post)
+    
+    dispatch({
+        type: UPDATE_POST,
+        payload: updatedPost
+    })
+
+    return updatedPost
+}
+export const deletePost = (postId) => async (dispatch) => {
+    if(!postId) return
+    PostsAPI.deletePost(postId)
+    
+    dispatch({
+        type: DELETE_POST,
+        payload: postId
+    })
+
+    return postId
+}
+
 export const getById = (postId) => async (dispatch) => {
     if(!postId) return
     var fetchedPost = await PostsAPI.getById(postId)
