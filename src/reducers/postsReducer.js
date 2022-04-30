@@ -1,4 +1,4 @@
-import {ADD_POST, ADD_POST_MAIN_FEED, ADD_POST_USER_FEED, CLEAR_POST_USER_FEED} from "actions/postsActionTypes";
+import {ADD_POST, ADD_POST_MAIN_FEED, ADD_POST_USER_FEED, CLEAR_POST_USER_FEED, DELETE_POST, UPDATE_POST} from "actions/postsActionTypes";
 import { addMainRecord, addUnique, Positions } from "utils/reducers";
 
 const INITIAL_STATE = {
@@ -26,7 +26,6 @@ export function postsReducer(state = INITIAL_STATE, action) {
 
         case ADD_POST : {
             if(state.posts.allIds.includes(payload.id)) return state
-            
             return {
                 ...state,
                 posts: {
@@ -39,6 +38,39 @@ export function postsReducer(state = INITIAL_STATE, action) {
                 }
             }
         }
+        case UPDATE_POST: {
+            if(!state.posts.allIds.includes(payload.id)) return state
+            return {
+                ...state,
+                posts: {
+                    ...state.posts,
+                    byId: {
+                        ...state.posts.byId,
+                        [payload.id]: {
+                            payload
+                        }
+                    }
+                }
+            }
+        }
+        case DELETE_POST: {
+            if(!state.posts.allIds.includes(payload)) return state
+            const deletedPostId = payload
+            return {
+                ...state,
+                posts: {
+                    ...state.posts,
+                    byId: {
+                        ...state.posts.byId,
+                        [deletedPostId]: undefined
+                    },
+                    allIds: state.posts.allIds.filter(it => it != deletedPostId),
+                    mainFeed: state.posts.mainFeed.filter(it => it != deletedPostId),
+                    userFeed: state.posts.userFeed.filter(it => it != deletedPostId)
+                }
+            }
+        }
+        
         case ADD_POST_MAIN_FEED : {
             return {
                 ...state,

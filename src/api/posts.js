@@ -1,14 +1,16 @@
-import { collection, where, query, getDocs, orderBy, limit, addDoc, Timestamp, documentId, doc, deleteDoc } from 'firebase/firestore';
+import { collection, where, query, getDocs, orderBy, limit, addDoc, Timestamp, documentId, doc, deleteDoc, setDoc } from 'firebase/firestore';
 import { db } from './_config';
 import { getData } from '../utils/api';
 import CommentsApi from './commentsAPI';
 import ReactionsAPI from './reactionsAPI';
+import { PostStatus } from 'types/postTypes';
 
 const collectionName = "posts"
 const postsCol = collection(db, collectionName)
 
 const createNew = async (userId, {body, title}) => {
     const newPost = {
+        status: PostStatus.DRAFT,
         userId: userId,
         title: title,
         body: body,
@@ -16,6 +18,11 @@ const createNew = async (userId, {body, title}) => {
     }
     const docRef = await addDoc(postsCol, newPost);
     return {...newPost, id:docRef.id}
+}
+
+const updatePost = async ( {id, ...postToUpdate} ) => {
+    const docRef = await setDoc(doc(db, collectionName, id), postToUpdate);
+    return {id, ...postToUpdate}
 }
 
 const deletePost = async (postId) => {
@@ -29,12 +36,12 @@ const deletePost = async (postId) => {
 }
 
 const getRecent = async (limitAmt = 25) => {
-    const q = query(postsCol, orderBy("createdAt", "desc"), limit(limitAmt));
+    const q = query(postsCol, orderBy("createdAt"), limit(limitAmt));
     return getData(await getDocs(q))
 }
 
 const getByUser = async (userId) => {
-    const q = query(postsCol, where("userId", "==", userId), orderBy("createdAt", "desc"));
+    const q = query(postsCol, where("userId", "==", userId), orderBy("createdAt"));
     return getData(await getDocs(q))
 }
 
@@ -49,4 +56,5 @@ export {
     getById,
     createNew,
     deletePost,
+    updatePost
 }   
