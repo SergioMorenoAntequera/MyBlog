@@ -4,9 +4,11 @@ import * as S from './NewPostPage.styled'
 import React, { useEffect, useRef, useState } from 'react'
 import { Button } from 'components'
 import { useDispatch } from 'react-redux'
-import { createPost } from 'actions/postsActions'
+import { createPost, getById, updatePost } from 'actions/postsActions'
 import { useLocalStorage } from 'hooks/useLocalStorage'
 import { PostStatus } from 'types/postTypes'
+import useCallbackSelector from 'hooks/useCallbackSelector'
+import { useParams } from 'react-router-dom'
 
 export default function NewPostPage() {
   
@@ -15,13 +17,14 @@ export default function NewPostPage() {
   const postTitle = useRef()
   const postBody = useRef()
 
+  let { id } = useParams()
   const { user } = authAPI.useUser()
-
-  let post = {
-    status: PostStatus.DRAFT,
-    title: "",
-    body: ""
-  } 
+  const recoveredPost = useCallbackSelector(
+    state => state.postsEntity.posts.byId[id],
+    getById(id)
+  )
+  const [post, setPost] = useState(recoveredPost)
+  console.log(recoveredPost)
 
   useEffect(() => {
     // setInterval(() => {
@@ -31,13 +34,13 @@ export default function NewPostPage() {
     // }, 3000);    
   }, [])
 
-  function crateNewPost(event) {
-    // event.preventDefault()
-    // var auxPost = {...post}
-    // auxPost.title = postTitle.current.value
-    // auxPost.body = postBody.current.value
-    // auxPost.status = PostStatus.PUBLIC
-    // dispatch(createPost(user?.uid, auxPost))
+  function publishPost(event) {
+    event.preventDefault()
+    var auxPost = {...post}
+    auxPost.title = postTitle.current.value
+    auxPost.body = postBody.current.value
+    auxPost.status = PostStatus.PUBLIC
+    dispatch(updatePost(auxPost))
   }
 
   return (<S.NewPostPage>
@@ -49,7 +52,7 @@ export default function NewPostPage() {
     <S.TitleInput ref={postTitle} placeholder="My new Adventure..."/>
     <S.BodyTextArea ref={postBody} placeholder="Lorem..."/>
 
-    <Button variant="contained" onClick={crateNewPost} mr="10px"> PUBLISH </Button>
+    <Button variant="contained" onClick={publishPost} mr="10px"> PUBLISH </Button>
     <Button variant="outlined" onClick={()=>{}}> POST </Button>
   </S.NewPostPage>)
 }

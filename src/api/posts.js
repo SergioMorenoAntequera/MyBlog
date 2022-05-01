@@ -20,9 +20,9 @@ const createNew = async (userId, {body, title}) => {
     return {...newPost, id:docRef.id}
 }
 
-const updatePost = async ( {id, ...postToUpdate} ) => {
-    const docRef = await setDoc(doc(db, collectionName, id), postToUpdate);
-    return {id, ...postToUpdate}
+const updatePost = async (post) => {
+    const docRef = await setDoc(doc(db, collectionName, post.id), post);
+    return post
 }
 
 const deletePost = async (postId) => {
