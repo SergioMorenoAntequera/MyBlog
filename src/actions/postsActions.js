@@ -1,5 +1,6 @@
 import {ADD_POST, ADD_POST_MAIN_FEED, ADD_POST_USER_FEED, CLEAR_POST_USER_FEED, DELETE_POST, UPDATE_POST} from "actions/postsActionTypes";
 import * as PostsAPI from 'api/posts'
+import { PostStatus } from "types/postTypes";
 
 export const getMainFeed = () => async (dispatch) => {
     var recentPosts = await PostsAPI.getRecent()
@@ -35,6 +36,7 @@ export const clearUserFeed = () => async (dispatch) => {
         type: CLEAR_POST_USER_FEED
     })
 }
+
 export const createPost = (userId, newPost) => async (dispatch) => {
     if(!userId) return
     var newPostCreated = await PostsAPI.createNew(userId, newPost)
@@ -51,6 +53,7 @@ export const createPost = (userId, newPost) => async (dispatch) => {
         type: ADD_POST_MAIN_FEED,
         payload: newPostCreated.id
     })
+    
 
     return newPostCreated
 }
