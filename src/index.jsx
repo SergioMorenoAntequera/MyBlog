@@ -9,6 +9,7 @@ import combineReducers from "reducers/_index";
 import { ThemeProvider } from 'styled-components';
 import APP_THEME from 'styles/theme';
 import GlobalStyle from 'styles/globalStyles';
+import 'styles/reset.scss';
 // import { logAction } from 'middlewares';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

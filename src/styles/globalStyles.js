@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
       font-family: ${theme.typography.fontFamilies.roboto};
       font-weight: ${theme.typography.fontWeights.light};
       color: ${theme.palette.primary.main};
+      font-size: ${theme.typography.htmlFontSize};
     `}
 
   }

@@ -3,7 +3,6 @@ import HomePage from "pages/Home";
 import UserPage from "pages/UserPage";
 import PostPage from "pages/PostPage";
 import Scaffold from "layout/Scaffold";
-import '../reset.scss'
 import NewPostPage from "pages/NewPostPage";
 
 function App() {

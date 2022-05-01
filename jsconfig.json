@@ -12,7 +12,7 @@
       "api*": ["./api*"],
       "utils*": ["./utils*"],
       "features*": ["./features*"],
-      "styles*": ["./styles*"],
+      "styles*": ["./styles*"]
     }
   }
 }
