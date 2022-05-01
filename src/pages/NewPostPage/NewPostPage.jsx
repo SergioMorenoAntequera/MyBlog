@@ -13,45 +13,44 @@ import { useParams } from 'react-router-dom'
 export default function NewPostPage() {
   
   const dispatch = useDispatch()
-  
-  const postTitle = useRef()
-  const postBody = useRef()
-
   let { id } = useParams()
   const { user } = authAPI.useUser()
-  const recoveredPost = useCallbackSelector(
+
+  const recoveredPost = useCallbackSelector (
     state => state.postsEntity.posts.byId[id],
     getById(id)
   )
-  const [post, setPost] = useState(recoveredPost)
+  const [post, setPost] = useState({title:"", body:"", unsetted:true})
 
   useEffect(() => {
-    // setInterval(() => {
-    //   var auxPost = {...post}
-    //   auxPost.title = postTitle.current.value
-    //   auxPost.body = postBody.current.value
-    // }, 3000);    
-  }, [])
+    if(!post?.unsetted) return
+    setPost(recoveredPost)
+  }, [recoveredPost])
+  
 
-  function publishPost(event) {
-    event.preventDefault()
+  function savePost(publish) {
     var auxPost = {...post}
-    auxPost.title = postTitle.current.value
-    auxPost.body = postBody.current.value
-    auxPost.status = PostStatus.PUBLIC
+    if(publish) {
+      auxPost.status = PostStatus.PUBLIC
+    }
     dispatch(updatePost(auxPost))
   }
 
-  return (<S.NewPostPage>
+  function handlePostInput({target}) {
+    let auxPost = {...post};
+    auxPost[target.name] = target.value
+    setPost(auxPost)
+  }
 
+  return (<S.NewPostPage>
     <H1>
       <Avatar redirect={false} user={user}/>
       New Post 
     </H1>
-    <S.TitleInput ref={postTitle} placeholder="My new Adventure..."/>
-    <S.BodyTextArea ref={postBody} placeholder="Lorem..."/>
+    <S.TitleInput value={post?.title} onChange={handlePostInput} name="title" placeholder="My new Adventure..."/>
+    <S.BodyTextArea value={post?.body} onChange={handlePostInput} name="body" placeholder="Lorem..."/>
 
-    <Button variant="contained" onClick={publishPost} mr="10px"> PUBLISH </Button>
+    <Button variant="contained" onClick={()=>{savePost(true)}} mr="10px"> PUBLISH </Button>
     <Button variant="outlined" onClick={()=>{}}> POST </Button>
   </S.NewPostPage>)
 }
