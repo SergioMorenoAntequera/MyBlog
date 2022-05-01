@@ -24,7 +24,6 @@ export default function NewPostPage() {
     getById(id)
   )
   const [post, setPost] = useState(recoveredPost)
-  console.log(recoveredPost)
 
   useEffect(() => {
     // setInterval(() => {

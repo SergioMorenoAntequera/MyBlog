@@ -1,7 +1,7 @@
 import Spinner from 'components/Spinner'
 import useComments from 'hooks/useComments.js'
 import { FaComment } from "react-icons/fa";
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import useCallbackSelector from 'hooks/useCallbackSelector'
 import UsersThunks from 'features/usersThunks';
 import useReactions from "hooks/useReactions";
@@ -15,11 +15,12 @@ import { useDispatch } from 'react-redux';
 import { deletePost } from 'actions/postsActions';
 
 export default function PostCard ({className, post: {id, body, title, userId, createdAt}}) {
+  const { user } = useUser();
+  const dispatch = useDispatch();
+  let navigate = useNavigate();
+
   let author = useCallbackSelector(state => state.usersEntity.users.byId[userId], UsersThunks.fetchUserByUid(userId))
-  let { commentsData } = useComments(id)
-  
-  const { user } = useUser()
-  const dispatch = useDispatch()
+  let { commentsData } = useComments(id);
   const isAuthorLoggedIn = user?.uid == author?.uid
 
   if(!id || !author) {
@@ -30,8 +31,7 @@ export default function PostCard ({className, post: {id, body, title, userId, cr
     await dispatch(deletePost(id))
   }
   function handleEdit() {
-
-    //deletePost(id)
+    navigate(`posts/${id}/edit`)
   }
 
   return (<S.PostCard className={className}> 
@@ -49,7 +49,7 @@ export default function PostCard ({className, post: {id, body, title, userId, cr
 
       {isAuthorLoggedIn &&
         <div>
-          <Button> Edit </Button>
+          <Button onClick={handleEdit}> Edit </Button>
           <Button onClick={handleDelete}> Remove </Button>
         </div>
       }
