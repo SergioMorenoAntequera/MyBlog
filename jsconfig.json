@@ -11,7 +11,8 @@
       "types*": ["./types*"],
       "api*": ["./api*"],
       "utils*": ["./utils*"],
-      "features*": ["./features*"]
+      "features*": ["./features*"],
+      "styles*": ["./styles*"],
     }
   }
 }

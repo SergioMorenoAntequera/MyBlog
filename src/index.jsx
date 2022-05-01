@@ -7,8 +7,8 @@ import reduxThunk from "redux-thunk"
 import { Provider } from "react-redux";
 import combineReducers from "reducers/_index";
 import { ThemeProvider } from 'styled-components';
-import APP_THEME from 'layout/theme';
-import GlobalStyle from 'layout/globalStyles';
+import APP_THEME from 'styles/theme';
+import GlobalStyle from 'styles/globalStyles';
 // import { logAction } from 'middlewares';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
