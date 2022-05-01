@@ -17,7 +17,7 @@ export default function Header() {
 
   async function handleNewPost() {
     const newPost = await dispatch(createPost(user.uid, {title:"", body:""}))
-    // navigate(`posts/${newPost.id}/edit`)
+    navigate(`posts/${newPost.id}/edit`)
   }
 
   return (<>
@@ -31,7 +31,7 @@ export default function Header() {
       
       <div>
         {user && <div onClick={handleNewPost}> <a> New Post </a> </div> }
-        <Avatar user={user} redirect={false}/>
+        <Avatar user={user}/>
         <SignToggle/>
       </div>
     </S.Header>

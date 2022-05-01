@@ -63,9 +63,9 @@ export function postsReducer(state = INITIAL_STATE, action) {
                         ...state.posts.byId,
                         [deletedPostId]: undefined
                     },
-                    allIds: state.posts.allIds.filter(it => it != deletedPostId),
-                    mainFeed: state.posts.mainFeed.filter(it => it != deletedPostId),
-                    userFeed: state.posts.userFeed.filter(it => it != deletedPostId)
+                    allIds: state.posts.allIds.filter(it => it !== deletedPostId),
+                    mainFeed: state.posts.mainFeed.filter(it => it !== deletedPostId),
+                    userFeed: state.posts.userFeed.filter(it => it !== deletedPostId)
                 }
             }
         }
@@ -73,7 +73,7 @@ export function postsReducer(state = INITIAL_STATE, action) {
         case ADD_POST_MAIN_FEED : {
             let postId = action.payload
             if(!state.posts.byId[postId]) return state;
-            if(state.posts.byId[postId].status != PostStatus.PUBLIC) return state;
+            if(state.posts.byId[postId].status !== PostStatus.PUBLIC) return state;
             
             return {
                 ...state,
@@ -86,7 +86,7 @@ export function postsReducer(state = INITIAL_STATE, action) {
         case ADD_POST_USER_FEED : {
             let postId = action.payload
             if(!state.posts.byId[postId]) return state;
-            if(state.posts.byId[postId].status != PostStatus.PUBLIC) return state;
+            if(state.posts.byId[postId].status !== PostStatus.PUBLIC) return state;
             return {
                 ...state,
                 posts: {

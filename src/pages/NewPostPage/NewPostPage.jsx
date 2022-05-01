@@ -24,31 +24,32 @@ export default function NewPostPage() {
   } 
 
   useEffect(() => {
-    setInterval(() => {
-      var auxPost = {...post}
-      auxPost.title = postTitle.current.value
-      auxPost.body = postBody.current.value
-    }, 3000);    
+    // setInterval(() => {
+    //   var auxPost = {...post}
+    //   auxPost.title = postTitle.current.value
+    //   auxPost.body = postBody.current.value
+    // }, 3000);    
   }, [])
 
   function crateNewPost(event) {
-    event.preventDefault()
-    var auxPost = {...post}
-    auxPost.title = postTitle.current.value
-    auxPost.body = postBody.current.value
-    auxPost.status = PostStatus.PUBLIC
-    dispatch(createPost(user?.uid, auxPost))
+    // event.preventDefault()
+    // var auxPost = {...post}
+    // auxPost.title = postTitle.current.value
+    // auxPost.body = postBody.current.value
+    // auxPost.status = PostStatus.PUBLIC
+    // dispatch(createPost(user?.uid, auxPost))
   }
 
   return (<S.NewPostPage>
 
     <H1>
-      <Avatar redirect={false}/>
+      <Avatar redirect={false} user={user}/>
       New Post 
     </H1>
     <S.TitleInput ref={postTitle} placeholder="My new Adventure..."/>
     <S.BodyTextArea ref={postBody} placeholder="Lorem..."/>
 
-    <Button variant="contained" onClick={crateNewPost}> POST </Button>
+    <Button variant="contained" onClick={crateNewPost} mr="10px"> PUBLISH </Button>
+    <Button variant="outlined" onClick={()=>{}}> POST </Button>
   </S.NewPostPage>)
 }

@@ -1,9 +1,10 @@
-const { default: styledComponents } = require("styled-components");
+import styled from 'styled-components';
+import { space } from 'styled-system'
 
 
-const Button = styledComponents.button`
+const Button = styled.button`
 
-
+    ${ space }
     ${props => {
         let base = props.theme.button.base    
         switch(props.variant) {
