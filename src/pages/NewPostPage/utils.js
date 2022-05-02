@@ -17,4 +17,20 @@ export function placeCaretAtEnd(el) {
         textRange.collapse(false);
         textRange.select();
     }
-  }
+}
+
+export const stringToHTML = function (str) {
+
+	// If DOMParser is supported, use it
+	if (DOMParser) {
+		var parser = new DOMParser();
+		var doc = parser.parseFromString(str, 'text/html');
+		return doc.body.innerHTML;
+	}
+
+	// Otherwise, fallback to old-school method
+	var dom = document.createElement('div');
+	dom.innerHTML = str;
+	return dom.innerHTML;
+
+};
