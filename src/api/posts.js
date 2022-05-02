@@ -36,7 +36,11 @@ const deletePost = async (postId) => {
 }
 
 const getRecent = async (limitAmt = 25) => {
-    const q = query(postsCol, orderBy("createdAt"), limit(limitAmt));
+    const q = query(postsCol, 
+        where("status", "==", PostStatus.PUBLIC), 
+        orderBy("createdAt"), 
+        limit(limitAmt)
+    );
     return getData(await getDocs(q))
 }
 
