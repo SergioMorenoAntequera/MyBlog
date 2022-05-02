@@ -16,7 +16,7 @@ const linesSlice = createSlice({
     reducers: {
         addLine: (state, {payload}) => {
             let lines = state.lines
-            lines[payload.id] = payload
+            lines.byId[payload.id] = payload
             lines.allIds.push(payload.id)
             
             lines.byPost[payload.post] = lines.byPost[payload.post] ?? []

@@ -3,12 +3,13 @@ import { addLine, removeLine as removeLineAction } from "features/linesSlice";
 const { createAsyncThunk } = require("@reduxjs/toolkit")
 
 const createLine = createAsyncThunk(
-    'lines/createLines',
+    'lines/createLine',
     async (newLine, {dispatch}) => {
         if(!newLine) return
-        var newLineCreated = await LinesAPI.createNew(newLine) 
-        
-        dispatch(addLine(newLineCreated))
+
+        LinesAPI.createNew(newLine) 
+        dispatch(addLine(newLine))
+        return newLine
     }
 )
 
@@ -17,7 +18,6 @@ const removeLine = createAsyncThunk(
     async ({id, attachedTo}, {dispatch}) => {
         if(!id) return
         LinesAPI.remove(id)
-        
         dispatch(removeLineAction({id:id, attachedTo:attachedTo}))
     }
 )
