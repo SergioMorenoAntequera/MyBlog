@@ -8,11 +8,13 @@ import { createPost, getById, updatePost } from 'actions/postsActions'
 import { useLocalStorage } from 'hooks/useLocalStorage'
 import { PostStatus } from 'types/postTypes'
 import useCallbackSelector from 'hooks/useCallbackSelector'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { placeCaretAtEnd } from './utils'
 
 export default function NewPostPage() {
   
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   let { id } = useParams()
   const { user } = authAPI.useUser()
 
@@ -21,26 +23,31 @@ export default function NewPostPage() {
     getById(id)
   )
   const [post, setPost] = useState({title:"", body:"", unsetted:true})
+  const postBody = useRef(null)
+  
+
 
   useEffect(() => {
     if(!post?.unsetted) return
+    if(!recoveredPost) return
     setPost(recoveredPost)
   }, [recoveredPost])
   
 
   function savePost(publish) {
     var auxPost = {...post}
-    if(publish) {
-      auxPost.status = PostStatus.PUBLIC
-    }
+    if(publish) auxPost.status = PostStatus.PUBLIC
     dispatch(updatePost(auxPost))
+    if(publish) navigate(`/posts/${id}`)
   }
 
   function handlePostInput({target}) {
     let auxPost = {...post};
     auxPost[target.name] = target.value
     setPost(auxPost)
+    placeCaretAtEnd(postBody.current)
   }
+  
 
   return (<S.NewPostPage>
     <H1>
@@ -48,7 +55,13 @@ export default function NewPostPage() {
       New Post 
     </H1>
     <S.TitleInput value={post?.title} onChange={handlePostInput} name="title" placeholder="My new Adventure..."/>
-    <S.BodyTextArea value={post?.body} onChange={handlePostInput} name="body" placeholder="Lorem..."/>
+    
+    <div contentEditable={true} suppressContentEditableWarning={true} ref={postBody}
+      onInput={e => handlePostInput({target:{value:e.currentTarget.textContent, name:"body"}}) }>
+      {post.body}
+    </div>
+    
+    
 
     <Button variant="contained" onClick={()=>{savePost(true)}} mr="10px"> PUBLISH </Button>
     <Button variant="outlined" onClick={()=>{}}> POST </Button>
