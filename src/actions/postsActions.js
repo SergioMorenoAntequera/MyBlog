@@ -49,34 +49,27 @@ export const clearUserFeed = () => async (dispatch) => {
     })
 }
 
-export const createPost = (userId, newPost) => async (dispatch) => {
-    if(!userId) return
-    var newPostCreated = await PostsAPI.createNew(userId, newPost)
-
-    // dispatch(
-    //     LinesThunks.createLine({
-    //         post:newPostCreated.id,
-    //         type:LineTypes.PARAGRAPH,
-    //         content:"default Lien from create Post"
-    //     })
-    // )
-    dispatch(addLine(new Line()))
+export const createPost = (newPost) => async (dispatch) => {
+    if(!newPost.userId) return
+    PostsAPI.createNew(newPost.userId, newPost)
     
+    var initialLine = new Line(newPost.id)
+    dispatch(LinesThunks.createLine(initialLine))
+
     dispatch({
         type: ADD_POST,
-        payload: newPostCreated
+        payload: newPost
     })
     dispatch({
         type: ADD_POST_USER_FEED,
-        payload: newPostCreated.id
+        payload: newPost.id
     })
     dispatch({
         type: ADD_POST_MAIN_FEED,
-        payload: newPostCreated.id
+        payload: newPost.id
     })
     
-
-    return newPostCreated
+    return newPost
 }
 export const updatePost = (post) => async (dispatch) => {
     if(!post) return

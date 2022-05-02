@@ -8,7 +8,7 @@ const collectionName = "lines"
 const linesCol = collection(db, collectionName)
 
 const createNew = async (newLine) => {
-    setDoc(doc(db, collectionName, newLine.id), newLine);
+    setDoc(doc(db, collectionName, newLine.id), {...newLine});
     return newLine
 }
 
