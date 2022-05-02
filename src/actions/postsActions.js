@@ -1,11 +1,22 @@
 import {ADD_POST, ADD_POST_MAIN_FEED, ADD_POST_USER_FEED, CLEAR_POST_USER_FEED, DELETE_POST, UPDATE_POST} from "actions/postsActionTypes";
 import * as PostsAPI from 'api/posts'
-import { PostStatus } from "types/postTypes";
+import CommentsThunks from "features/commentsThunks";
+import { addLine } from "features/linesSlice";
+import LinesThunks from "features/linesThunks";
+import ReactionsThunks from "features/reactionsThunks";
+import Line, { LineTypes } from "types/lineTypes";
+
+export const fetchPostRelated = (postId) => {
+    LinesThunks.fetchLinesByPost(postId)
+    CommentsThunks.fetchCommentsByPost(postId)
+    ReactionsThunks.fetchReactionsByPost(postId)
+}
 
 export const getMainFeed = () => async (dispatch) => {
     var recentPosts = await PostsAPI.getRecent()
 
     recentPosts.forEach(post => {
+        fetchPostRelated(post.id)
         dispatch({
             type: ADD_POST,
             payload: post
@@ -21,6 +32,7 @@ export const getUserFeed = (userId) => async (dispatch) => {
     var recentPosts = await PostsAPI.getByUser(userId)
 
     recentPosts.forEach(post => {
+        fetchPostRelated(post.id)
         dispatch({
             type: ADD_POST,
             payload: post
@@ -40,6 +52,15 @@ export const clearUserFeed = () => async (dispatch) => {
 export const createPost = (userId, newPost) => async (dispatch) => {
     if(!userId) return
     var newPostCreated = await PostsAPI.createNew(userId, newPost)
+
+    // dispatch(
+    //     LinesThunks.createLine({
+    //         post:newPostCreated.id,
+    //         type:LineTypes.PARAGRAPH,
+    //         content:"default Lien from create Post"
+    //     })
+    // )
+    dispatch(addLine(new Line()))
     
     dispatch({
         type: ADD_POST,
@@ -84,6 +105,8 @@ export const getById = (postId) => async (dispatch) => {
     if(!postId) return
     var fetchedPost = await PostsAPI.getById(postId)
     if(fetchedPost.length === 0) return
+
+    fetchPostRelated(postId)
     
     dispatch({
         type: ADD_POST,
