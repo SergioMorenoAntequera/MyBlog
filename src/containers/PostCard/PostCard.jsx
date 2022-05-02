@@ -31,7 +31,7 @@ export default function PostCard ({className, post: {id, body, title, userId, cr
     await dispatch(deletePost(id))
   }
   function handleEdit() {
-    navigate(`posts/${id}/edit`)
+    navigate(`/posts/${id}/edit`)
   }
 
   return (<S.PostCard className={className}> 

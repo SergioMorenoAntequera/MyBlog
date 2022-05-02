@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
   html, body {
 
     ${({theme}) => `
-      font-family: ${theme.typography.fontFamilies.roboto};
+      font-family: ${theme.typography.fontFamilies.helvetica};
       font-weight: ${theme.typography.fontWeights.light};
       color: ${theme.palette.primary.main};
       font-size: ${theme.typography.htmlFontSize};
