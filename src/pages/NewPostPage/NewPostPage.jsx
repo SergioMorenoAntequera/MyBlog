@@ -3,7 +3,7 @@ import * as authAPI from "api/auth"
 import * as S from './NewPostPage.styled' 
 import React, { useEffect, useRef, useState } from 'react'
 import { Button } from 'components'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { getById, updatePost } from 'actions/postsActions'
 import { PostStatus } from 'types/postTypes'
 import useCallbackSelector from 'hooks/useCallbackSelector'
@@ -28,6 +28,14 @@ export default function NewPostPage() {
     state => state.linesEntity.lines.byPost[id],
     LinesThunks.fetchLinesByPost(id)
   )
+  const linesData = useSelector(state => {
+      return recoveredLines.map(line =>
+        state.linesEntity.lines.byId[line]
+      )  
+  }) 
+  console.log(linesData);
+  
+  
 
   const [post, setPost] = useState({title:"", body:"", unsetted:true})
   const [postData, setPostData] = useState([])
@@ -96,10 +104,7 @@ export default function NewPostPage() {
 
     <S.TitleInput value={post?.title} onChange={handlePostTitle} name="title" placeholder="My new Adventure..."/>
     <div ref={postDataContainer}>
-      {Object.entries(postData).map((paragraph) => 
-        <p key={paragraph[1].id}>
-          <input value={paragraph[1].content} onChange={(e)=>{handlePostBody(e, paragraph[1].id)}} onKeyPress={handleEnter}/>
-        </p>)}
+      {}
     </div>
     
     <Button variant="contained" onClick={()=>{savePost(true)}} mr="10px"> PUBLISH </Button>
