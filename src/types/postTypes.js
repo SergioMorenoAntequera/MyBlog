@@ -6,7 +6,6 @@ export default class Post extends Model {
     body = ""
     userId = ""
     status = PostStatus.DRAFT
-    createdAt = new Date()
 
     constructor(userId) {
         super()
