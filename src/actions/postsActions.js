@@ -51,7 +51,7 @@ export const clearUserFeed = () => async (dispatch) => {
 
 export const createPost = (newPost) => async (dispatch) => {
     if(!newPost.userId) return
-    PostsAPI.createNew(newPost.userId, newPost)
+    PostsAPI.createNew(newPost)
     
     var initialLine = new Line(newPost.id)
     dispatch(LinesThunks.createLine(initialLine))

@@ -1,4 +1,4 @@
-import { collection, where, query, getDocs, orderBy, limit, addDoc, Timestamp, documentId, doc, deleteDoc, setDoc } from 'firebase/firestore';
+import { collection, where, query, getDocs, orderBy, limit, addDoc, documentId, doc, deleteDoc, setDoc } from 'firebase/firestore';
 import { db } from './_config';
 import { getData } from '../utils/api';
 import CommentsApi from './commentsAPI';
@@ -8,16 +8,9 @@ import { PostStatus } from 'types/postTypes';
 const collectionName = "posts"
 const postsCol = collection(db, collectionName)
 
-const createNew = async (userId, {body, title}) => {
-    const newPost = {
-        status: PostStatus.DRAFT,
-        userId: userId,
-        title: title,
-        body: body,
-        createdAt: Timestamp.now()
-    }
-    const docRef = await addDoc(postsCol, newPost);
-    return {...newPost, id:docRef.id}
+const createNew = async (newPost) => {
+    setDoc(doc(db, collectionName, newPost.id), {...newPost});
+    return newPost
 }
 
 const updatePost = async (post) => {
