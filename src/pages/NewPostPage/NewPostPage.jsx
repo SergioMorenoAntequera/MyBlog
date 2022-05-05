@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Button } from 'components'
 import { useDispatch, useSelector } from 'react-redux'
 import { getById, updatePost } from 'actions/postsActions'
-import { PostStatus } from 'types/postTypes'
+import Post, { PostStatus } from 'types/postTypes'
 import useCallbackSelector from 'hooks/useCallbackSelector'
 import { useNavigate, useParams } from 'react-router-dom'
 import { v4 as uuid } from 'uuid';
@@ -29,20 +29,19 @@ export default function NewPostPage() {
     LinesThunks.fetchLinesByPost(id)
   )
   const linesData = useSelector(state => {
-      return recoveredLines.map(line =>
+      return recoveredLines?.map(line =>
         state.linesEntity.lines.byId[line]
       )  
-  }) 
-  console.log(linesData);
+  })
   
   
 
-  const [post, setPost] = useState({title:"", body:"", unsetted:true})
+  const [post, setPost] = useState(new Post())
   const [postData, setPostData] = useState([])
   
   
   useEffect(() => {
-    if(!post?.unsetted) return
+    if(!post.id) return
     if(!recoveredPost) return
 
     setPost(recoveredPost)

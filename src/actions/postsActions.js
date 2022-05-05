@@ -73,14 +73,14 @@ export const createPost = (newPost) => async (dispatch) => {
 }
 export const updatePost = (post) => async (dispatch) => {
     if(!post) return
-    var updatedPost = await PostsAPI.updatePost(post)
+    PostsAPI.updatePost(post)
     
     dispatch({
         type: UPDATE_POST,
-        payload: updatedPost
+        payload: post
     })
 
-    return updatedPost
+    return post
 }
 export const deletePost = (postId) => async (dispatch) => {
     if(!postId) return
