@@ -10,6 +10,7 @@ import useCallbackSelector from 'hooks/useCallbackSelector'
 import { useNavigate, useParams } from 'react-router-dom'
 import { v4 as uuid } from 'uuid';
 import LinesThunks from 'features/linesThunks'
+import { LineTypes } from 'types/lineTypes'
 
 const paragraphSeparator = "\\<br/\\>"
 export default function NewPostPage() {
@@ -70,13 +71,10 @@ export default function NewPostPage() {
     const event = e.nativeEvent
 
     let _postData = {...postData}
-    let _post = {...post}
     
     _postData[paragraphId].content = event.target.value 
 
-    
     setPostData(_postData)
-    setPost(_post)
   }
 
   function handleEnter(e) {
@@ -103,7 +101,18 @@ export default function NewPostPage() {
 
     <S.TitleInput value={post?.title} onChange={handlePostTitle} name="title" placeholder="My new Adventure..."/>
     <div ref={postDataContainer}>
-      {}
+      {linesData?.map(line => { 
+
+
+        switch(line.type) {
+          case(LineTypes.PARAGRAPH): {
+            return <input key={line.id} type="text" placeholder={line.content} />
+          }
+          default: return "Not Supported type yet"
+        }
+
+
+      })}
     </div>
     
     <Button variant="contained" onClick={()=>{savePost(true)}} mr="10px"> PUBLISH </Button>
