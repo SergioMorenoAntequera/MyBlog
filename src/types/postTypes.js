@@ -3,7 +3,6 @@ import Model from "./Model"
 export default class Post extends Model {
 
     title = ""
-    body = ""
     userId = ""
     status = PostStatus.DRAFT
 

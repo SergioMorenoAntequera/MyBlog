@@ -48,12 +48,6 @@ export default function NewPostPage() {
     setPost(recoveredPost)
   }, [recoveredPost])
 
-  const postDataContainer = useRef(null)
-  // useEffect(()=>{
-    // postDataContainer?.current?.lastElementChild?.firstChild.focus()
-  // }, [postData.length])
-  
-
   function savePost(publish) {
     var auxPost = {...post}
     if(publish) auxPost.status = PostStatus.PUBLIC
@@ -67,29 +61,9 @@ export default function NewPostPage() {
     setPost(auxPost)
   }
 
-  function handlePostBody(e, paragraphId) {
+  function handlePostLine(e, lineId) {
     const event = e.nativeEvent
 
-    let _postData = {...postData}
-    
-    _postData[paragraphId].content = event.target.value 
-
-    setPostData(_postData)
-  }
-
-  function handleEnter(e) {
-    const event = e.nativeEvent
-    if(event.keyCode !== 13) return;
-
-    let _post = {...post}
-    let _postData = {...postData}
-    
-    _post.body += paragraphSeparator
-    var id = uuid()
-    _postData[id] = { id: id, content:"" }
-    
-    setPost(_post)
-    setPostData(_postData)
   }
   
 
@@ -100,17 +74,15 @@ export default function NewPostPage() {
     </H1>
 
     <S.TitleInput value={post?.title} onChange={handlePostTitle} name="title" placeholder="My new Adventure..."/>
-    <div ref={postDataContainer}>
+    <div>
       {linesData?.map(line => { 
-
 
         switch(line.type) {
           case(LineTypes.PARAGRAPH): {
-            return <input key={line.id} type="text" placeholder={line.content} />
+            return <input key={line.id} value={line.content} onChange={(e)=>{handlePostLine(e, line.id)}} />
           }
           default: return "Not Supported type yet"
         }
-
 
       })}
     </div>
