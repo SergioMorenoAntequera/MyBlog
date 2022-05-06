@@ -27,10 +27,14 @@ const linesSlice = createSlice({
             
             state.lines.allIds = state.lines.allIds.filter(l=>l != payload.id)
             state.lines.byPost[payload.post] = state.lines.byPost[payload.post].filter(l=>l != payload.id)
+        },
+        updateLine: (state, {payload}) => {
+            let lines = state.lines
+            lines.byId[payload.id] = payload;
         }
     }
 })
 
-export const { addLine, removeLine } = linesSlice.actions
+export const { addLine, removeLine, updateLine } = linesSlice.actions
 const linesReducer = linesSlice.reducer
 export default linesReducer

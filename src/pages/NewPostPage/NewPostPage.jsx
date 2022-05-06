@@ -10,7 +10,8 @@ import useCallbackSelector from 'hooks/useCallbackSelector'
 import { useNavigate, useParams } from 'react-router-dom'
 import { v4 as uuid } from 'uuid';
 import LinesThunks from 'features/linesThunks'
-import { LineTypes } from 'types/lineTypes'
+import Line, { LineTypes } from 'types/lineTypes'
+import { addLine, updateLine } from 'features/linesSlice'
 
 const paragraphSeparator = "\\<br/\\>"
 export default function NewPostPage() {
@@ -35,15 +36,17 @@ export default function NewPostPage() {
       )  
   })
   
-  
-
   const [post, setPost] = useState(new Post())
-  const [postData, setPostData] = useState([])
-  
   
   useEffect(() => {
     if(!post.id) return
     if(!recoveredPost) return
+
+    setPost(recoveredPost)
+  }, [recoveredPost])
+
+  useEffect(() => {
+    if(!recoveredLines) return
 
     setPost(recoveredPost)
   }, [recoveredPost])
@@ -61,11 +64,18 @@ export default function NewPostPage() {
     setPost(auxPost)
   }
 
-  function handlePostLine(e, lineId) {
+  function handlePostLine(e, line) {
     const event = e.nativeEvent
-
+    let auxLine = {...line, content:event.target.value}
+    dispatch(updateLine(auxLine))
   }
-  
+
+  function handleEnter(e) {
+    const event = e.nativeEvent
+    if(event.keyCode !== 13) return;
+
+    dispatch(addLine(new Line(id)))
+  }
 
   return (<S.NewPostPage>
     <H1>
@@ -79,7 +89,7 @@ export default function NewPostPage() {
 
         switch(line.type) {
           case(LineTypes.PARAGRAPH): {
-            return <input key={line.id} value={line.content} onChange={(e)=>{handlePostLine(e, line.id)}} />
+            return <input key={line.id} value={line.content} onChange={(e)=>{handlePostLine(e, line)}} onKeyUp={handleEnter}/>
           }
           default: return "Not Supported type yet"
         }

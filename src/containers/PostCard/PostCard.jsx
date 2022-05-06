@@ -13,6 +13,7 @@ import { Button } from 'components';
 import useUser from 'api/auth';
 import { useDispatch } from 'react-redux';
 import { deletePost } from 'actions/postsActions';
+import LinesThunks from 'features/linesThunks';
 
 export default function PostCard ({className, post: {id, body, title, userId, createdAt}}) {
   const { user } = useUser();
@@ -20,6 +21,11 @@ export default function PostCard ({className, post: {id, body, title, userId, cr
   let navigate = useNavigate();
 
   let author = useCallbackSelector(state => state.usersEntity.users.byId[userId], UsersThunks.fetchUserByUid(userId))
+  let lines = useCallbackSelector(
+    state => state.linesEntity.lines.byPost[id], 
+    LinesThunks.fetchLinesByPost(id),
+    state => state.linesEntity.lines.byId
+  )
   let { commentsData } = useComments(id);
   const isAuthorLoggedIn = user?.uid == author?.uid
 
