@@ -4,7 +4,6 @@ import { FaComment } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom'
 import useCallbackSelector from 'hooks/useCallbackSelector'
 import UsersThunks from 'features/usersThunks';
-import useReactions from "hooks/useReactions";
 import ReactionsTypes from "types/reactions";
 import * as S from './PostCard.styled';
 import { Reaction } from 'components';
@@ -66,7 +65,7 @@ export default function PostCard ({className, post: {id, body, title, userId, cr
 
         <S.ContentContainer>
           <H2> { title } </H2>    
-          <p> { body } </p>
+          {lines?.map(line => line?.content)}
         </S.ContentContainer>
         
 
