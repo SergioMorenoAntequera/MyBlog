@@ -11,7 +11,7 @@ export default function Reaction({className, attachedToId, reactionType, onClick
             {!userReactionsByType[reactionType.type] && reactionType.unActiveIcon()}
             {userReactionsByType[reactionType.type] && reactionType.activeIcon()}
             
-            {reactionsData.filter(it=>it.type === reactionType.type).length}
+            {reactionsData?.filter(it=>it.type === reactionType.type).length ?? 0}
         </div>
     </S.Reaction>)
 }
