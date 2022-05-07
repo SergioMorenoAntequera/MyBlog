@@ -4,7 +4,6 @@ import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import Model from "./Model";
 
 export class Reaction extends Model {
-    
 
     attachedToType = ATTACHED_TO_TYPES.disabled
     constructor(type, attachedToId, userUid) {
@@ -14,11 +13,6 @@ export class Reaction extends Model {
         this.userUid =  userUid;
     }
 
-    toFirebase() {
-        return {...this,
-            type: this.type.type
-        }
-    }
 }
 
 const TYPES = Object.freeze({

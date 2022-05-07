@@ -6,9 +6,8 @@ const createReaction = createAsyncThunk(
     'reactions/createReaction',
     async (newReaction, {dispatch}) => {
         if(!newReaction) return
-        var newReactionCreated = await ReactionsAPI.createNew(newReaction) 
-        
-        dispatch(addReaction(newReactionCreated))
+        ReactionsAPI.createNew(newReaction)
+        dispatch(addReaction(newReaction))
     }
 )
 
@@ -17,7 +16,6 @@ const removeReaction = createAsyncThunk(
     async ({id, attachedTo}, {dispatch}) => {
         if(!id) return
         ReactionsAPI.remove(id)
-        
         dispatch(removeReactionAction({id:id, attachedTo:attachedTo}))
     }
 )
