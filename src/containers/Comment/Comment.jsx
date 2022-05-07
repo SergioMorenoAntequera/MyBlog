@@ -4,7 +4,7 @@ import UsersThunks from 'features/usersThunks'
 import useComments from 'hooks/useComments'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import ReactionsTypes from 'types/reactions'
+import ReactionsTypes from 'types/reactionsType'
 import "./style.scss"
 
 export default function Comment({comment: {id, body, userUid, createdAt}}) {

@@ -4,7 +4,7 @@ import { FaComment } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom'
 import useCallbackSelector from 'hooks/useCallbackSelector'
 import UsersThunks from 'features/usersThunks';
-import ReactionsTypes from "types/reactions";
+import ReactionsTypes from "types/reactionsType";
 import * as S from './PostCard.styled';
 import { Reaction } from 'components';
 import H2 from 'components/H2';

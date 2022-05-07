@@ -5,7 +5,7 @@ import { clearUserFeed, getUserFeed } from 'actions/postsActions'
 import Post from 'containers/PostCard'
 import { useParams } from 'react-router-dom'
 import Reaction from 'components/Reaction'
-import ReactionsTypes from 'types/reactions'
+import ReactionsTypes from 'types/reactionsType'
 
 
 function UserPage(props) {

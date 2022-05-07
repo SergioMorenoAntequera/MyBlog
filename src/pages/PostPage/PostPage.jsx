@@ -8,7 +8,7 @@ import Avatar from 'components/Avatar'
 import postActions from 'actions/postsActions'
 import "./style.scss"
 import Reaction from 'components/Reaction'
-import ReactionsTypes from 'types/reactions'
+import ReactionsTypes from 'types/reactionsType'
 import UsersThunks from 'features/usersThunks'
 
 export default function PostPage() {
