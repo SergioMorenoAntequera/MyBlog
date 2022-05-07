@@ -6,17 +6,9 @@ import { v4 as uuid } from 'uuid';
 const collectionName = "reactions"
 const reactionsCol = collection(db, collectionName)
 
-const createNew = async ({userUid, type, attachedTo, attachedToType}) => {
-    const newReaction = {
-        userUid: userUid,
-        type: type,
-        attachedTo: attachedTo,
-        attachedToType: attachedToType,
-        createdAt: Timestamp.now()
-    }
-    const newReactionId = uuid()
-    setDoc(doc(db, collectionName, newReactionId), newReaction);
-    return {...newReaction, id:newReactionId}
+const createNew = async (newReaction) => {
+    setDoc(doc(db, collectionName, newReaction.id), {...newReaction.toFirebase()});
+    return newReaction
 }
 
 const deleteReaction = async (reactionId) => {
