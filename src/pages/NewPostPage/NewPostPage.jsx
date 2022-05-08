@@ -8,10 +8,10 @@ import { getById, updatePost } from 'actions/postsActions'
 import Post, { PostStatus } from 'types/postTypes'
 import useCallbackSelector from 'hooks/useCallbackSelector'
 import { useNavigate, useParams } from 'react-router-dom'
-import { v4 as uuid } from 'uuid';
 import LinesThunks from 'features/linesThunks'
 import Line, { LineTypes } from 'types/lineTypes'
 import { addLine, updateLine } from 'features/linesSlice'
+import LinesApi from 'api/linesAPI'
 
 const paragraphSeparator = "\\<br/\\>"
 export default function NewPostPage() {
@@ -26,15 +26,11 @@ export default function NewPostPage() {
     state => state.postsEntity.posts.byId[id],
     getById(id)
   )
-  const recoveredLines = useCallbackSelector (
+  const linesData = useCallbackSelector (
     state => state.linesEntity.lines.byPost[id],
-    LinesThunks.fetchLinesByPost(id)
+    LinesThunks.fetchLinesByPost(id),
+    state => state.linesEntity.lines.byId
   )
-  const linesData = useSelector(state => {
-      return recoveredLines?.map(line =>
-        state.linesEntity.lines.byId[line]
-      )  
-  })
   
   const [post, setPost] = useState(new Post())
   
@@ -46,7 +42,7 @@ export default function NewPostPage() {
   }, [recoveredPost])
 
   useEffect(() => {
-    if(!recoveredLines) return
+    if(!linesData) return
 
     setPost(recoveredPost)
   }, [recoveredPost])
@@ -55,6 +51,9 @@ export default function NewPostPage() {
     var auxPost = {...post}
     if(publish) auxPost.status = PostStatus.PUBLIC
     dispatch(updatePost(auxPost))
+    linesData.forEach(line => {
+      LinesApi.createNew(line)
+    });
     if(publish) navigate(`/posts/${id}`)
   }
 
