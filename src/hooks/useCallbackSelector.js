@@ -18,7 +18,6 @@ const useCallbackSelector = (useSelectorCallBack, actionToRecover, listWithResul
     
     listWithResults = listWithResults ?? (state => state.none)
     let results = useSelector(listWithResults)
-
     const [data, setData] = useState(stateData)
 
 
@@ -31,9 +30,9 @@ const useCallbackSelector = (useSelectorCallBack, actionToRecover, listWithResul
     }, [stateData])
 
     
-    useEffect(()=>{
+    useEffect(() => {
         if(stateData && results) {
-            setData(stateData.map(s => results[s]))
+            setData(stateData.map(s => ({...results[s]})))
             return
         }
     }, [results])
