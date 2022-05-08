@@ -29,8 +29,7 @@ const linesSlice = createSlice({
             state.lines.byPost[payload.post] = state.lines.byPost[payload.post].filter(l=>l != payload.id)
         },
         updateLine: (state, {payload}) => {
-            let lines = state.lines
-            lines.byId[payload.id] = payload;
+            state.lines.byId[payload.id] = payload;
         }
     }
 })

@@ -21,9 +21,9 @@ const getByPost = async (postId) => {
     return getData(await getDocs(q));
 }
 
-const linesAPI = {
+const LinesAPI = {
     getByPost,
     createNew,
     remove
 }
-export default linesAPI;
+export default LinesAPI;

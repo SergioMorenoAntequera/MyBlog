@@ -22,6 +22,16 @@ const removeLine = createAsyncThunk(
     }
 )
 
+
+const updateLine = createAsyncThunk(
+    'lines/updateLine',
+    async (lineToUpdate, {dispatch}) => {
+        if(!lineToUpdate.id) return
+        LinesAPI.createNew(lineToUpdate.id)
+        dispatch(updateLine(lineToUpdate))
+    }
+)
+
 const fetchLinesByPost = createAsyncThunk(
     'lines/fetchLinesByPost',
     async (postId, {dispatch}) => {
@@ -38,6 +48,7 @@ const fetchLinesByPost = createAsyncThunk(
 const LinesThunks = {
     createLine,
     removeLine,
+    updateLine,
     fetchLinesByPost
 }
 export default LinesThunks
