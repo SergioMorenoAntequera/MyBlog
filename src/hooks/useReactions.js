@@ -15,47 +15,43 @@ export default function useReactions(attachedToId, reactionType) {
         ReactionsThunks.fetchReactionsByPost(attachedToId),
         state => state.reactionsEntity.reactions.byId  
     )
-    
+
     const userReactions = reactionsData?.filter(it => it.userUid === user?.uid)
-
-    const userReactionsByType = {}
-    userReactions?.forEach(it => userReactionsByType[it.type] = it )
-
+    const userReaction = userReactions?.find(reaction => reaction.type == reactionType.type)
     const userReactionsByGroup = {}
-    userReactions?.forEach(reaction => {
-        var reactionGroup = -1
-        Object.keys(ReactionsTypes.TYPES).forEach(key => {
-            let possibleType = ReactionsTypes.TYPES[key]
-            if(possibleType.type !== reaction.type) return
-            reactionGroup = possibleType.group
+    userReactions?.map(userReaction => {
+        Object.keys(ReactionsTypes.TYPES).find(rt => {
+            let reactionType = ReactionsTypes.TYPES[rt]
+
+            if(reactionType.type !== userReaction.type) return;
+            userReactionsByGroup[reactionType.group] = userReaction
         })
-        userReactionsByGroup[reactionGroup] = {...reaction}
     })
 
 
     function toggleReaction() {
         if(!user) return;
-        const userReaction = userReactionsByGroup[reactionType.group]
+        const userReactionToGroup = userReactionsByGroup[reactionType.group]
         const newReaction = new Reaction(reactionType, attachedToId, user.uid)
         
-        // if(!userReaction){
+        if(!userReactionToGroup){
             dispatch(ReactionsThunks.createReaction(newReaction))
             return
-        // } 
+        } 
             
-        // dispatch(ReactionsThunks.removeReaction({
-        //     id: userReaction.id,
-        //     attachedTo: attachedToId,
-        // }))
+        dispatch(ReactionsThunks.removeReaction({
+            id: userReactionToGroup.id,
+            attachedTo: attachedToId,
+        }))
 
-        // if(userReaction.type !== reactionType.type) {
-        //     dispatch(ReactionsThunks.createReaction(newReaction))
-        // }
+        if(userReactionToGroup.type !== reactionType.type) {
+            dispatch(ReactionsThunks.createReaction(newReaction))
+        }
     }
 
     return  {
         reactionsData,
-        userReactionsByType,
+        userReacted: !!userReaction,
         toggleReaction
     }
 }

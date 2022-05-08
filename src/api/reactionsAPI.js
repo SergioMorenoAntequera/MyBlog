@@ -7,7 +7,7 @@ const collectionName = "reactions"
 const reactionsCol = collection(db, collectionName)
 
 const createNew = async (newReaction) => {
-    setDoc(doc(db, collectionName, newReaction.id), {...newReaction, type:newReaction.type.type});
+    setDoc(doc(db, collectionName, newReaction.id), {...newReaction, type:newReaction.type});
     return newReaction
 }
 

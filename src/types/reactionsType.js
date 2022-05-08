@@ -8,7 +8,7 @@ export class Reaction extends Model {
     attachedToType = ATTACHED_TO_TYPES.disabled
     constructor(type, attachedToId, userUid) {
         super()
-        this.type = type;
+        this.type = type.type ? type.type : type;
         this.attachedTo = attachedToId;
         this.userUid =  userUid;
     }
