@@ -86,6 +86,11 @@ export const deletePost = (postId) => async (dispatch) => {
     if(!postId) return
     PostsAPI.deletePost(postId)
     
+    // todo -> Delete comments, reactions and lines as well
+    let comments = await CommentsThunks.fetchCommentsByPost(postId)
+    let reactions = await ReactionsThunks.fetchReactionsByPost(postId)
+
+
     dispatch({
         type: DELETE_POST,
         payload: postId
