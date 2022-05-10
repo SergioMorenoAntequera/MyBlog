@@ -76,6 +76,12 @@ export default function NewPostPage() {
     dispatch(addLine(new Line(id)))
   }
 
+  function addLineByType(lineType) {
+    let newLine = new Line(id)
+    newLine.type = lineType;
+    dispatch(addLine(newLine))
+  }
+
   return (<S.NewPostPage>
     <H1>
       <Avatar redirect={false} user={user}/>
@@ -90,10 +96,17 @@ export default function NewPostPage() {
           case(LineTypes.PARAGRAPH): {
             return <input key={line.id} value={line.content} onChange={(e)=>{handlePostLine(e, line)}} onKeyUp={handleEnter}/>
           }
+          case(LineTypes.IMAGE): {
+            return <input key={line.id} value={line.content} onChange={(e)=>{handlePostLine(e, line)}} onKeyUp={handleEnter} placeholder="image url"/>
+          }
           default: return "Not Supported type yet"
         }
 
       })}
+    </div>
+    <div>
+      <span style={{marginRight: "20px"}} onClick={()=>{addLineByType(LineTypes.PARAGRAPH)}}> add Paragr </span>
+      <span onClick={()=>{addLineByType(LineTypes.IMAGE)}}> add Image </span>
     </div>
     
     <Button variant="contained" onClick={()=>{savePost(true)}} mr="10px"> PUBLISH </Button>
