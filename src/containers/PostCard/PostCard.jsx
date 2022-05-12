@@ -13,6 +13,7 @@ import useUser from 'api/auth';
 import { useDispatch } from 'react-redux';
 import { deletePost } from 'actions/postsActions';
 import LinesThunks from 'features/linesThunks';
+import Lines from 'containers/Lines';
 
 export default function PostCard ({className, post: {id, body, title, userId, createdAt}}) {
   const { user } = useUser();
@@ -65,7 +66,7 @@ export default function PostCard ({className, post: {id, body, title, userId, cr
 
         <S.ContentContainer>
           <H2> { title } </H2>    
-          {lines?.map(line => line?.content)}
+          <Lines lines={lines} amountToShow={1}/>
         </S.ContentContainer>
         
 

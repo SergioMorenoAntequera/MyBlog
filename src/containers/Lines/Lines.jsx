@@ -1,25 +1,24 @@
 import React from 'react'
 import {LineTypes} from 'types/lineTypes'
 
-function Lines({lines}) {
-    
-  return (<p>
-    {lines.map(line => {
-        switch (line.type) {
-            
-            case LineTypes.PARAGRAPH: {
-                
-            } break;
+function Lines({lines, amountToShow}) {
+  amountToShow = amountToShow ?? lines.length
 
-            case LineTypes.IMAGE: {
-
-            } break;
+  return (<>
+    {lines.map((line, index) => {
+        if(index >= amountToShow) return;
         
+        switch (line.type) {
+            case LineTypes.PARAGRAPH: {
+                return <p> {line.content} </p>
+            }
+            case LineTypes.IMAGE: {
+                return <img src={line.content} alt={line.content} />
+            }
             default: break;
         }
-
     })}
-  </p>)
+  </>)
 }
 
 export default Lines
