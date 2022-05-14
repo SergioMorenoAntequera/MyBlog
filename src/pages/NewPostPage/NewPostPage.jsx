@@ -12,6 +12,7 @@ import LinesThunks from 'features/linesThunks'
 import Line, { LineTypes } from 'types/lineTypes'
 import * as LinesFeatures from 'features/linesSlice'
 import LinesApi from 'api/linesAPI'
+import LinesAPI from 'api/linesAPI'
 
 const paragraphSeparator = "\\<br/\\>"
 export default function NewPostPage() {
@@ -49,11 +50,21 @@ export default function NewPostPage() {
 
   function savePost(publish) {
     var auxPost = {...post}
-    if(publish) auxPost.status = PostStatus.PUBLIC
+		if(publish) auxPost.status = PostStatus.PUBLIC
     dispatch(updatePost(auxPost))
-    linesData.forEach(line => {
-      LinesApi.createNew(line)
+
+		linesData.forEach(line => {
+			LinesThunks.createLine(line)
     });
+
+		var actualLinesIds = linesData.map(l=>l.id)
+		LinesAPI.getByPost(post.id).then(fetchedLines => {
+			fetchedLines.forEach(line => {
+				if(actualLinesIds.includes(line.id)) return;
+				LinesAPI.remove(line.id)
+			})
+		})
+
     if(publish) navigate(`/posts/${id}`)
   }
 

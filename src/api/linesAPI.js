@@ -1,4 +1,4 @@
-import { collection, where, query, getDocs, Timestamp, doc, setDoc } from 'firebase/firestore';
+import { collection, where, query, getDocs, Timestamp, doc, setDoc, deleteDoc } from 'firebase/firestore';
 import { db } from './_config';
 import { v4 as uuid } from 'uuid';
 import { getData } from 'utils/api';
@@ -13,7 +13,7 @@ const createNew = async (newLine) => {
 }
 
 const remove = async (reactionId) => {
-    // return await deleteDoc(doc(linesCol, reactionId));
+    return deleteDoc(doc(linesCol, reactionId));
 }
 
 const getByPost = async (postId) => {
