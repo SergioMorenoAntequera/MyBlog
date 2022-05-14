@@ -1,5 +1,8 @@
 import {ADD_POST, ADD_POST_MAIN_FEED, ADD_POST_USER_FEED, CLEAR_POST_USER_FEED, DELETE_POST, UPDATE_POST} from "actions/postsActionTypes";
+import CommentsApi from "api/commentsAPI";
+import LinesAPI from "api/linesAPI";
 import * as PostsAPI from 'api/posts'
+import ReactionsAPI from "api/reactionsAPI";
 import CommentsThunks from "features/commentsThunks";
 import { addLine } from "features/linesSlice";
 import LinesThunks from "features/linesThunks";
@@ -86,10 +89,9 @@ export const deletePost = (postId) => async (dispatch) => {
     if(!postId) return
     PostsAPI.deletePost(postId)
     
-    // todo -> Delete comments, reactions and lines as well
-    let comments = await CommentsThunks.fetchCommentsByPost(postId)
-    let reactions = await ReactionsThunks.fetchReactionsByPost(postId)
-
+    CommentsApi.getByPost(postId).then(comments => comments.forEach(c=>dispatch(CommentsThunks.removeComment(c))))
+    ReactionsAPI.getByPost(postId).then(reactions => reactions.forEach(r=>dispatch(ReactionsThunks.removeReaction(r))))
+    LinesAPI.getByPost(postId).then(lines => lines.forEach(l=>dispatch(LinesThunks.removeLine(l))))
 
     dispatch({
         type: DELETE_POST,

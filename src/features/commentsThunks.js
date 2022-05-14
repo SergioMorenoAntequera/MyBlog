@@ -1,5 +1,6 @@
 import CommentsApi from "api/commentsAPI"
 import { addComment } from "./commentsSlice"
+import { removeReaction } from "./reactionsSlice"
 const { createAsyncThunk } = require("@reduxjs/toolkit")
 
 const createComment = createAsyncThunk(
@@ -8,6 +9,15 @@ const createComment = createAsyncThunk(
         if(!newComment) return
         var newCommentCreated = await CommentsApi.createNew(newComment)
         dispatch(addComment(newCommentCreated))
+    }
+)
+
+const removeComment = createAsyncThunk(
+    'comments/removeComment',
+    async ({id, attachedTo}, {dispatch}) => {
+        if(!id) return
+        CommentsApi.deleteComment(id)
+        dispatch(removeReaction({id:id, attachedTo:attachedTo}))
     }
 )
 
@@ -25,6 +35,7 @@ const fetchCommentsByPost = createAsyncThunk(
 
 const CommentsThunks = {
     fetchCommentsByPost,
-    createComment
+    createComment,
+    removeComment
 }
 export default CommentsThunks
