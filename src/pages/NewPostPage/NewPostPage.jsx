@@ -10,7 +10,7 @@ import useCallbackSelector from 'hooks/useCallbackSelector'
 import { useNavigate, useParams } from 'react-router-dom'
 import LinesThunks from 'features/linesThunks'
 import Line, { LineTypes } from 'types/lineTypes'
-import { addLine, updateLine } from 'features/linesSlice'
+import * as LinesFeatures from 'features/linesSlice'
 import LinesApi from 'api/linesAPI'
 
 const paragraphSeparator = "\\<br/\\>"
@@ -66,23 +66,26 @@ export default function NewPostPage() {
   function handlePostLine(e, line) {
     const event = e.nativeEvent
     let auxLine = {...line, content:event.target.value}
-    dispatch(updateLine(auxLine))
+    dispatch(LinesFeatures.updateLine(auxLine))
   }
 
   function handleEnter(e) {
     const event = e.nativeEvent
     if(event.keyCode !== 13) return;
 
-    dispatch(addLine(new Line(id)))
+    dispatch(LinesFeatures.addLine(new Line(id)))
   }
 
   function addLine(lineType) {
     let newLine = new Line(id)
     newLine.type = lineType;
-    dispatch(addLine(newLine))
+    dispatch(LinesFeatures.addLine(newLine))
   }
 	function updateLineType(line, newType) {
-		dispatch(updateLine({...line, type:newType}))
+		dispatch(LinesFeatures.updateLine({...line, type:newType}))
+	}
+	function removeLine(line) {
+		dispatch(LinesFeatures.removeLine(line))
 	}
 
   function displayPropperLineType(line) {
@@ -121,8 +124,10 @@ export default function NewPostPage() {
 						Image
 					</span>
 				</S.ChangeLineType>
-				
+
 				{displayPropperLineType(line)}
+
+				<span  onClick={()=>{removeLine(line)}}> remove Line</span>
 			</div>)}
     </section>
 

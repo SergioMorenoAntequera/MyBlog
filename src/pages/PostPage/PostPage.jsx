@@ -11,6 +11,7 @@ import Reaction from 'components/Reaction'
 import ReactionsTypes from 'types/reactionsType'
 import UsersThunks from 'features/usersThunks'
 import LinesThunks from 'features/linesThunks'
+import Lines from 'containers/Lines'
 
 export default function PostPage() {
 
@@ -40,9 +41,7 @@ export default function PostPage() {
             <Avatar user={author}/>
             <div>
                 <H2>INFO DEL POST {post.title} </H2>
-                {
-                    lines?.map(line => <p key={line.id}> {line.content} </p>)
-                }
+                <Lines lines={lines}/>
             </div>
         </div>
 

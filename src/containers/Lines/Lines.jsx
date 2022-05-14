@@ -1,10 +1,11 @@
 import React from 'react'
 import {LineTypes} from 'types/lineTypes'
+import * as S from "./Lines.styled"
 
 function Lines({lines, amountToShow}) {
   amountToShow = amountToShow ?? lines.length
 
-  return (<>
+  return (<S.Lines>
     {lines?.map((line, index) => {
         if(index >= amountToShow) return;
         
@@ -18,7 +19,7 @@ function Lines({lines, amountToShow}) {
             default: break;
         }
     })}
-  </>)
+  </S.Lines>)
 }
 
 export default Lines
