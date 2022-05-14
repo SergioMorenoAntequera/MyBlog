@@ -3,7 +3,7 @@ import {LineTypes} from 'types/lineTypes'
 import * as S from "./Lines.styled"
 
 function Lines({lines, amountToShow}) {
-  amountToShow = amountToShow ?? lines.length
+  amountToShow = amountToShow ?? lines?.length
 
   return (<S.Lines>
     {lines?.map((line, index) => {

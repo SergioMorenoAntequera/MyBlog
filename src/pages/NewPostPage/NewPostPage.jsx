@@ -54,7 +54,7 @@ export default function NewPostPage() {
     dispatch(updatePost(auxPost))
 
 		linesData.forEach(line => {
-			LinesThunks.createLine(line)
+      dispatch(LinesThunks.updateLine(line))
     });
 
 		var actualLinesIds = linesData.map(l=>l.id)

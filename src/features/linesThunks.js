@@ -1,5 +1,5 @@
 import LinesAPI from "api/linesAPI"
-import { addLine, removeLine as removeLineAction } from "features/linesSlice";
+import { addLine, removeLine as removeLineAction, updateLine as updateLineAction } from "features/linesSlice";
 const { createAsyncThunk } = require("@reduxjs/toolkit")
 
 const createLine = createAsyncThunk(
@@ -27,8 +27,8 @@ const updateLine = createAsyncThunk(
     'lines/updateLine',
     async (lineToUpdate, {dispatch}) => {
         if(!lineToUpdate.id) return
-        LinesAPI.createNew(lineToUpdate.id)
-        dispatch(updateLine(lineToUpdate))
+        LinesAPI.createNew(lineToUpdate)
+        dispatch(updateLineAction(lineToUpdate))
     }
 )
 
