@@ -5,15 +5,15 @@ function Lines({lines, amountToShow}) {
   amountToShow = amountToShow ?? lines.length
 
   return (<>
-    {lines.map((line, index) => {
+    {lines?.map((line, index) => {
         if(index >= amountToShow) return;
         
         switch (line.type) {
             case LineTypes.PARAGRAPH: {
-                return <p> {line.content} </p>
+                return <p key={line.id}> {line.content} </p>
             }
             case LineTypes.IMAGE: {
-                return <img src={line.content} alt={line.content} />
+                return <img key={line.id} src={line.content} alt={line.content} />
             }
             default: break;
         }

@@ -76,11 +76,28 @@ export default function NewPostPage() {
     dispatch(addLine(new Line(id)))
   }
 
-  function addLineByType(lineType) {
+  function addLine(lineType) {
     let newLine = new Line(id)
     newLine.type = lineType;
     dispatch(addLine(newLine))
   }
+	function updateLineType(line, newType) {
+		dispatch(updateLine({...line, type:newType}))
+	}
+
+  function displayPropperLineType(line) {
+	switch(line.type) {
+		case(LineTypes.PARAGRAPH): {
+			return <input value={line.content} onChange={(e)=>{handlePostLine(e, line)}} onKeyUp={handleEnter}/>
+		}
+		case(LineTypes.IMAGE): {
+			return <input value={line.content} onChange={(e)=>{handlePostLine(e, line)}} onKeyUp={handleEnter} placeholder="image url"/>
+		}
+		default: return "Not Supported type yet"
+	}
+  }
+
+  
 
   return (<S.NewPostPage>
     <H1>
@@ -89,25 +106,30 @@ export default function NewPostPage() {
     </H1>
 
     <S.TitleInput value={post?.title} onChange={handlePostTitle} name="title" placeholder="My new Adventure..."/>
-    <div>
-      {linesData?.map(line => { 
+    <section>
+			{linesData?.map(line => <div key={line.id}>
+				<S.ChangeLineType> 
+					Change to:
+					<span 
+						className={`${line.type === LineTypes.PARAGRAPH ? 'selected':''}`} 
+						onClick={()=>{updateLineType(line, LineTypes.PARAGRAPH)}}> 
+						Paragraph 
+					</span>
+					<span 
+						className={`${line.type === LineTypes.IMAGE ? 'selected':''}`} 
+						onClick={()=>{updateLineType(line, LineTypes.IMAGE)}}> 
+						Image
+					</span>
+				</S.ChangeLineType>
+				
+				{displayPropperLineType(line)}
+			</div>)}
+    </section>
 
-        switch(line.type) {
-          case(LineTypes.PARAGRAPH): {
-            return <input key={line.id} value={line.content} onChange={(e)=>{handlePostLine(e, line)}} onKeyUp={handleEnter}/>
-          }
-          case(LineTypes.IMAGE): {
-            return <input key={line.id} value={line.content} onChange={(e)=>{handlePostLine(e, line)}} onKeyUp={handleEnter} placeholder="image url"/>
-          }
-          default: return "Not Supported type yet"
-        }
-
-      })}
-    </div>
-    <div>
-      <span style={{marginRight: "20px"}} onClick={()=>{addLineByType(LineTypes.PARAGRAPH)}}> add Paragr </span>
-      <span onClick={()=>{addLineByType(LineTypes.IMAGE)}}> add Image </span>
-    </div>
+    <footer>
+      <span style={{marginRight: "20px"}} onClick={()=>{addLine(LineTypes.PARAGRAPH)}}> add Paragr </span>
+      <span onClick={()=>{addLine(LineTypes.IMAGE)}}> add Image </span>
+    </footer>
     
     <Button variant="contained" onClick={()=>{savePost(true)}} mr="10px"> PUBLISH </Button>
     <Button variant="outlined" onClick={()=>{}}> POST </Button>

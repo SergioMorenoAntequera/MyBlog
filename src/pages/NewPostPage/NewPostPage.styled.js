@@ -34,3 +34,21 @@ export const BodyTextArea = styled.textarea`
         outline: none;
     }
 `;
+
+export const ChangeLineType = styled.div`
+  display: flex;
+  opacity: 0;
+  gap: 20px;
+  transition: .3s;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1;
+  }
+  span.selected {
+		font-weight: bold;
+	}
+	span:active {
+		transform: scale(.9);
+  }
+`;
