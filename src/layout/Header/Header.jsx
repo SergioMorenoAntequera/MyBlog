@@ -9,6 +9,7 @@ import * as S from './Header.styled'
 import { createPost } from 'actions/postsActions'
 import { useDispatch } from 'react-redux'
 import Post from 'types/postTypes'
+import { Button } from 'components'
 
 export default function Header() {
   
@@ -32,7 +33,7 @@ export default function Header() {
       
       
       <div>
-        {user && <div onClick={handleNewPost}> <a> New Post </a> </div> }
+        {user && <Button onClick={handleNewPost}> <a> New Post </a> </Button> }
         <Avatar user={user}/>
         <SignToggle/>
       </div>

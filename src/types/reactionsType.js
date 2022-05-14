@@ -1,6 +1,7 @@
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { AiOutlineDislike, AiFillDislike } from "react-icons/ai";
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
+import { RiUser5Line, RiUser5Fill } from "react-icons/ri";
 import Model from "./Model";
 
 export class Reaction extends Model {
@@ -34,6 +35,12 @@ const TYPES = Object.freeze({
         activeIcon: BsBookmarkFill,
         group: 1
     },
+    "follow": {
+        type: "ReactionType.FOLLOW",
+        unActiveIcon: RiUser5Line,
+        activeIcon: RiUser5Fill,
+        group: 2
+    }
 })
 
 

@@ -28,7 +28,7 @@ function UserPage(props) {
   return (<>
     <H1 style={{display:"flex"}}> 
       USER {user?.displayName} profile 
-      <Reaction attachedToId={id} reactionType={ReactionsTypes.TYPES.like}/>
+      <Reaction attachedToId={id} reactionType={ReactionsTypes.TYPES.follow}/>
     </H1>
     
     { posts?.map(post => <Post key={post.id} post={post}/> )}
