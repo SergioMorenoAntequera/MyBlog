@@ -125,8 +125,7 @@ export default function NewPostPage() {
 				{ renderLine(line, {
             onChange:(e)=>{handlePostLine(e, line)}, 
             onKeyUp:handleEnter
-          }) 
-        }
+        })}
 
 				<span  onClick={()=>{removeLine(line)}}> remove Line</span>
 			</div>)}

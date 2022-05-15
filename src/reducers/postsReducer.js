@@ -86,7 +86,7 @@ export function postsReducer(state = INITIAL_STATE, action) {
         case ADD_POST_USER_FEED : {
             let postId = action.payload
             if(!state.posts.byId[postId]) return state;
-            if(state.posts.byId[postId].status !== PostStatus.PUBLIC) return state;
+            // if(state.posts.byId[postId].status !== PostStatus.PUBLIC) return state;
             return {
                 ...state,
                 posts: {
