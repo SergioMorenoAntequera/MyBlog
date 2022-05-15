@@ -4,10 +4,9 @@ import LinesAPI from "api/linesAPI";
 import * as PostsAPI from 'api/posts'
 import ReactionsAPI from "api/reactionsAPI";
 import CommentsThunks from "features/commentsThunks";
-import { addLine } from "features/linesSlice";
 import LinesThunks from "features/linesThunks";
 import ReactionsThunks from "features/reactionsThunks";
-import Line, { LineTypes } from "types/lineTypes";
+import Line from "types/lineTypes";
 
 export const fetchPostRelated = (postId) => {
     LinesThunks.fetchLinesByPost(postId)

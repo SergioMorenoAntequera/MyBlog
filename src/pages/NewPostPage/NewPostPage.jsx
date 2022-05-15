@@ -9,7 +9,7 @@ import Post, { PostStatus } from 'types/postTypes'
 import useCallbackSelector from 'hooks/useCallbackSelector'
 import { useNavigate, useParams } from 'react-router-dom'
 import LinesThunks from 'features/linesThunks'
-import Line, { LineTypes } from 'types/lineTypes'
+import Line, { LineTypes, renderLine } from 'types/lineTypes'
 import * as LinesFeatures from 'features/linesSlice'
 import LinesApi from 'api/linesAPI'
 import LinesAPI from 'api/linesAPI'
@@ -99,20 +99,6 @@ export default function NewPostPage() {
 		dispatch(LinesFeatures.removeLine(line))
 	}
 
-  function displayPropperLineType(line) {
-	switch(line.type) {
-		case(LineTypes.PARAGRAPH): {
-			return <input value={line.content} onChange={(e)=>{handlePostLine(e, line)}} onKeyUp={handleEnter}/>
-		}
-		case(LineTypes.IMAGE): {
-			return <input value={line.content} onChange={(e)=>{handlePostLine(e, line)}} onKeyUp={handleEnter} placeholder="image url"/>
-		}
-		default: return "Not Supported type yet"
-	}
-  }
-
-  
-
   return (<S.NewPostPage>
     <H1>
       <Avatar redirect={false} user={user}/>
@@ -124,27 +110,33 @@ export default function NewPostPage() {
 			{linesData?.map(line => <div key={line.id}>
 				<S.ChangeLineType> 
 					Change to:
-					<span 
-						className={`${line.type === LineTypes.PARAGRAPH ? 'selected':''}`} 
-						onClick={()=>{updateLineType(line, LineTypes.PARAGRAPH)}}> 
-						Paragraph 
-					</span>
-					<span 
-						className={`${line.type === LineTypes.IMAGE ? 'selected':''}`} 
-						onClick={()=>{updateLineType(line, LineTypes.IMAGE)}}> 
-						Image
-					</span>
+          {Object.keys(LineTypes).map(lineTypeName => {
+            let lineType = LineTypes[lineTypeName]
+            
+            return <span 
+              className={`${line.type === lineType ? 'selected':''}`} 
+              onClick={()=>{updateLineType(line, lineType)}}> 
+              { lineType.replace("LineTypes.", "") } 
+            </span>
+
+          })}
 				</S.ChangeLineType>
 
-				{displayPropperLineType(line)}
+				{ renderLine(line, {
+            onChange:(e)=>{handlePostLine(e, line)}, 
+            onKeyUp:handleEnter
+          }) 
+        }
 
 				<span  onClick={()=>{removeLine(line)}}> remove Line</span>
 			</div>)}
     </section>
 
     <footer>
-      <span style={{marginRight: "20px"}} onClick={()=>{addLine(LineTypes.PARAGRAPH)}}> add Paragr </span>
-      <span onClick={()=>{addLine(LineTypes.IMAGE)}}> add Image </span>
+      {Object.keys(LineTypes).map(lineTypeName => {
+        let lineType = LineTypes[lineTypeName]
+        return <Button style={{marginRight: "20px"}} onClick={()=>{addLine(lineType)}}> add {lineType} </Button>
+      })}
     </footer>
     
     <Button variant="contained" onClick={()=>{savePost(true)}} mr="10px"> PUBLISH </Button>
