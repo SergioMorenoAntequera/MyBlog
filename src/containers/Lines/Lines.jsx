@@ -1,5 +1,5 @@
 import React from 'react'
-import {LineTypes, renderLine} from 'types/lineTypes'
+import { renderLine } from 'types/lineTypes'
 import * as S from "./Lines.styled"
 
 function Lines({lines, amountToShow}) {

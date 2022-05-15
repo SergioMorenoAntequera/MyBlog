@@ -110,18 +110,18 @@ export default function NewPostPage() {
 			{linesData?.map(line => <div key={line.id}>
 				<S.ChangeLineType> 
 					Change to:
-          {Object.keys(LineTypes).map(lineTypeName => {
-            let lineType = LineTypes[lineTypeName]
+          {Object.entries(LineTypes).map( lineTypeName => {
+            let lineType = lineTypeName[1]
             
             return <span 
-              className={`${line.type === lineType ? 'selected':''}`} 
-              onClick={()=>{updateLineType(line, lineType)}}> 
-              { lineType.replace("LineTypes.", "") } 
+              className={`${line.type === lineType.id ? 'selected':''}`} 
+              onClick={()=>{updateLineType(line, lineType.id)}}> 
+              { lineType.name } 
             </span>
 
           })}
 				</S.ChangeLineType>
-
+          
 				{ renderLine(line, {
             onChange:(e)=>{handlePostLine(e, line)}, 
             onKeyUp:handleEnter
@@ -135,7 +135,7 @@ export default function NewPostPage() {
     <footer>
       {Object.keys(LineTypes).map(lineTypeName => {
         let lineType = LineTypes[lineTypeName]
-        return <Button style={{marginRight: "20px"}} onClick={()=>{addLine(lineType)}}> add {lineType} </Button>
+        return <Button style={{marginRight: "20px"}} onClick={()=>{addLine(lineType.id)}}> add {lineType.name} </Button>
       })}
     </footer>
     

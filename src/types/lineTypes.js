@@ -5,7 +5,7 @@ import Model from "./Model"
 export default class Line extends Model {
 
     post = ""
-    type = LineTypes.PARAGRAPH
+    type = LineTypes.PARAGRAPH.id
     content = ""
     
     constructor(postId) {
@@ -14,28 +14,45 @@ export default class Line extends Model {
     }
 }
 
+function defaultEditField(line, editingProps) {
+    return <input value={line.content} {...editingProps}/>
+}
 export const LineTypes = Object.freeze({
-    PARAGRAPH: "LineTypes.paragraph",
-    TITLE: "LineTypes.title",
-    SUBTITLE: "LineTypes.subtitle",
-    IMAGE: "LineTypes.image"
-})
-
-export const renderLine = (line, editingProps) => {
-    if(editingProps) return <input value={line.content} {...editingProps}/>
-
-    switch (line.type) {
-        case LineTypes.PARAGRAPH: {
+    PARAGRAPH: {
+        id: "LineTypes.paragraph",
+        name: "Paragraph",
+        render(line, editingProps) {
+            if(editingProps) return defaultEditField(line, editingProps)
             return <p key={line.id}> {line.content} </p>
         }
-        case LineTypes.TITLE: {
+    },
+    TITLE: {
+        id: "LineTypes.title",
+        name: "Title",
+        render(line, editingProps) {
+            if(editingProps) return defaultEditField(line, editingProps)
             return <H1 key={line.id}> {line.content} </H1>
         }
-        case LineTypes.SUBTITLE: {
+    },
+    SUBTITLE: {
+        id: "LineTypes.subtitle",
+        name: "Subtitle",
+        render(line, editingProps) {
+            if(editingProps) return defaultEditField(line, editingProps)
             return <H2 key={line.id}> {line.content} </H2>
         }
-        case LineTypes.IMAGE: {
+    },
+    IMAGE: {
+        id: "LineTypes.image",
+        name: "Image",
+        render(line, editingProps) {
+            if(editingProps) return defaultEditField(line, editingProps)
             return <img key={line.id} src={line.content} alt={line.content} />
         }
     }
+})
+
+export const renderLine = (line, editingProps) => {
+    if(!line?.type) return
+    return Object.entries(LineTypes).find(lt => lt[1].id == line.type)[1].render(line, editingProps)
 }
