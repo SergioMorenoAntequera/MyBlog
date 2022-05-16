@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { layout } from 'styled-system'
 
 export const Avatar = styled.div`
 
@@ -10,10 +11,10 @@ export const Avatar = styled.div`
     
     .Image {
         border-radius: 100%;
-        width: 30px;
-        height: 30px;
+        
+        width: ${ props=> props.width ?? "30px" };
+        height: ${ props=> props.height ?? "30px" };
     }
-    
 `;
 
 
