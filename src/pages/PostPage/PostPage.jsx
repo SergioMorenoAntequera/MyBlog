@@ -1,10 +1,9 @@
 import React from 'react'
-import H2 from 'components/H2'
+import H1 from 'components/H1'
 import Spinner from 'components/Spinner'
 import useComments from 'hooks/useComments'
 import useCallbackSelector from 'hooks/useCallbackSelector'
 import { useParams } from 'react-router-dom'
-import Avatar from 'components/Avatar'
 import postActions from 'actions/postsActions'
 import "./style.scss"
 import Reaction from 'components/Reaction'
@@ -12,6 +11,8 @@ import ReactionsTypes from 'types/reactionsType'
 import UsersThunks from 'features/usersThunks'
 import LinesThunks from 'features/linesThunks'
 import Lines from 'containers/Lines'
+import Caption from 'components/Caption'
+import { Avatar } from 'components'
 
 export default function PostPage() {
 
@@ -37,12 +38,15 @@ export default function PostPage() {
     if(!post) return <Spinner/>
     
     return (<div className='PostPage'>
-        <div className='PostPage_Post'>
-            <Avatar user={author}/>
+        <div className='PostPage_Header'>
             <div>
-                <H2>INFO DEL POST {post.title} </H2>
-                <Lines lines={lines}/>
+                <Caption> {post.createdAt.toDate().toDateString()} </Caption>
+                <H1 fontWeight="bold" mb="0"> {post.title || "NoTitleFound"} </H1>
             </div>
+            <Avatar width="40px" height="40px" user={author}/>
+        </div>
+        <div className='PostPage_Body'>
+            <Lines lines={lines} />
         </div>
 
         <Reaction attachedToId={id} reactionType={ReactionsTypes.TYPES.like}/>
