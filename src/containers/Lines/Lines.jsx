@@ -8,7 +8,6 @@ function Lines({lines, amountToShow}) {
   return (<S.Lines>
     {lines?.map((line, index) => {
         if(index >= amountToShow) return;
-        
         return renderLine(line)
     })}
   </S.Lines>)

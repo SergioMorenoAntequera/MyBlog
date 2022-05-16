@@ -23,7 +23,7 @@ export const LineTypes = Object.freeze({
         name: "Paragraph",
         render(line, editingProps) {
             if(editingProps) return defaultEditField(line, editingProps)
-            return <p key={line.id}> {line.content} </p>
+            return <p style={{marginBottom:"2rem"}} key={line.id}> {line.content} </p>
         }
     },
     TITLE: {
