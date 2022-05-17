@@ -41,7 +41,7 @@ export default function PostPage() {
         <div className='PostPage_Header'>
             <div>
                 <Caption> {post.createdAt.toDate().toDateString()} </Caption>
-                <H1 fontWeight="bold" mb="0"> {post.title || "NoTitleFound"} </H1>
+                <H1> {post.title || "NoTitleFound"} </H1>
             </div>
             <Avatar width="40px" height="40px" user={author}/>
         </div>
