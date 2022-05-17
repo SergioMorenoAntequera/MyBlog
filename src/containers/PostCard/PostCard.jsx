@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux';
 import { deletePost } from 'actions/postsActions';
 import LinesThunks from 'features/linesThunks';
 import Lines from 'containers/Lines';
+import { useState } from 'react';
 
 export default function PostCard ({className, post: {id, body, title, userId, createdAt}}) {
   const { user } = useUser();
@@ -27,11 +28,9 @@ export default function PostCard ({className, post: {id, body, title, userId, cr
     state => state.linesEntity.lines.byId
   )
   let { commentsData } = useComments(id);
-  const isAuthorLoggedIn = user?.uid == author?.uid
+  const isAuthorLoggedIn = user?.uid === author?.uid
 
-  if(!id || !author) {
-    return <Spinner/>
-  }
+  const [loadedLines, setLoadedLines] = useState(1)
 
   async function handleDelete() {
     await dispatch(deletePost(id))
@@ -40,6 +39,12 @@ export default function PostCard ({className, post: {id, body, title, userId, cr
     navigate(`/posts/${id}/edit`)
   }
 
+  function onLoadMore(event) {
+    event.preventDefault(); 
+    setLoadedLines(loadedLines=>loadedLines+3)
+  }
+
+  if(!id || !author) return <Spinner/>
   return (<S.PostCard className={className}> 
 
     <S.Header>
@@ -66,7 +71,11 @@ export default function PostCard ({className, post: {id, body, title, userId, cr
 
         <S.ContentContainer>
           <H2> { title } </H2>    
-          <Lines lines={lines} amountToShow={1}/>
+          <Lines lines={lines} amountToShow={loadedLines}/>
+          { loadedLines < lines?.length && 
+            <span onClick={onLoadMore}> Load More </span>
+          }
+            
         </S.ContentContainer>
         
 
