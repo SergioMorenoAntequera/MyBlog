@@ -50,6 +50,11 @@ export const ContentContainer = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  .loadMore {
+    cursor: pointer;
+    transition: .1s;
+    &:hover { opacity: .9 }
+  }
 `;
 
 export const ReactionsContainer = styled.div`

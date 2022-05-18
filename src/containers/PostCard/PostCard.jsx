@@ -73,7 +73,7 @@ export default function PostCard ({className, post: {id, body, title, userId, cr
           <H2> { title } </H2>    
           <Lines lines={lines} amountToShow={loadedLines}/>
           { loadedLines < lines?.length && 
-            <span onClick={onLoadMore}> Load More </span>
+            <span className='loadMore' onClick={onLoadMore}> Load More </span>
           }
             
         </S.ContentContainer>
