@@ -4,7 +4,7 @@ export const Body = styled.div`
 
     width: 100%;
     height: 100%;
-    padding: 2em;
+    padding: 4em 2em;
     display: flex;
     justify-content: center;
 
