@@ -7,10 +7,12 @@ export default class Line extends Model {
     post = ""
     type = LineTypes.PARAGRAPH.id
     content = ""
+    position = 1
     
-    constructor(postId) {
+    constructor(postId, position = this.position) {
         super()
         this.post = postId
+        this.position = position
     }
 }
 

@@ -31,9 +31,11 @@ export default function NewPostPage() {
     state => state.linesEntity.lines.byPost[id],
     LinesThunks.fetchLinesByPost(id),
     state => state.linesEntity.lines.byId
-  )
+  )?.sort((a, b) => a.position - b.position)
   
   const [post, setPost] = useState(new Post())
+  const [focusedLine, setFocusedLine] = useState(linesData ? linesData[0] : null)
+
   
   useEffect(() => {
     if(!post.id) return
@@ -100,11 +102,6 @@ export default function NewPostPage() {
 	}
 
   return (<S.NewPostPage>
-    <H1>
-      <Avatar redirect={false} user={user}/>
-      New Post 
-    </H1>
-
     <S.TitleInput value={post?.title} onChange={handlePostTitle} name="title" placeholder="My new Adventure..."/>
     <section>
 			{linesData?.map(line => <div key={line.id}>
@@ -124,8 +121,13 @@ export default function NewPostPage() {
           
 				{ renderLine(line, {
             onChange:(e)=>{handlePostLine(e, line)}, 
-            onKeyUp:handleEnter
+            onKeyUp:handleEnter,
+            onFocus:(e)=>{setFocusedLine(line)}
         })}
+
+        {/* <p contentEditable="true" onKeyUp={handleEnter}>
+          {line.content}
+        </p>  */}
 
 				<span  onClick={()=>{removeLine(line)}}> remove Line</span>
 			</div>)}
