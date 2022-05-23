@@ -1,4 +1,3 @@
-import { H1, Avatar } from 'components'
 import * as authAPI from "api/auth"
 import * as S from './NewPostPage.styled' 
 import React, { useEffect, useRef, useState } from 'react'
@@ -11,7 +10,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 import LinesThunks from 'features/linesThunks'
 import Line, { LineTypes, renderLine } from 'types/lineTypes'
 import * as LinesFeatures from 'features/linesSlice'
-import LinesApi from 'api/linesAPI'
 import LinesAPI from 'api/linesAPI'
 
 const paragraphSeparator = "\\<br/\\>"
@@ -35,7 +33,6 @@ export default function NewPostPage() {
   
   const [post, setPost] = useState(new Post())
   const [focusedLine, setFocusedLine] = useState(linesData ? linesData[0] : null)
-
   
   useEffect(() => {
     if(!post.id) return
@@ -70,29 +67,32 @@ export default function NewPostPage() {
     if(publish) navigate(`/posts/${id}`)
   }
 
-  function handlePostTitle(e) {
+
+  function onTitleChange(e) {
     let auxPost = {...post};
     auxPost.title = e.target.value
     setPost(auxPost)
   }
-
-  function handlePostLine(e, line) {
+  function onLineContentChange(e, line) {
     const event = e.nativeEvent
     let auxLine = {...line, content:event.target.value}
     dispatch(LinesFeatures.updateLine(auxLine))
   }
 
-  function handleEnter(e) {
-    const event = e.nativeEvent
-    if(event.keyCode !== 13) return;
 
-    dispatch(LinesFeatures.addLine(new Line(id)))
-  }
-
-  function addLine(lineType) {
+  function addLine(lineType = LineTypes.PARAGRAPH.id) {
     let newLine = new Line(id)
     newLine.type = lineType;
+    newLine.position = focusedLine.position + 1
+    
+    linesData
+      .filter(line => line.position >= newLine.position)
+      .forEach(line => {
+        dispatch(LinesFeatures.updateLine({...line, position:++line.position}))
+      })
+
     dispatch(LinesFeatures.addLine(newLine))
+    return newLine
   }
 	function updateLineType(line, newType) {
 		dispatch(LinesFeatures.updateLine({...line, type:newType}))
@@ -101,8 +101,17 @@ export default function NewPostPage() {
 		dispatch(LinesFeatures.removeLine(line))
 	}
 
+  function handleEnter(e) {
+    const event = e.nativeEvent
+    if(event.keyCode !== 13) return;
+    
+    let newLine = addLine()
+    console.log(newLine)
+  }
+
+
   return (<S.NewPostPage>
-    <S.TitleInput value={post?.title} onChange={handlePostTitle} name="title" placeholder="My new Adventure..."/>
+    <S.TitleInput value={post?.title} onChange={onTitleChange} name="title" placeholder="My new Adventure..."/>
     <section>
 			{linesData?.map(line => <div key={line.id}>
 				<S.ChangeLineType> 
@@ -119,8 +128,9 @@ export default function NewPostPage() {
           })}
 				</S.ChangeLineType>
           
+        {line.position}
 				{ renderLine(line, {
-            onChange:(e)=>{handlePostLine(e, line)}, 
+            onChange:(e)=>{onLineContentChange(e, line)}, 
             onKeyUp:handleEnter,
             onFocus:(e)=>{setFocusedLine(line)}
         })}
