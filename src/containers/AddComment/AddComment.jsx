@@ -1,7 +1,9 @@
 import { useUser } from 'api/auth'
+import { Avatar } from 'components'
 import CommentsThunks from 'features/commentsThunks'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import * as S from './AddComment.styled'
 
 export default function AddComment({to}) {
 
@@ -18,8 +20,9 @@ export default function AddComment({to}) {
       }))
     }
 
-    return (<div>
+    return (<S.AddComment>
+        <Avatar user={login}/>
         <input type="text" value={newCommentBody} onChange={(e)=>{setNewCommentBody(e.target.value)}}/>
         <button onClick={addComment}> Comment </button>
-    </div>)
+    </S.AddComment>)
 }
