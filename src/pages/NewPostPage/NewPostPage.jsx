@@ -120,7 +120,7 @@ export default function NewPostPage() {
             let lineType = lineTypeName[1]
             
             return <span 
-              className={`${line.type === lineType.id ? 'selected':''}`} 
+              className={`${line?.type === lineType.id ? 'selected':''}`} 
               onClick={()=>{updateLineType(line, lineType.id)}}> 
               { lineType.name } 
             </span>

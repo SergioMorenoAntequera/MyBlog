@@ -7,7 +7,7 @@ function Lines({lines, amountToShow}) {
 
   return (<S.Lines>
     {lines?.map((line, index) => {
-        if(index >= amountToShow) return;
+        if(index >= amountToShow) return null;
         return renderLine(line)
     })}
   </S.Lines>)
