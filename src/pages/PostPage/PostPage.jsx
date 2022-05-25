@@ -49,9 +49,12 @@ export default function PostPage() {
             <Lines lines={lines} />
         </div>
 
-        <Reaction attachedToId={id} reactionType={ReactionsTypes.TYPES.like}/>
-        <Reaction attachedToId={id} reactionType={ReactionsTypes.TYPES.disLike}/>
-        <Reaction attachedToId={id} reactionType={ReactionsTypes.TYPES.save}/>
+        <div className='ReactionContainer'>
+            <Reaction attachedToId={id} reactionType={ReactionsTypes.TYPES.like}/>
+            <Reaction attachedToId={id} reactionType={ReactionsTypes.TYPES.disLike}/>
+            <Reaction attachedToId={id} reactionType={ReactionsTypes.TYPES.save}/>
+        </div>
+        
         
         { AddComment }
         { comments }
