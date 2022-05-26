@@ -13,6 +13,10 @@ export default class Line extends Model {
         super()
         this.post = postId
     }
+
+    render(editingProps = null) {
+        renderLine(this, editingProps)
+    }
 }
 
 function defaultEditField(line, editingProps) {
@@ -55,5 +59,5 @@ export const LineTypes = Object.freeze({
 
 export const renderLine = (line, editingProps) => {
     if(!line?.type) return
-    return Object.entries(LineTypes).find(lt => lt[1].id == line.type)[1].render(line, editingProps)
+    return Object.entries(LineTypes).find(lt => lt[1].id === line.type)[1].render(line, editingProps)
 }

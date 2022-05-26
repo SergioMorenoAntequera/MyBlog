@@ -41,19 +41,13 @@ export const ContentContainer = styled.div`
     display: block;
     display: -webkit-box;
     
-    height: 2.6em;
-    line-height: 1.3em;
+      line-height: 1.3em;
     
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 
     overflow: hidden;
     text-overflow: ellipsis;
-  }
-  .loadMore {
-    cursor: pointer;
-    transition: .1s;
-    &:hover { opacity: .9 }
   }
 `;
 

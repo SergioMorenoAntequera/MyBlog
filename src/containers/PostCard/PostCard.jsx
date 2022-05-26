@@ -15,6 +15,7 @@ import { deletePost } from 'actions/postsActions';
 import LinesThunks from 'features/linesThunks';
 import Lines from 'containers/Lines';
 import { useState } from 'react';
+import { renderLine } from 'types/lineTypes';
 
 export default function PostCard ({className, post: {id, body, title, userId, createdAt}}) {
   const { user } = useUser();
@@ -29,19 +30,12 @@ export default function PostCard ({className, post: {id, body, title, userId, cr
   )
   let { commentsData } = useComments(id);
   const isAuthorLoggedIn = user?.uid === author?.uid
-
-  const [loadedLines, setLoadedLines] = useState(1)
-
+  
   async function handleDelete() {
     await dispatch(deletePost(id))
   }
   function handleEdit() {
     navigate(`/posts/${id}/edit`)
-  }
-
-  function onLoadMore(event) {
-    event.preventDefault(); 
-    setLoadedLines(loadedLines=>loadedLines+3)
   }
 
   if(!id || !author) return <Spinner/>
@@ -71,18 +65,23 @@ export default function PostCard ({className, post: {id, body, title, userId, cr
 
         <S.ContentContainer>
           <H2> { title } </H2>    
-          <Lines lines={lines} amountToShow={loadedLines}/>
-          { loadedLines < lines?.length && 
-            <span className='loadMore' onClick={onLoadMore}> Load More </span>
-          }
-            
+
+          <div className='linesPreview'>
+            <Lines lines={lines} amountToShow={1}/>
+          </div>
         </S.ContentContainer>
         
 
         <S.ReactionsContainer>
+         <Link to={`/posts/${id}`} className="unstyled-link">
+            <Button variant="outlined"> Read more </Button>
+          </Link>
+
           <div> <FaComment/> {commentsData.length} </div>
           <Reaction attachedToId={id} reactionType={ReactionsTypes.TYPES.like} onClick={event=>event.preventDefault()}/>
           <Reaction attachedToId={id} reactionType={ReactionsTypes.TYPES.disLike} onClick={event=>event.preventDefault()}/>
+            
+
         </S.ReactionsContainer>
       </Link>
     </S.Body>
