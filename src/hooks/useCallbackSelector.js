@@ -22,7 +22,11 @@ const useCallbackSelector = (useSelectorCallBack, actionToRecover, listWithResul
 
 
     useEffect(() => {
-        if(stateData) {
+        var thereIsData = stateData
+        if(stateData?.constructor() === ([]).constructor() && !stateData.lenght) thereIsData = false
+        if(stateData?.constructor() === ({}).constructor() && !Object.keys(stateData).lenght) thereIsData = false
+        
+        if(thereIsData) {
             setData(stateData)
         } else {
             dispatch(actionToRecover)

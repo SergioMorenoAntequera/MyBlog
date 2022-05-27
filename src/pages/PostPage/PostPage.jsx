@@ -28,12 +28,14 @@ export default function PostPage() {
         state => state.usersEntity.users.byId[post?.userId],
         UsersThunks.fetchUserByUid(post?.userId)
     )
-
     const lines = useCallbackSelector(
         state => state.linesEntity.lines.byPost[id],
         LinesThunks.fetchLinesByPost(id),
         state => state.linesEntity.lines.byId
     )
+
+
+    
     
     if(!post) return <Spinner/>
     
@@ -54,8 +56,7 @@ export default function PostPage() {
             <Reaction attachedToId={id} reactionType={ReactionsTypes.TYPES.disLike}/>
             <Reaction attachedToId={id} reactionType={ReactionsTypes.TYPES.save}/>
         </div>
-        
-        
+
         { AddComment }
         { comments }
     </div>)

@@ -55,7 +55,8 @@ const THEME_BLOCKS = Object.freeze({
     },
     borders : {
         none:"none",
-        thin:`solid 1px ${THEME_BASES.palette.primary.light}`
+        thin:`solid 1px ${THEME_BASES.palette.primary.light}`,
+        regular:`solid 1px ${THEME_BASES.palette.primary.main}`
     },
     shape: {
         borderRadius: "4px", 

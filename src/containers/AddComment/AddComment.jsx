@@ -1,4 +1,5 @@
 import { useUser } from 'api/auth'
+import { Button } from 'components'
 import { Avatar } from 'components'
 import CommentsThunks from 'features/commentsThunks'
 import React, { useState } from 'react'
@@ -18,11 +19,12 @@ export default function AddComment({to}) {
         userUid: login.uid,
         attachedTo: to
       }))
+      setNewCommentBody("")
     }
 
     return (<S.AddComment>
         <Avatar user={login}/>
         <input type="text" value={newCommentBody} onChange={(e)=>{setNewCommentBody(e.target.value)}}/>
-        <button onClick={addComment}> Comment </button>
+        <Button variant="contained" onClick={addComment}> Comment </Button>
     </S.AddComment>)
 }
