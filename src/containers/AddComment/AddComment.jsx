@@ -4,6 +4,7 @@ import { Avatar } from 'components'
 import CommentsThunks from 'features/commentsThunks'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import Comment from 'types/commentTypes'
 import * as S from './AddComment.styled'
 
 export default function AddComment({to}) {
@@ -14,11 +15,11 @@ export default function AddComment({to}) {
     const [newCommentBody, setNewCommentBody] = useState("")
     function addComment() {
       if(!login) return
-      dispatch(CommentsThunks.createComment({
+      dispatch(CommentsThunks.createComment(new Comment({
         body: newCommentBody,
         userUid: login.uid,
         attachedTo: to
-      }))
+      })))
       setNewCommentBody("")
     }
 

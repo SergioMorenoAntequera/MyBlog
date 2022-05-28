@@ -7,8 +7,8 @@ const createComment = createAsyncThunk(
     'comments/createComment',
     async (newComment, {dispatch}) => {
         if(!newComment) return
-        var newCommentCreated = await CommentsApi.createNew(newComment)
-        dispatch(addComment(newCommentCreated))
+        CommentsApi.createNew(newComment)
+        dispatch(addComment(newComment))
     }
 )
 
