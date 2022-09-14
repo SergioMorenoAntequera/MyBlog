@@ -1,0 +1,30 @@
+---
+import type { PostFrontmatter } from '../../types/PostFrontmatter'
+
+type Props = { frontmatter: PostFrontmatter, compiledContent: () => string }
+const { frontmatter, compiledContent }: Props = Astro.props
+
+type ExtractedHtmlElement = { id:string, content:string }
+function findElements(elementToFind:string, raw:string):Array<ExtractedHtmlElement> {
+    const elements = raw.split(elementToFind).filter(el => el.endsWith('</')).map(l => l.trim())
+    return elements.map(el => ({
+        id: el.substring(el.indexOf('id="') + 4, el.indexOf('">')),
+        content: el.substring(el.indexOf('>') + 1, el.indexOf('<')),
+    }))
+}
+const h2s = findElements('h2', compiledContent())
+
+---
+
+<div style="display: flex; justify-content: space-between;">
+    <div>
+        <div> Header -&gt; {frontmatter?.title}  </div>
+        <div> <slot/> </div>
+        <div> Footer  </div>
+    </div>
+    <div>
+        {h2s.map(h2 => <a href={`#${h2.id}`}>
+            {h2.content}
+        </a>)}
+    </div>
+</div>
