@@ -3,7 +3,6 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
-import Test from '../components/Test.astro';
 ---
 
 <!DOCTYPE html>
@@ -15,11 +14,6 @@ import Test from '../components/Test.astro';
 
 		<Header title={SITE_TITLE} />
 		<main>
-			<Test name="Juan">
-				<p slot="despues"> P1 Test</p>
-				<p slot="antes"> P2 Test</p>
-			</Test>
-
 			<h1>🧑‍🚀 Hello, Astronaut!</h1>
 			<p>
 				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
