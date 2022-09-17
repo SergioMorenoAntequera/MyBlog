@@ -3,11 +3,17 @@
   https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700;900&display=swap');
+
+* {
+	box-sizing: border-box;
+}
 body {
-	font-family: Verdana, sans-serif;
+	font-family: Inter, sans-serif;
 	margin: auto;
 	padding: 20px;
-	max-width: 65ch;
+	max-width: 1500px;
 	text-align: left;
 	background-color: #fff;
 	word-wrap: break-word;

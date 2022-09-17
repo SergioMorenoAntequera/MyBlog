@@ -1,0 +1,21 @@
+---
+import MainLayout from "./MainLayout.astro";
+---
+
+<style>
+    .grid {
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+</style>
+
+<MainLayout>
+    <div class="grid">
+        <div>
+            <slot name="left"/>
+        </div>
+        <div>
+            <slot name="right"/>
+        </div>
+    </div>
+</MainLayout>
