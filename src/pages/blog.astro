@@ -7,12 +7,18 @@ const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
 );
 ---
 
-<DividedLayout>
-	<div slot="left">
-		<h1> asd </h1>
-		<h1> asd </h1>
+<DividedLayout gridCols="grid-cols-[40em_auto]" accountForHeader={false}>
+	<div slot="0" class="sticky top-0 h-[100vh] grid place-items-center bg-black text-white">
+		<h1 class="flex-1 font-black text-[8rem] leading-[8rem]"> 
+			BL <br/>
+			<span class="ml-[1.5rem]"> OG& <br/> </span>
+			NEW <br/>
+			<span> S <br/> </span>
+		</h1>
 	</div>
-	<div slot="right">
-		right
+	<div slot="1" class="mt-10">
+		{ posts.map(p => <div>
+			{ p.frontmatter.title }
+		</div>) }
 	</div>
 </DividedLayout>

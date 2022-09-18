@@ -1,21 +1,21 @@
 ---
 import MainLayout from "./MainLayout.astro";
+
+export type Props = {accountForHeader?: boolean, gridCols?: string }
+const { accountForHeader = true, gridCols = 'grid-cols-[50%_50%]' }:Props = Astro.props
+
+const cleanGridCols = gridCols.replace('grid-cols-[', '').replace(']', '').split('_')
 ---
 
-<style>
-    .grid {
-        display: grid;
-        grid-template-columns: 50% 50%;
-    }
-</style>
-
-<MainLayout>
-    <div class="grid">
-        <div>
-            <slot name="left"/>
-        </div>
-        <div>
-            <slot name="right"/>
-        </div>
+<MainLayout accountForHeader={accountForHeader}>
+    <div class={`grid ${gridCols}`}>
+        <!-- Doing it like this because you cant have dinamic names in slots RIP -->
+        {cleanGridCols.length > 0 ? <slot name="0"/> : null}
+        {cleanGridCols.length > 1 ? <slot name="1"/> : null}
+        {cleanGridCols.length > 2 ? <slot name="2"/> : null}
+        {cleanGridCols.length > 3 ? <slot name="3"/> : null}
+        {cleanGridCols.length > 4 ? <slot name="4"/> : null}
+        {cleanGridCols.length > 5 ? <slot name="5"/> : null}
+        {cleanGridCols.length > 6 ? <slot name="6"/> : null}
     </div>
 </MainLayout>
