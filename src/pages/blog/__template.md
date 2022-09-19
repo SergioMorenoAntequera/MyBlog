@@ -1,10 +1,11 @@
 ---
 layout: "../../layouts/PostLayout.astro"
-title: "Haciendo mi blog con astro"
-description: "Las razones por las que he decidido terminar de hacer mi blog con Astro.js en lugar de continuar con el desarrollo usando React.js."
+title: ""
+description: ""
 pubDate: "Sep 13 2022"
-heroImage: "/placeholder-hero.jpg"
-topics: ['TypeScript']
+heroImage: "/placeholder-about.jpg"
+themes: ['']
+draft: true
 ---
 
 ## Conocer el scope del proyecto

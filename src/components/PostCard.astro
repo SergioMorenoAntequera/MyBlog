@@ -1,0 +1,23 @@
+---
+import type { PostType } from "../types/PostType";
+
+type Props = { post: PostType, className?: string}
+const { post, className = '' }: Props = Astro.props
+---
+
+<article class={`${className} p-5`}>
+    <p class="text-sm font-serif text-slate-400 leading-[12px]"> { post.pubDate } </p>
+    <a href={post.url} class="text-black grid grid-cols-[auto_122px] gap-5">
+        <div class="mb-3">
+            <h3 class="font-bold mb-3"> {post.title} </h3>
+            <p class="text-sm font-serif line-clamp-2" title={post.description}> {post.description} </p>
+        </div>
+
+        <img width="122" height="122" src={post.heroImage} alt={post.title}>    
+    </a>
+
+    { post.topics.length &&  
+        <p class="inline-block text-xs p-2 rounded bg-slate-400 text-white"> { post.topics[0] } </p>
+    }
+</article>
+
