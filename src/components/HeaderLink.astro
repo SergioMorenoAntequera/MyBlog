@@ -5,7 +5,7 @@ const { href, class: className, ...props } = Astro.props;
 const isActive = href === Astro.url.pathname;
 ---
 
-<li class="grid place-items-center">
+<li class="grid place-items-center h-full w-full">
 	<a href={href} class:list={[className, { active: isActive }]} {...props}>
 		<slot />
 	</a>

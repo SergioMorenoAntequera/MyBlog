@@ -1,15 +1,16 @@
 ---
 import type { PostType } from "../types/PostType";
+import Badge from "./Badge.astro";
 
 type Props = { post: PostType, className?: string}
 const { post, className = '' }: Props = Astro.props
 ---
 
 <article class={`${className} p-5`}>
-    <p class="text-sm font-serif text-slate-400 leading-[12px]"> { post.pubDate } </p>
+    <time class="text-sm font-serif text-slate-500 leading-[12px]"> { post.pubDate } </time>
     <a href={post.url} class="text-black grid grid-cols-[auto_122px] gap-5">
         <div class="mb-3">
-            <h3 class="font-bold mb-3"> {post.title} </h3>
+            <h2 class="font-bold mb-3"> {post.title} </h2>
             <p class="text-sm font-serif line-clamp-2" title={post.description}> {post.description} </p>
         </div>
 
@@ -17,7 +18,7 @@ const { post, className = '' }: Props = Astro.props
     </a>
 
     { post.topics.length &&  
-        <p class="inline-block text-xs p-2 rounded bg-slate-400 text-white"> { post.topics[0] } </p>
+        <Badge> {post.topics[0]} </Badge>
     }
 </article>
 
