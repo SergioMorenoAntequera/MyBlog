@@ -19,8 +19,9 @@ const {
 </head>
 <body>
     <Header accountForHeader={accountForHeader}/>
-    { accountForHeader && <div class="h-10"/> }
-
+    { accountForHeader && <div class="fixed top-0 bg-white h-10 w-full"/> }
+    { accountForHeader && <div class="h-10 w-full"/> }
+    
     <main>
         <slot/>
     </main>

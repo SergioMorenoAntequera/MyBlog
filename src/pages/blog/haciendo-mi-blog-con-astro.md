@@ -1,14 +1,25 @@
 ---
 layout: "../../layouts/PostLayout.astro"
-title: "Haciendo mi blog con astro"
-description: "Las razones por las que he decidido terminar de hacer mi blog con Astro.js en lugar de continuar con el desarrollo usando React.js."
+title: "Astro vs React para hacer un blog"
+description: "Para hacer un blog es mejor utilizar Astro.js en lugar de otro framework ya que este está centrado en mayormente contenido estáticos basados en contenidos."
 pubDate: "Sep 13 2022"
 heroImage: "/placeholder-hero.jpg"
-topics: ['TypeScript']
+topics: ['Astro']
 ---
 
-## Conocer el scope del proyecto
+## Para que usar Astro.js
+Astro.js es un framework web para crear sitios web muy rápidos. Esto es porque no manda JavaScript al navegador, lo cual, a dia de hoy con todos los frameworks con tanto JS que existen acaban haciendo la experiencia lenta porque se tiene que montar la página delante tuya.
 
+Usando Astro nada de eso pasa porque solo se manda el contenido HTML al navegador y este no tiene que construir nada. HAciendo de este modo la experiencia mucho más rapida. 
+
+Opcionalmente se puede cargar JS dentro de componentes para añadir interactividad
+
+### hey how ye
+
+## hey how ye 1 un titulhow ye 1 un titulhow ye 1 un titulhow ye 1 un titulhow ye 1 un titul
+
+### hey how ye 2
+### hey how ye 3
 
 Analizar las opciones para llegar al resultado
 
