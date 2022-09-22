@@ -1,5 +1,6 @@
 
 enum PostTopics {
+    [""],
     JavaScript,
     TypeScript,
     React
@@ -14,4 +15,5 @@ export type PostType = {
     topics: PostTopics[]
     url: string
     draft?: boolean
+    showIndex: boolean
 }

@@ -8,7 +8,14 @@ export interface Props {
 	headings: { depth: number; slug: string; text: string }[]
 }
 
-const { headings, frontmatter: { title, description, pubDate, heroImage, topics }}: Props = Astro.props;
+const { headings, frontmatter: { 
+	title = "", 
+	description = "", 
+	pubDate = "", 
+	heroImage = "", 
+	topics = [], 
+	showIndex = true,
+}}: Props = Astro.props;
 ---
 
 <style is:global>
@@ -54,14 +61,20 @@ const { headings, frontmatter: { title, description, pubDate, heroImage, topics 
 		</div>
 		<div class="ml-auto mr-8 w-[14rem]">
 			<div class="sticky top-32 text-xs">
-				<p class="mb-2 font-bold"> Contenido: </p>
-				{headings.map(h => 
-					<a class="block px-3 py-1 transition border-l-4 border-l-gray-200 text-black hover:bg-gray-100 hover:border-l-gray-500" 
-						href={`#${h.slug}`}> 
-						<p title={h.text} class="line-clamp-2"> {h.text} </p> 
-					</a>
-				)}
-				<!-- <p class="mt-6 mb-2 font-bold"> More Stuff: </p> -->
+				
+				{ showIndex && <div class="mb-6">
+					<p class="mb-2 font-bold"> Contenido: </p>
+					{ headings.map(h => 
+						<a class="block px-3 py-1 transition border-l-4 border-l-gray-200 text-black hover:bg-gray-100 hover:border-l-gray-500"  href={`#${h.slug}`}> 
+							<p title={h.text} class="line-clamp-2" style={`margin-left: ${(h.depth-2)*20}px`}> {h.text} </p> 
+						</a>
+					)}
+				</div>}
+				
+				<div>
+					<p class="mb-2 font-bold"> Related Posts: </p>
+				</div>
+				
 			</div>
 		</div>
 	</div>
