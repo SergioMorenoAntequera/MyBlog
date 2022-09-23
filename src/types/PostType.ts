@@ -1,9 +1,9 @@
 
 enum PostTopics {
-    [""],
     JavaScript,
     TypeScript,
-    React
+    React,
+    Astro
 }
 
 export type PostType = {

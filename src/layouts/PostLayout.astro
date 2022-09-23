@@ -8,14 +8,25 @@ export interface Props {
 	headings: { depth: number; slug: string; text: string }[]
 }
 
-const { headings, frontmatter: { 
-	title = "", 
-	description = "", 
-	pubDate = "", 
-	heroImage = "", 
-	topics = [], 
-	showIndex = true,
-}}: Props = Astro.props;
+const { headings, frontmatter: post }: Props = Astro.props;
+const { title, description, pubDate, showIndex = true, topics, heroImage } = post
+
+const relatedPosts = 
+	(await Astro.glob('./../pages/blog/*.{md,mdx}'))
+	.map((p:any) => ({...p.frontmatter, url: p.url} as PostType))
+	.filter((p:PostType) => p.title !== title && !p.draft)
+	.map((p:PostType) => {
+		let commonPost = {commonTopics: 0, post: p}
+		p.topics?.forEach(topic => {
+			if(!topics.includes(topic)) return
+			commonPost.commonTopics++	  
+		});
+		return commonPost
+	})
+	.sort((a, b) => b.commonTopics - a.commonTopics)
+	.filter(p => p.commonTopics > 0)
+	.slice(0, 5)
+	.map(p => p.post)
 ---
 
 <style is:global>
@@ -62,18 +73,27 @@ const { headings, frontmatter: {
 		<div class="ml-auto mr-8 w-[14rem]">
 			<div class="sticky top-32 text-xs">
 				
-				{ showIndex && <div class="mb-6">
-					<p class="mb-2 font-bold"> Contenido: </p>
-					{ headings.map(h => 
-						<a class="block px-3 py-1 transition border-l-4 border-l-gray-200 text-black hover:bg-gray-100 hover:border-l-gray-500"  href={`#${h.slug}`}> 
-							<p title={h.text} class="line-clamp-2" style={`margin-left: ${(h.depth-2)*20}px`}> {h.text} </p> 
+				{ headings.length > 0 && showIndex && 
+					<div class="mb-6">
+						<p class="mb-2 font-bold"> Contenido: </p>
+						{ headings.map(h => 
+							<a class="block px-3 py-1 transition border-l-4 border-l-gray-200 text-black hover:bg-gray-100 hover:border-l-gray-500"  href={`#${h.slug}`}> 
+								<p title={h.text} class="line-clamp-2" style={`margin-left: ${(h.depth-2)*20}px`}> {h.text} </p> 
+							</a>
+						)}
+					</div>
+				}
+				
+				{ relatedPosts.length > 0 && 
+					<div>
+						<p class="mb-2 font-bold"> Posts relacionados: </p>
+						{ relatedPosts.map(p => 
+						<a class="block px-3 py-1 transition border-l-4 border-l-gray-200 text-black hover:bg-gray-100 hover:border-l-gray-500"  href={`#${p.url}`}> 
+							<p title={p.title} class="line-clamp-2"> {p.title} </p> 
 						</a>
 					)}
-				</div>}
-				
-				<div>
-					<p class="mb-2 font-bold"> Related Posts: </p>
-				</div>
+					</div>
+				}
 				
 			</div>
 		</div>
