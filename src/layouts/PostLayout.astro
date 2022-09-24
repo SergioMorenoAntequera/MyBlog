@@ -66,9 +66,22 @@ const relatedPosts =
 			
 			<hr class="mb-5"/>
 		
-			<div id="PostContent">
+			<div id="PostContent" class="mb-40">
 				<slot/>
 			</div>
+
+
+			<hr class="mb-4"/>
+			<h2 class="font-bold mb-4"> ¿Quién ha escrito esto? </h2>
+			<div class="flex items-end mb-2">
+				<img class="w-12 rounded-full" src="/seran.jpg" alt="Foto de Sergio Moreno Antequera (Seran)">
+				<p class="ml-2 leading-6 italic"> Sergio Moreno Antequera<br/>(Seran)</p>
+			</div>
+			<div>
+				Soy un desarrollador web apasionado por usar y crear nuevas técnologias para
+				planear y diseñar arquitecturas frontend que soporten aplicaciones web exigentes.
+			</div>
+
 		</div>
 		<div class="ml-auto mr-8 w-[14rem]">
 			<div class="sticky top-32 text-xs">
@@ -88,7 +101,7 @@ const relatedPosts =
 					<div>
 						<p class="mb-2 font-bold"> Posts relacionados: </p>
 						{ relatedPosts.map(p => 
-						<a class="block px-3 py-1 transition border-l-4 border-l-gray-200 text-black hover:bg-gray-100 hover:border-l-gray-500"  href={`#${p.url}`}> 
+						<a class="block px-3 py-1 transition border-l-4 border-l-gray-200 text-black hover:bg-gray-100 hover:border-l-gray-500"  href={`${p.url}`}> 
 							<p title={p.title} class="line-clamp-2"> {p.title} </p> 
 						</a>
 					)}
