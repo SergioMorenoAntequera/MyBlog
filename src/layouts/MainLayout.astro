@@ -18,6 +18,18 @@ const {
     <MetaTags title={title} description={description}/>
 </head>
 <body>
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-95857WXMNS"></script>
+    <script>
+        // @ts-ignore 
+        window.dataLayer = window.dataLayer || [];
+        // @ts-ignore 
+        function gtag(){dataLayer.push(arguments);}
+        // @ts-ignore 
+        gtag('js', new Date());
+        // @ts-ignore 
+        gtag('config', 'G-95857WXMNS');
+    </script> -->
+
     <Header accountForHeader={accountForHeader}/>
     { accountForHeader && <div class="fixed top-0 bg-white h-10 w-full"/> }
     { accountForHeader && <div class="h-10 w-full"/> }
