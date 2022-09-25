@@ -1,4 +1,5 @@
 ---
+import AddLinksToHeadings from "../components/AddLinksToHeadings.astro";
 import Badge from "../components/Badge.astro";
 import type { PostType } from "../types/PostType";
 import MainLayout from "./MainLayout.astro";
@@ -31,10 +32,13 @@ const relatedPosts =
 
 <style is:global>
 	#PostContent p { margin-bottom: 2rem; }
-	#PostContent h2, #PostContent h3 { font-weight: bold; margin-bottom: .5rem; }
 	#PostContent ol { padding-left: 3rem; list-style: decimal; margin-bottom: 2rem; }
-
-
+	
+	#PostContent [id] { 
+		font-weight: bold; 
+		margin-bottom: .5rem; 
+		position: relative;
+	}
 	#PostContent [id]::before {
 		content: '';
 		display: block;
@@ -42,6 +46,11 @@ const relatedPosts =
 		margin-top: -50px;
 		visibility: hidden;
 	}
+
+	#PostContent [id] .Heading-Link { opacity: 0; }
+	#PostContent [id]:hover .Heading-Link { opacity: 1; }
+
+	
 </style>
 
 <MainLayout>
@@ -74,7 +83,7 @@ const relatedPosts =
 			<hr class="mb-4"/>
 			<h2 class="font-bold mb-4"> ¿Quién ha escrito esto? </h2>
 			<div class="flex items-end mb-2">
-				<img class="w-12 rounded-full" src="/seran.jpg" alt="Foto de Sergio Moreno Antequera (Seran)">
+				<img width="48px" height="48px" class="rounded-full" src="/seran.jpg" alt="Foto de Sergio Moreno Antequera (Seran)">
 				<p class="ml-2 leading-6 italic"> Sergio Moreno Antequera<br/>(Seran)</p>
 			</div>
 			<div>
@@ -111,4 +120,7 @@ const relatedPosts =
 			</div>
 		</div>
 	</div>
+
+	<AddLinksToHeadings/>
+	
 </MainLayout>
