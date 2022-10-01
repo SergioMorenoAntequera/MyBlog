@@ -1,6 +1,7 @@
 ---
 import AddLinksToHeadings from "../components/AddLinksToHeadings.astro";
 import Badge from "../components/Badge.astro";
+import PostAuthor from "../components/PostAuthor.astro";
 import type { PostType } from "../types/PostType";
 import MainLayout from "./MainLayout.astro";
 
@@ -53,6 +54,20 @@ const relatedPosts =
 	
 </style>
 
+<style>
+	.side-link:hover {
+		--tw-bg-opacity: 1;
+    	background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+		text-decoration: underline;
+	}
+	.side-link.active {
+		--tw-bg-opacity: 1;
+		--tw-border-opacity: 1;
+    	background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+    	border-left-color: rgb(107 114 128 / var(--tw-border-opacity));
+	}
+</style>
+
 <MainLayout>
 	<div class="grid grid-cols-[28rem_auto_28rem] justify-center mt-10">	
 		<div/>
@@ -81,33 +96,7 @@ const relatedPosts =
 
 
 			<hr class="mb-4"/>
-			<h2 class="font-bold mb-4"> ¿Quién ha escrito esto? </h2>
-			<div class="flex items-end mb-2">
-				<img width="48px" height="48px" class="rounded-full" src="/seran.jpg" alt="Foto de Sergio Moreno Antequera (Seran)">
-				<p class="ml-2 leading-6 italic"> Sergio Moreno Antequera<br/>(Seran)</p>
-			</div>
-			<div class="mb-4">
-				Soy un desarrollador web apasionado por usar y crear nuevas técnologias para
-				planear y diseñar arquitecturas frontend que soporten aplicaciones web exigentes.
-			</div>
-
-			<div class="flex gap-2 mb-4 items-center">
-				<a aria-label="Email" href="mailto:seranmoreno500@gmail.com">
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 12.713l-11.985-9.713h23.971l-11.986 9.713zm-5.425-1.822l-6.575-5.329v12.501l6.575-7.172zm10.85 0l6.575 7.172v-12.501l-6.575 5.329zm-1.557 1.261l-3.868 3.135-3.868-3.135-8.11 8.848h23.956l-8.11-8.848z"/></svg>
-				</a>
-				<span class="leading-none"> seranmoreno500@gmail.com </span>
-			</div>
-			<div class="flex gap-5 mb-10">
-				<a aria-label="Github" href="https://github.com/SergioMorenoAntequera" target="_blank">
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-				</a>
-				<a aria-label="Linkedin" href="https://www.linkedin.com/in/seran-moreno/" target="_blank">
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-				</a>
-				<a aria-label="Behance" href="https://www.behance.net/sergiomoreno12" target="_blank">
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.228 15.01h-2.228v-2.01h2.261c1.878 0 2.003 2.01-.033 2.01zm6.758-2.677h3.018c-.117-1.715-2.73-1.977-3.018 0zm-6.804-3.333h-2.182v2h2.389c1.673 0 1.937-2-.207-2zm15.818-4v14c0 2.761-2.238 5-5 5h-14c-2.762 0-5-2.239-5-5v-14c0-2.761 2.238-5 5-5h14c2.762 0 5 2.239 5 5zm-10 3h5v-1h-5v1zm-3.552 3.618c1.907-.974 1.837-4.55-1.813-4.604h-4.635v9.978h4.311c4.522 0 4.445-4.534 2.137-5.374zm9.487.602c-.274-1.763-1.528-2.95-3.583-2.95-2.094 0-3.352 1.34-3.352 3.947 0 2.631 1.367 3.783 3.416 3.783s3.106-1.135 3.4-2h-2.111c-.736.855-2.893.521-2.767-1.353h5.06c.01-.634-.012-1.089-.063-1.427z"/></svg>
-				</a>
-			</div>
+			<PostAuthor/>
 			
 		</div>
 		<div class="mr-auto ml-16 w-[14rem]">
@@ -116,8 +105,12 @@ const relatedPosts =
 				{ headings.length > 0 && showIndex && 
 					<div class="mb-6">
 						<p class="mb-2 font-bold"> Contenido: </p>
+						
+						<a class="content-link side-link block px-3 py-1 transition border-l-4 border-l-gray-200 text-black"  href="#"> 
+							<p title='Sinopsis' class="line-clamp-2"> Sinopsis </p> 
+						</a>
 						{ headings.map(h => 
-							<a class="block px-3 py-1 transition border-l-4 border-l-gray-200 text-black hover:bg-gray-100 hover:border-l-gray-500"  href={`#${h.slug}`}> 
+							<a class="content-link side-link block px-3 py-1 transition border-l-4 border-l-gray-200 text-black"  href={`#${h.slug}`}> 
 								<p title={h.text} class="line-clamp-2" style={`margin-left: ${(h.depth-2)*20}px`}> {h.text} </p> 
 							</a>
 						)}
@@ -128,10 +121,10 @@ const relatedPosts =
 					<div>
 						<p class="mb-2 font-bold"> Posts relacionados: </p>
 						{ relatedPosts.map(p => 
-						<a class="block px-3 py-1 transition border-l-4 border-l-gray-200 text-black hover:bg-gray-100 hover:border-l-gray-500"  href={`${p.url}`}> 
-							<p title={p.title} class="line-clamp-2"> {p.title} </p> 
-						</a>
-					)}
+							<a class="side-link block px-3 py-1 transition border-l-4 border-l-gray-200 text-black"  href={`${p.url}`}> 
+								<p title={p.title} class="line-clamp-2"> {p.title} </p> 
+							</a>
+						)}
 					</div>
 				}
 				
@@ -140,5 +133,29 @@ const relatedPosts =
 	</div>
 
 	<AddLinksToHeadings/>
+	
+	<script>	
+		const linksToTitlesEl = Array.from(document.querySelectorAll('.content-link'))
+		const titlesEl = [
+			document.querySelector("h1"),
+			...Array.from(document.querySelectorAll('#PostContent [id]'))
+		]
+
+		let observer = new IntersectionObserver(entries => {
+			entries = entries.filter(e => e.isIntersecting)
+			entries.forEach(entry => {
+				const titleIndex = titlesEl.indexOf(entry.target)
+				linksToTitlesEl.forEach(linkEl => linkEl.classList.remove("active"))
+				linksToTitlesEl[titleIndex].classList.add("active")
+			});
+		}, {
+			rootMargin: '0px 0px -80%'
+		});
+
+		titlesEl.forEach(titleEl => {
+			observer.observe(titleEl)
+		});
+
+	</script>
 	
 </MainLayout>

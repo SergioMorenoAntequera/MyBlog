@@ -1,4 +1,5 @@
 ---
-const { className = '' } = Astro.props 
+type Props = { background?: string, className?: string }
+const { background = 'bg-slate-500', className = '' }:Props = Astro.props 
 ---
-<span class={`text-xs p-2 rounded bg-slate-500 text-white ${className}`}> <slot/> </span>
+<span class={`inline-block text-xs p-2 rounded text-white ${background} ${className}`}> <slot/> </span>
