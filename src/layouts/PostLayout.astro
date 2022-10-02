@@ -1,13 +1,15 @@
 ---
 import AddLinksToHeadings from "../components/AddLinksToHeadings.astro";
 import Badge from "../components/Badge.astro";
+import FixedDropdown from "../components/FixedDropdown";
 import PostAuthor from "../components/PostAuthor.astro";
 import type { PostType } from "../types/PostType";
 import MainLayout from "./MainLayout.astro";
 
+export interface Heading { depth: number; slug: string; text: string }
 export interface Props {
 	frontmatter: PostType
-	headings: { depth: number; slug: string; text: string }[]
+	headings: Heading[]
 }
 
 const { headings, frontmatter: post }: Props = Astro.props;
@@ -40,13 +42,20 @@ const relatedPosts =
 		margin-bottom: .5rem; 
 		position: relative;
 	}
+	
 	#PostContent [id]::before {
 		content: '';
 		display: block;
 		height:      50px;
 		margin-top: -50px;
-		visibility: hidden;
 	}
+	@media (max-width: 768px) {
+		#PostContent [id]::before {22
+		height:      100px;
+		margin-top: -100px;
+	}}
+	
+
 
 	#PostContent [id] .Heading-Link { opacity: 0; }
 	#PostContent [id]:hover .Heading-Link { opacity: 1; }
@@ -69,9 +78,15 @@ const relatedPosts =
 </style>
 
 <MainLayout>
-	<div class="grid grid-cols-[28rem_auto_28rem] justify-center mt-10">	
-		<div/>
-		<div class="max-w-[50rem]">
+	<div class="bg-slate-900 fixed top-10 w-100 z-10">
+		<FixedDropdown client:visible fixedMessage={'Contenido'} options={headings}/>
+	</div>
+	<div class="grid grid-cols-1 md:grid-cols-[auto_14rem] lg:grid-cols-[28rem_auto_28rem] justify-center mt-10">	
+		<div class="hidden lg:block"> 
+
+		</div>
+
+		<div class="px-8 lg:px-0 max-w-[50rem]">
 			
 			<div class="flex items-end mb-2">
 				{ topics.map(t => <Badge className="mr-2"> { t } </Badge> )}
@@ -99,7 +114,8 @@ const relatedPosts =
 			<PostAuthor/>
 			
 		</div>
-		<div class="mr-auto ml-16 w-[14rem]">
+
+		<div class="hidden md:block mr-auto lg:ml-16 w-[14rem]">
 			<div class="sticky top-40 text-xs">
 				
 				{ headings.length > 0 && showIndex && 

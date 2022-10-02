@@ -23,7 +23,7 @@ const { post, className = '' }: Props = Astro.props
         </a>
         <div>
             {
-                post.topics.map(topic => <Badge> {topic} </Badge>)
+                post.topics.map(topic => <Badge className="mr-2"> {topic} </Badge>)
             }
         </div>
     </div>
