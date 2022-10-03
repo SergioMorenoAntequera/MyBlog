@@ -50,10 +50,11 @@ const relatedPosts =
 		margin-top: -50px;
 	}
 	@media (max-width: 768px) {
-		#PostContent [id]::before {22
-		height:      100px;
-		margin-top: -100px;
-	}}
+		#PostContent [id]::before {
+			height:      100px;
+			margin-top: -100px;
+		}
+	}
 	
 
 
@@ -96,7 +97,10 @@ const relatedPosts =
 			<hr class="my-4"/>
 
 			<strong> <h1 class="text-black !mb-5"> {title} </h1> </strong>
-			<p class="!mb-5"> {description} </p>
+			<p class="!mb-5 p-5 bg-gray-200 rounded-r border-l-8 border-l-green-700	"> 
+				<span class="font-bold mb-4 block"> Conclusión: <br/> </span>
+				{description} 
+			</p>
 
 			{heroImage && (<img class="mb-5"
 				width={720} height={360}
