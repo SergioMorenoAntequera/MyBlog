@@ -79,13 +79,12 @@ const relatedPosts =
 </style>
 
 <MainLayout>
-	<div class="bg-slate-900 fixed top-10 w-100 z-10">
-		<FixedDropdown client:visible fixedMessage={'Contenido'} options={headings}/>
+	<div class="block md:hidden fixed top-10 w-full z-10 p-2 px-8 bg-white cursor-pointer border-black border-b-2">
+		<FixedDropdown client:visible fixedMessage={'Indice de contenido'} options={headings}/>
 	</div>
+	
 	<div class="grid grid-cols-1 md:grid-cols-[auto_14rem] lg:grid-cols-[28rem_auto_28rem] justify-center mt-10">	
-		<div class="hidden lg:block"> 
-
-		</div>
+		<div class="hidden lg:block"></div>
 
 		<div class="px-8 lg:px-0 max-w-[50rem]">
 			
@@ -98,7 +97,7 @@ const relatedPosts =
 
 			<strong> <h1 class="text-black !mb-5"> {title} </h1> </strong>
 			<p class="!mb-5 p-5 bg-gray-200 rounded-r border-l-8 border-l-green-700	"> 
-				<span class="font-bold mb-4 block"> Conclusión: <br/> </span>
+				<span class="font-bold mb-4 block"> Resumen: <br/> </span>
 				{description} 
 			</p>
 
@@ -127,7 +126,7 @@ const relatedPosts =
 						<p class="mb-2 font-bold"> Contenido: </p>
 						
 						<a class="content-link side-link block px-3 py-1 transition border-l-4 border-l-gray-200 text-black"  href="#"> 
-							<p title='Sinopsis' class="line-clamp-2"> Sinopsis </p> 
+							<p title='Resumen' class="line-clamp-2"> Resumen </p> 
 						</a>
 						{ headings.map(h => 
 							<a class="content-link side-link block px-3 py-1 transition border-l-4 border-l-gray-200 text-black"  href={`#${h.slug}`}> 
