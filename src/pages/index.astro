@@ -1,0 +1,36 @@
+---
+import PostCard from "../components/PostCard.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+import type { PostType } from "../types/PostType";
+
+const posts = 
+	(await Astro.glob('./blog/*.{md,mdx}'))
+	.map(p => ({...p.frontmatter, url: p.url} as PostType))
+	.filter(p => !p.draft)
+	.sort((a, b) => new Date(b.pubDate).valueOf() - new Date(a.pubDate).valueOf()
+)
+---
+
+<MainLayout accountForHeader={false}>
+	<div class="block md:grid md:grid-cols-[15em_auto] xl:grid-cols-[30em_auto]">
+		<div class="hidden sticky top-0 h-[100vh] md:grid place-items-center bg-black text-white">
+			<h1 class="flex-1 font-black md:text-[5rem] md:leading-[5rem] xl:text-[8rem] xl:leading-[8rem]"> 
+				BL <br/>
+				<span class="ml-[1.5rem]"> OG& <br/> </span>
+				NEW <br/>
+				<span> S <br/> </span>
+			</h1>
+		</div>
+		<div class="mt-10 p-6">
+			{posts.map((p, i) => {
+				const isLastOne = i != posts.length - 1
+				const separationLine = isLastOne ? <div class="border-b my-5"/> : null
+				
+				return <>
+					<PostCard post={p}/>
+					{separationLine}
+				</>
+			})}
+		</div>	
+	</div>
+</MainLayout>

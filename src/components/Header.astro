@@ -1,0 +1,18 @@
+---
+import HeaderLink from './HeaderLink.astro';
+---
+
+<header class="fixed w-full top-0 left-0 z-10 bg-white md:bg-transparent">
+	<nav class="flex items-center justify-between h-10 px-8">
+		<ul class="block gap-4 h-full">
+			<HeaderLink href="/MyBlog"> 
+				<img width="30" height="30" src="/_logo.png" alt="Seran Logo">
+			</HeaderLink>
+		</ul>
+		<ul class="flex gap-4">
+			<HeaderLink href="/MyBlog">Blog</HeaderLink>
+			<HeaderLink href="mailto:seranmoreno500@gmail.com"> Contact </HeaderLink>
+		</ul>
+	</nav>
+</header>
+

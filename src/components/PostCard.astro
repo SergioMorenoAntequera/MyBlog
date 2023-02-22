@@ -1,0 +1,32 @@
+---
+import type { PostType } from "../types/PostType";
+import Badge from "./Badge.astro";
+
+type Props = { post: PostType, className?: string}
+const { post, className = '' }: Props = Astro.props
+---
+
+<article class={`${className} p-5 transition hover:bg-slate-50`}>
+    <time class="text-sm font-serif text-slate-500 leading-[12px]"> { post.pubDate } </time>
+    <a href={post.url} class="text-black sm:grid sm:grid-cols-[auto_122px] gap-5">
+        <div class="mb-3">
+            <h2 class="font-bold mb-3"> {post.title} </h2>
+            <p class="text-sm font-serif line-clamp-2" title={post.description}> {post.description} </p>
+        </div>
+
+        <img width="122" height="122" class="hidden sm:block" src={post.heroImage} alt={post.title}>    
+    </a>
+
+    <div class="flex items-end mt-2">
+        <a class="block md:hidden mr-2 rounded bg-black text-white text-[1rem] p-3 transition hover:bg-gray-900 cursor-pointer"> 
+            Leer Más 
+        </a>
+        <div>
+            {
+                post.topics.map(topic => <Badge className="mr-2"> {topic} </Badge>)
+            }
+        </div>
+    </div>
+    
+</article>
+

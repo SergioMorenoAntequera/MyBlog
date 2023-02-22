@@ -1,0 +1,43 @@
+---
+import MetaTags from "../components/MetaTags.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../config";
+
+export type Props = {title?: string, description?: string, accountForHeader?: boolean }
+const { 
+    title = SITE_TITLE, 
+    description = SITE_DESCRIPTION,
+    accountForHeader = true
+}:Props = Astro.props
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <MetaTags title={title} description={description}/>
+</head>
+<body>
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-95857WXMNS"></script>
+    <script>
+        // @ts-ignore 
+        window.dataLayer = window.dataLayer || [];
+        // @ts-ignore 
+        function gtag(){dataLayer.push(arguments);}
+        // @ts-ignore 
+        gtag('js', new Date());
+        // @ts-ignore 
+        gtag('config', 'G-95857WXMNS');
+    </script> -->
+
+    <Header accountForHeader={accountForHeader}/>
+    { accountForHeader && <div class="fixed top-0 bg-white h-14 md:h-8 w-full"/> }
+    { accountForHeader && <div class="h-14 md:h-8 w-full"/> }
+    
+    <main>
+        <slot/>
+    </main>
+    
+    <Footer />
+</body>
+</html>

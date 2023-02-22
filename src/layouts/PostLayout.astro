@@ -1,0 +1,180 @@
+---
+import AddLinksToHeadings from "../components/AddLinksToHeadings.astro";
+import Badge from "../components/Badge.astro";
+import FixedDropdown from "../components/FixedDropdown";
+import PostAuthor from "../components/PostAuthor.astro";
+import type { PostType } from "../types/PostType";
+import MainLayout from "./MainLayout.astro";
+
+export interface Heading { depth: number; slug: string; text: string }
+export interface Props {
+	frontmatter: PostType
+	headings: Heading[]
+}
+
+const { headings, frontmatter: post }: Props = Astro.props;
+const { title, description, pubDate, showIndex = true, topics, heroImage } = post
+
+const relatedPosts = 
+	(await Astro.glob('./../pages/blog/*.{md,mdx}'))
+	.map((p:any) => ({...p.frontmatter, url: p.url} as PostType))
+	.filter((p:PostType) => p.title !== title && !p.draft)
+	.map((p:PostType) => {
+		let commonPost = {commonTopics: 0, post: p}
+		p.topics?.forEach(topic => {
+			if(!topics.includes(topic)) return
+			commonPost.commonTopics++	  
+		});
+		return commonPost
+	})
+	.sort((a, b) => b.commonTopics - a.commonTopics)
+	.filter(p => p.commonTopics > 0)
+	.slice(0, 5)
+	.map(p => p.post)
+---
+
+<style is:global>
+	#PostContent p { margin-bottom: 2rem; }
+	#PostContent ol { padding-left: 3rem; list-style: decimal; margin-bottom: 2rem; }
+	
+	#PostContent [id] { 
+		font-weight: bold; 
+		margin-bottom: .5rem; 
+		position: relative;
+	}
+	
+	#PostContent [id]::before {
+		content: '';
+		display: block;
+		height:      50px;
+		margin-top: -50px;
+	}
+	@media (max-width: 768px) {
+		#PostContent [id]::before {
+			height:      100px;
+			margin-top: -100px;
+		}
+	}
+	
+
+
+	#PostContent [id] .Heading-Link { opacity: 0; }
+	#PostContent [id]:hover .Heading-Link { opacity: 1; }
+
+	
+</style>
+
+<style>
+	.side-link:hover {
+		--tw-bg-opacity: 1;
+    	background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+		text-decoration: underline;
+	}
+	.side-link.active {
+		--tw-bg-opacity: 1;
+		--tw-border-opacity: 1;
+    	background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+    	border-left-color: rgb(107 114 128 / var(--tw-border-opacity));
+	}
+</style>
+
+<MainLayout>
+	<div class="block md:hidden fixed top-10 w-full z-10 p-2 px-8 bg-white cursor-pointer border-black border-b-2">
+		<FixedDropdown client:visible fixedMessage={'Indice de contenido'} options={headings}/>
+	</div>
+	
+	<div class="grid grid-cols-1 md:grid-cols-[auto_14rem] lg:grid-cols-[28rem_auto_28rem] justify-center mt-10">	
+		<div class="hidden lg:block"></div>
+
+		<div class="px-8 lg:px-0 max-w-[50rem]">
+			
+			<div class="flex items-end mb-2">
+				{ topics.map(t => <Badge className="mr-2"> { t } </Badge> )}
+				{ pubDate && <time class="leading-none"> {pubDate} </time> }
+			</div>
+
+			<hr class="my-4"/>
+
+			<strong> <h1 class="text-black !mb-5"> {title} </h1> </strong>
+			<p class="!mb-5 p-5 bg-gray-200 rounded-r border-l-8 border-l-green-700	"> 
+				<span class="font-bold mb-4 block"> Resumen: <br/> </span>
+				{description} 
+			</p>
+
+			{heroImage && (<img class="mb-5"
+				width={720} height={360}
+				src={heroImage} alt={description}
+			/>)}
+			
+			<hr class="mb-5"/>
+		
+			<div id="PostContent" class="mb-40">
+				<slot/>
+			</div>
+
+
+			<hr class="mb-4"/>
+			<PostAuthor/>
+			
+		</div>
+
+		<div class="hidden md:block mr-auto lg:ml-16 w-[14rem]">
+			<div class="sticky top-40 text-xs">
+				
+				{ headings.length > 0 && showIndex && 
+					<div class="mb-6">
+						<p class="mb-2 font-bold"> Contenido: </p>
+						
+						<a class="content-link side-link block px-3 py-1 transition border-l-4 border-l-gray-200 text-black"  href="#"> 
+							<p title='Resumen' class="line-clamp-2"> Resumen </p> 
+						</a>
+						{ headings.map(h => 
+							<a class="content-link side-link block px-3 py-1 transition border-l-4 border-l-gray-200 text-black"  href={`#${h.slug}`}> 
+								<p title={h.text} class="line-clamp-2" style={`margin-left: ${(h.depth-2)*20}px`}> {h.text} </p> 
+							</a>
+						)}
+					</div>
+				}
+				
+				{ relatedPosts.length > 0 && 
+					<div>
+						<p class="mb-2 font-bold"> Posts relacionados: </p>
+						{ relatedPosts.map(p => 
+							<a class="side-link block px-3 py-1 transition border-l-4 border-l-gray-200 text-black"  href={`${p.url}`}> 
+								<p title={p.title} class="line-clamp-2"> {p.title} </p> 
+							</a>
+						)}
+					</div>
+				}
+				
+			</div>
+		</div>
+	</div>
+
+	<AddLinksToHeadings/>
+	
+	<script>	
+		const linksToTitlesEl = Array.from(document.querySelectorAll('.content-link'))
+		const titlesEl = [
+			document.querySelector("h1"),
+			...Array.from(document.querySelectorAll('#PostContent [id]'))
+		]
+
+		let observer = new IntersectionObserver(entries => {
+			entries = entries.filter(e => e.isIntersecting)
+			entries.forEach(entry => {
+				const titleIndex = titlesEl.indexOf(entry.target)
+				linksToTitlesEl.forEach(linkEl => linkEl.classList.remove("active"))
+				linksToTitlesEl[titleIndex].classList.add("active")
+			});
+		}, {
+			rootMargin: '0px 0px -80%'
+		});
+
+		titlesEl.forEach(titleEl => {
+			observer.observe(titleEl)
+		});
+
+	</script>
+	
+</MainLayout>
