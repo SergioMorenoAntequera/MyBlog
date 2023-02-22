@@ -130,7 +130,7 @@ const relatedPosts =
 						</a>
 						{ headings.map(h => 
 							<a class="content-link side-link block px-3 py-1 transition border-l-4 border-l-gray-200 text-black"  href={`#${h.slug}`}> 
-								<p title={h.text} class="line-clamp-2" style={`margin-left: ${(h.depth-2)*20}px`}> {h.text} </p> 
+								<p title={h.text} class="line-clamp-2" style={`margin-left: ${Math.max(0, (h.depth-2))*20}px`}> {h.text} </p> 
 							</a>
 						)}
 					</div>

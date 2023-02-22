@@ -6,7 +6,7 @@ const FixedDropdown = ({ fixedMessage = '', options }: Props): any => {
     options = [{depth: 1, slug: '', text: 'Resumen'}, ...options]
     
     const [open, setOpen] = useState(false)
-    const ref = useRef<HTMLDivElements>(null);
+    const ref = useRef(null);
     
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
