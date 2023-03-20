@@ -4,7 +4,7 @@ title: "def title"
 description: ""
 pubDate: "Sep 13 2022"
 heroImage: "/placeholder-about.jpg"
-themes: ['']
+topics: ['']
 draft: true
 ---
 
