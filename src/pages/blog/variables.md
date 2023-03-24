@@ -64,23 +64,25 @@ Vale, sabemos lo que es una variable, pero esto no puede ser tan facil... De hec
 
 Además en cada lenguage de programación puede cambiar como trabajamos con las variables, y los tipos de variables que hay, así que lo dejaremos simple u veremos 3 que se encuentran en la mayoría de los lenguajes de programación que te vas a encontrar a lo largo de tu carrera.
 
-
 ### Números
 Estas variables se pueden llamar de muchos tipos, ``int, float, number`` pero al fin de al cabo representan un numero. ya sea un numero entero ``int``, decimal, para lo que en algunos lenguajes usaremos ``float`` o si el lenguaje con el que estamos trabajando lo reprensetande de un modo más genérico como ``number``.
 
-Por lo general para crear un crear una variable de este tipo tendremos que indicar su tipo, ponerle un nombre
+Por lo general para crear un crear una variable de este tipo tendremos que indicar su tipo(uno de los que hemos indicado en el parrafo de arriba), ponerle un nombre y por lo general queremos incicializarlas con un valor, un ejemplo en Javascript sería `` let miNumero = 0`` mientas que en Java (En lenguaje que necesita el tipo de la varaible antes) sería ``int miNumero = 0``.
+
+Como podemos ver hay mucho parecido entre las 2, por eso creo que esta guía deberia de ayudarte a encontrar el mayor número de similitudes posible.
 
 ### String
+
+En este tipo de variable lo que almacenamos son textos: nombres, frases, un libro, lo que sea. Por lo general se inicializan así:
+`` let miString = ""``, En este caso es **MUY IMPORTANTE** que añadamos las dobles comillas para rodear la palabra. Eso es lo que le va a indicar al ordenador que queremos un tipo de variable ``string``
+
+
 ### Booleans
-
-
+Esta es un poco especial, solo puede valer Verdadero o False. Dentro de estas variables solo podemos meter esos 2 valores ```let mi Variable = true``, son 2 palabras reservadas. Importante fijarse que el true no va entre comillas, si lo fuese sería una variable de tipo String.
 
 ## ¿Como acceder al valor de una variable?
+Para acceder al nombre de la variable simplemente escribe su nombre en el código! En el ejemplo anterior, cuando deciamos lo de ``c = a - b`` para acceder al valor de ve valía con escribir la letra ``b`` y automantimanete el ordenador ya sabe a donde ir.
+
 
 ## ¿Como cambiar el valor de una variable?
-
-
-
-Además, al igual que podemos modificar el contenido de una caja, podemos cambiar el valor almacenado en una variable. Por ejemplo, si la edad de la persona cambia, podemos actualizar el valor de la variable "edad" para reflejar este cambio.
-
-En resumen, una variable en programación es como una caja que se utiliza para almacenar valores y que puede ser referenciada por su nombre. Al igual que una caja, una variable puede contener diferentes valores en diferentes momentos y puede ser modificada para reflejar cambios en el programa.
+Para cambiar el valor de una variable basta con usar el símbolo ``=``. Este simbolo se usa al darle un valor inicial a la variable, pues lo mismo en este caso, siempre que queramos cambiar el valor de la variable vamos a usar ese símbolo.
