@@ -3,4 +3,4 @@
 
 export const SITE_TITLE = 'Seran';
 export const SITE_DESCRIPTION = 'Be welcome!';
-export const SITE_PRE_URL = '/MyBlog'
+export const SITE_PRE_URL = '/'

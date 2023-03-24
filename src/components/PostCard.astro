@@ -14,7 +14,7 @@ const { post, className = '' }: Props = Astro.props
             <p class="text-sm font-serif line-clamp-2" title={post.description}> {post.description} </p>
         </div>
 
-        <img width="122" height="122" class="hidden sm:block" src={`/MyBlog${post.heroImage}`} alt={post.title}>    
+        <img width="122" height="122" class="hidden sm:block" src={`/${post.heroImage}`} alt={post.title}>    
     </a>
 
     <div class="flex items-end mt-2">

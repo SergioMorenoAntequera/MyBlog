@@ -34,7 +34,7 @@ Usando Astro nada de eso pasa porque solo se manda el contenido HTML y CSS al na
 ## Como hacer Astro interactivo
 Opcionalmente se puede cargar JS dentro de componentes para añadir interactividad en forma de componentes de cualquiera de los siguientes frameworks/librerias.
 
-![frameworks-aceptados-por-Astrojs](/MyBlog/frameworks-aceptados-por-Astrojs.png)
+![frameworks-aceptados-por-Astrojs](/frameworks-aceptados-por-Astrojs.png)
  
 Para implementar cualquiera de estos frameworks/librerias te dejo la guia de instalción:
 https://docs.astro.build/en/guides/integrations-guide/
