@@ -12,7 +12,9 @@
         let headingLink = document?.querySelector('.Heading-Link.template')!!
         const headingTypes = ["h1", "h2", "h3", "h4", "h5", "h6"]
         const contentEl = document?.querySelector("#PostContent")!!
+        
         headingTypes.forEach(headingType => {
+            if(!contentEl) return
             Array.from(contentEl.querySelectorAll(headingType)).forEach(heading => {
                 let clonedHeadingLink= headingLink.cloneNode(true) as HTMLAnchorElement
                 clonedHeadingLink.style.display = 'block'
