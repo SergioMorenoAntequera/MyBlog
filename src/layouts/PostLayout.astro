@@ -155,10 +155,10 @@ const relatedPosts =
 	<AddLinksToHeadings/>
 	
 	<script>	
-		const linksToTitlesEl = Array.from(document.querySelectorAll('.content-link'))
+		const linksToTitlesEl = Array.from(document?.querySelectorAll('.content-link'))
 		const titlesEl = [
-			document.querySelector("h1"),
-			...Array.from(document.querySelectorAll('#PostContent [id]'))
+			document?.querySelector("h1"),
+			...Array.from(document?.querySelectorAll('#PostContent [id]'))
 		]
 
 		let observer = new IntersectionObserver(entries => {

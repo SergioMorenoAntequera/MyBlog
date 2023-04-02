@@ -5,6 +5,7 @@ description: "Para hacer un blog es mejor utilizar Astro.js en lugar de otro fra
 pubDate: "Sep 13 2022"
 heroImage: "/placeholder-hero.jpg"
 topics: ['Astro']
+draft: true
 ---
 
 ## Que es Astro.js

@@ -2,7 +2,7 @@
 layout: "../../layouts/PostLayout.astro"
 title: "La Estructura If"
 description: "Los 'if' son herramientas que permiten a los programas tomar decisiones basadas en condiciones establecidas."
-pubDate: "Abril 2 2023"
+pubDate: "03/04/2023"
 heroImage: "/placeholder-hero.jpg"
 topics: ['Programación']
 draft: false

@@ -2,7 +2,7 @@
 layout: "../../layouts/PostLayout.astro"
 title: "Variables"
 description: "Una variable es una caja donde podemos almacenar valores, y así utilizarlos o modificarlos cuando nos haga falta"
-pubDate: "Marzo 24 2023"
+pubDate: "24/03/2023"
 heroImage: "/placeholder-hero.jpg"
 topics: ['Programación']
 draft: false
