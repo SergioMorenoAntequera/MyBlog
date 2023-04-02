@@ -1,0 +1,24 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import { type PostType } from "../../types/PostType";
+ 
+export function getStaticPaths() {
+  return [
+    {params: {postName: 'clifford'}},
+    {params: {postName: 'rover'}},
+    {params: {postName: 'spot'}},
+  ];
+}
+
+(await Astro.glob('/public')).forEach(p => console.log(p))
+	// .map(p => ({...p.frontmatter, url: p.url} as PostType))
+	// .filter(p => !p.draft)
+	// .sort((a, b) => new Date(b.pubDate).valueOf() - new Date(a.pubDate).valueOf()
+
+
+const { postName } = Astro.params;
+---
+
+<MainLayout accountForHeader>
+  <div>Good postName, {postName}!</div>
+</MainLayout>
