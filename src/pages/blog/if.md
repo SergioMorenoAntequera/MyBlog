@@ -1,6 +1,6 @@
 ---
 layout: "../../layouts/PostLayout.astro"
-title: "If"
+title: "La Estructura If"
 description: "Los 'if' son herramientas que permiten a los programas tomar decisiones basadas en condiciones establecidas."
 pubDate: "Abril 2 2023"
 heroImage: "/placeholder-hero.jpg"
@@ -25,7 +25,7 @@ if (edad >= 18) {
 
 En este ejemplo, estamos utilizando "if" para comprobar si la variable "edad" es mayor o igual a 18. Si se cumple la condición, se ejecuta el primer bloque de código (en este caso, la consola mostrará "Eres mayor de edad"). Si no se cumple, se ejecutará el segundo bloque de código (la consola mostrará "Eres menor de edad").
 
-## ¡No te líes con los bloques de código en "if"!
+## Estructura
 
 Es importante tener en cuenta que, en JavaScript, el código que queremos que se ejecute si se cumple una condición debe estar encerrado entre llaves {}. Esto es lo que se conoce como un bloque de código.
 
@@ -55,18 +55,18 @@ En este caso, si la hora es menor que 12, se ejecutarán ambas líneas de códig
 Recuerda siempre usar llaves {} alrededor de los bloques de código en "if" para evitar confusiones en el código.
 
 
-## Condiciones y operadores lógicos en "if"
+## Condiciones y operadores lógicos
 
 En JavaScript, podemos establecer una variedad de condiciones utilizando diferentes operadores lógicos. Algunos de los más comunes son:
 
-Igualdad (==): comprueba si dos valores son iguales, sin tener en cuenta su tipo de dato.
-Estrictamente igual (===): comprueba si dos valores son iguales, teniendo en cuenta su tipo de dato.
-Desigualdad (!=): comprueba si dos valores no son iguales, sin tener en cuenta su tipo de dato.
-Estrictamente desigual (!==): comprueba si dos valores no son iguales, teniendo en cuenta su tipo de dato.
-Mayor que (>): comprueba si un valor es mayor que otro.
-Menor que (<): comprueba si un valor es menor que otro.
-Mayor o igual que (>=): comprueba si un valor es mayor o igual que otro.
-Menor o igual que (<=): comprueba si un valor es menor o igual que otro.
+* Igualdad (==): comprueba si dos valores son iguales, sin tener en cuenta su tipo de dato.
+* Estrictamente igual (===): comprueba si dos valores son iguales, teniendo en cuenta su tipo de dato.
+* Desigualdad (!=): comprueba si dos valores no son iguales, sin tener en cuenta su tipo de dato.
+* Estrictamente desigual (!==): comprueba si dos valores no son iguales, teniendo en cuenta su tipo de dato.
+* Mayor que (>): comprueba si un valor es mayor que otro.
+* Menor que (<): comprueba si un valor es menor que otro.
+* Mayor o igual que (>=): comprueba si un valor es mayor o igual que otro.
+* Menor o igual que (<=): comprueba si un valor es menor o igual que otro.
 
 ```
 let num1 = 10;
@@ -85,7 +85,7 @@ En este ejemplo, estamos utilizando los operadores lógicos "mayor que" y "menor
 
 
 
-## El poder de las declaraciones anidadas en "if"
+## El poder de los ifs anidados
 Además de "if", en JavaScript también podemos utilizar "else". Esta estructura nos permite ejecutar un bloque de código en caso de que la condición del "if" no se cumpla.
 ```
 let edad = 18;
@@ -113,7 +113,7 @@ if (hora < 12) {
 En este ejemplo, estamos comprobando si la variable "hora" es menor que 12. Si se cumple la condición, se ejecutará el primer bloque de código. Si no se cumple, se comprobará si "hora" es menor que 20. Si se cumple la segunda condición, se ejecutará el segundo bloque de código. Si no se cumple ninguna de las dos condiciones anteriores, se ejecutará el bloque de código del "else".
 
 
-## Errores comunes en el uso de "if" y cómo evitarlos
+## Errores comunes y cómo evitarlos
 En JavaScript, también podemos anidar "if" dentro de otros "if". Sin embargo, esto puede hacer que nuestro código sea más complejo y difícil de entender.
 ```
 let nombre = "Juan";
@@ -131,7 +131,7 @@ if (nombre === "Juan") {
 ```
 En JavaScript, los "if" pueden ser anidados para comprobar varias condiciones. Sin embargo, anidar demasiados "if" puede hacer que el código sea más complejo y difícil de leer. En el ejemplo proporcionado, primero comprobamos si la variable "nombre" es igual a "Juan" y luego, dentro de ese bloque, comprobamos si la variable "edad" es mayor o igual a 18. Si se cumplen las condiciones, se ejecutará el bloque de código correspondiente. En general, es recomendable evitar anidar demasiados "if" y tratar de escribir un código lo más sencillo y claro posible.
 
-## "if" en acción: ejemplos prácticos de uso
+## Ejemplos prácticos de uso
 Una vez que se ha entendido cómo funciona el operador "if" y se ha practicado su uso en algunos ejemplos sencillos, es hora de ver cómo se puede aplicar en situaciones más complejas. A continuación, se presentan algunos ejemplos prácticos del uso de "if" en diferentes situaciones y contextos.
 
 Uno de los usos más comunes de "if" en una aplicación web es la validación de las entradas del usuario en un formulario. Por ejemplo, si un usuario envía un formulario sin completar un campo obligatorio, el código de validación puede utilizar "if" para comprobar si se ha introducido un valor en el campo correspondiente y mostrar un mensaje de error si no se ha hecho.
