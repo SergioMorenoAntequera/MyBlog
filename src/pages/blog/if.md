@@ -1,7 +1,7 @@
 ---
 layout: "../../layouts/PostLayout.astro"
 title: "If"
-description: "Los "if" son herramientas que permiten a los programas tomar decisiones basadas en condiciones establecidas."
+description: "Los 'if' son herramientas que permiten a los programas tomar decisiones basadas en condiciones establecidas."
 pubDate: "Abril 2 2023"
 heroImage: "/placeholder-hero.jpg"
 topics: ['Programación']
