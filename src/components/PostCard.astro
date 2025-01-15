@@ -1,8 +1,8 @@
 ---
-import type { PostType } from "../types/PostType";
+import type { TPost } from "../types/Post.type";
 import Badge from "./Badge.astro";
 
-type Props = { post: PostType, className?: string}
+type Props = { post: TPost, className?: string}
 const { post, className = '' }: Props = Astro.props
 ---
 
@@ -22,9 +22,7 @@ const { post, className = '' }: Props = Astro.props
             Leer Más 
         </a>
         <div>
-            {
-                post.topics.map(topic => <Badge className="mr-2"> {topic} </Badge>)
-            }
+            { post.topics.map(topic => <Badge className="mr-2"> {topic} </Badge>) }
         </div>
     </div>
     

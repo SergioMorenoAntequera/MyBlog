@@ -1,11 +1,13 @@
 ---
 import PostCard from "../components/PostCard.astro";
 import MainLayout from "../layouts/MainLayout.astro";
-import type { PostType } from "../types/PostType";
+import type { TPost, TPostFile } from "../types/Post.type";
 
-const posts = 
-	(await Astro.glob('./blog/*.{md,mdx}'))
-	.map(p => ({...p.frontmatter, url: p.url} as PostType))
+const otherPostsFileLoaders = await import.meta.glob<TPostFile>('./../pages/blog/*.{md,mdx}')
+const otherPostFile = await Promise.all(Object.values(otherPostsFileLoaders).map(loadPost => loadPost())) 
+const otherPost = otherPostFile.map(p => ({...p.frontmatter, url: p.url} as TPost))
+
+const posts = otherPost
 	.filter(p => !p.draft)
 	.sort((a, b) => new Date(b.pubDate).valueOf() - new Date(a.pubDate).valueOf()
 )

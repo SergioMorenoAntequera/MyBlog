@@ -6,14 +6,21 @@ enum PostTopics {
     Astro
 }
 
-export type PostType = {
+export type TPostFrontmatter = {
     layout: string
     title: string
     description: string
     pubDate: string
     heroImage: string
     topics: PostTopics[]
-    url: string
-    draft?: boolean
-    showIndex: boolean
+    draft?: boolean	
 }
+
+export type TPostFile = {
+    url: string
+    frontmatter: TPostFrontmatter
+}
+
+export type TPost = TPostFrontmatter & {
+    url: string
+} 

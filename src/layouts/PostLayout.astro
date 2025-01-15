@@ -3,27 +3,27 @@ import AddLinksToHeadings from "../components/AddLinksToHeadings.astro";
 import Badge from "../components/Badge.astro";
 import FixedDropdown from "../components/FixedDropdown";
 import PostAuthor from "../components/PostAuthor.astro";
-import type { PostType } from "../types/PostType";
+import type { TPost, TPostFile, TPostFrontmatter } from "../types/Post.type";
 import MainLayout from "./MainLayout.astro";
 
 export interface Heading { depth: number; slug: string; text: string }
-export interface Props {
-	frontmatter: PostType
-	headings: Heading[]
-}
+export interface Props { headings: Heading[], frontmatter: TPostFrontmatter}
 
 const { headings, frontmatter: post }: Props = Astro.props;
-const { title, description, pubDate, showIndex = true, topics, heroImage } = post
+const { title, description, pubDate, topics, heroImage } = post
 
-const relatedPosts = 
-	(await Astro.glob('./../pages/blog/*.{md,mdx}'))
-	.map((p:any) => ({...p.frontmatter, url: p.url} as PostType))
-	.filter((p:PostType) => p.title !== title && !p.draft)
-	.map((p:PostType) => {
+
+const otherPostsFileLoaders = await import.meta.glob<TPostFile>('./../pages/blog/*.{md,mdx}')
+const otherPostFile = await Promise.all(Object.values(otherPostsFileLoaders).map(loadPost => loadPost())) 
+const otherPost = otherPostFile.map(p => ({...p.frontmatter, url: p.url} as TPost))
+
+const relatedPosts = otherPost
+	.filter(p => p.title !== title && !p.draft)
+	.map(p => {
 		let commonPost = {commonTopics: 0, post: p}
 		p.topics?.forEach(topic => {
 			if(!topics.includes(topic)) return
-			commonPost.commonTopics++	  
+			commonPost.commonTopics++
 		});
 		return commonPost
 	})
@@ -122,7 +122,7 @@ const relatedPosts =
 		<div class="hidden md:block mr-auto lg:ml-16 w-[14rem]">
 			<div class="sticky top-40 text-xs">
 				
-				{ headings.length > 0 && showIndex && 
+				{ headings.length > 0 && 
 					<div class="mb-6">
 						<p class="mb-2 font-bold"> Contenido: </p>
 						
@@ -166,14 +166,14 @@ const relatedPosts =
 			entries.forEach(entry => {
 				const titleIndex = titlesEl.indexOf(entry.target)
 				linksToTitlesEl.forEach(linkEl => linkEl.classList.remove("active"))
-				linksToTitlesEl[titleIndex].classList.add("active")
+				linksToTitlesEl[titleIndex]?.classList.add("active")
 			});
 		}, {
 			rootMargin: '0px 0px -80%'
 		});
 
 		titlesEl.forEach(titleEl => {
-			observer.observe(titleEl)
+			observer.observe(titleEl!!)
 		});
 
 	</script>
